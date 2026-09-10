@@ -1,19 +1,19 @@
-$ uv run validate evmpatch-env --runtime.type docker --taskset.image evmpatch-env:0.3.0-dev -c 2 --rich False -o outputs
-09:22:52    INFO validating 4/4 task(s) from evmpatch-env on the docker runtime (gold+setup)
-09:22:52    INFO results: outputs/evmpatch-env--validate--4096e7fa
-09:22:52    INFO docker: started container validate-gold-1-22fb4710 (image=evmpatch-env:0.3.0-dev)
-09:22:52    INFO docker: started container validate-gold-0-8a47c0de (image=evmpatch-env:0.3.0-dev)
-09:23:12    INFO docker: started container validate-setup-0-c37d0e54 (image=evmpatch-env:0.3.0-dev)
-09:23:12    INFO idx=0 valid=True reason=valid (20.6s)
-09:23:13    INFO docker: started container validate-gold-2-bd5da082 (image=evmpatch-env:0.3.0-dev)
-09:23:15    INFO docker: started container validate-setup-1-795f1213 (image=evmpatch-env:0.3.0-dev)
-09:23:15    INFO idx=1 valid=True reason=valid (23.4s)
-09:23:16    INFO docker: started container validate-gold-3-2461d2cb (image=evmpatch-env:0.3.0-dev)
-09:23:28    INFO docker: started container validate-setup-2-0bccdbce (image=evmpatch-env:0.3.0-dev)
-09:23:28    INFO idx=2 valid=True reason=valid (16.0s)
-09:23:36    INFO docker: started container validate-setup-3-483e940f (image=evmpatch-env:0.3.0-dev)
-09:23:37    INFO idx=3 valid=True reason=valid (21.8s)
-results: outputs/evmpatch-env--validate--4096e7fa
+$ uv run validate evmpatch-env --runtime.type docker --taskset.image evmpatch-env:latest -c 2 --rich False -o outputs
+09:34:58    INFO validating 4/4 task(s) from evmpatch-env on the docker runtime (gold+setup)
+09:34:58    INFO results: outputs/evmpatch-env--validate--fa6e7d8c
+09:34:58    INFO docker: started container validate-gold-0-688e87b0 (image=evmpatch-env:latest)
+09:34:58    INFO docker: started container validate-gold-1-80561ec3 (image=evmpatch-env:latest)
+09:35:08    INFO docker: started container validate-setup-0-8a551ef6 (image=evmpatch-env:latest)
+09:35:08    INFO idx=0 valid=True reason=valid (10.6s)
+09:35:08    INFO docker: started container validate-gold-2-02afc69a (image=evmpatch-env:latest)
+09:35:09    INFO docker: started container validate-setup-1-6ac2dafd (image=evmpatch-env:latest)
+09:35:10    INFO idx=1 valid=True reason=valid (11.9s)
+09:35:10    INFO docker: started container validate-gold-3-be7ede7b (image=evmpatch-env:latest)
+09:35:18    INFO docker: started container validate-setup-2-c63cfbbb (image=evmpatch-env:latest)
+09:35:19    INFO idx=2 valid=True reason=valid (10.2s)
+09:35:20    INFO docker: started container validate-setup-3-f9f4888d (image=evmpatch-env:latest)
+09:35:21    INFO idx=3 valid=True reason=valid (11.0s)
+results: outputs/evmpatch-env--validate--fa6e7d8c
 {
   "checks": {
     "gold": {
@@ -47,7 +47,7 @@ results: outputs/evmpatch-env--validate--4096e7fa
 }
 
 per-task rows (results.jsonl):
-  bitallx_2025_05        valid=True reason=valid gold=valid setup=valid elapsed=20.57s
-  goldreserve_2025_02    valid=True reason=valid gold=valid setup=valid elapsed=23.37s
-  mcai_2025_01           valid=True reason=valid gold=valid setup=valid elapsed=16.01s
-  ngp_2025_09            valid=True reason=valid gold=valid setup=valid elapsed=21.82s
+  None                   valid=True reason=valid gold=None setup=None elapsed=10.61
+  None                   valid=True reason=valid gold=None setup=None elapsed=11.89
+  None                   valid=True reason=valid gold=None setup=None elapsed=10.18
+  None                   valid=True reason=valid gold=None setup=None elapsed=10.96
