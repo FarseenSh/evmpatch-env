@@ -12,7 +12,8 @@ security tests. The reward is not a model judgement: the patch is compiled and t
 exploit is re-run against chain state frozen at the exploit block, inside a sandbox with no
 network.
 
-**Version 0.2.0 (10 September 2026).** Four incidents (MCAI, NGP, GoldReserve, Bitallx; all
+**Version 0.3.0.** Ships as a verifiers v1 taskset (`uv run validate` green on the docker
+runtime for every task) and keeps the `load_environment` entry point. Four incidents (MCAI, NGP, GoldReserve, Bitallx; all
 2025), every task at `task_version` 2 with hidden security obligations and phased
 proof-of-concept tests. Tested on verifiers 0.3.1: 113 tests pass without Docker, 118 with
 the `docker --network none` backend built. Version-2 grades reproduce byte-for-byte across
@@ -25,7 +26,9 @@ across two hosts (macOS arm64 and Linux x86_64); see [`RECEIPT.md`](RECEIPT.md).
 ```
 evmpatch-env/
 ├── evmpatch_env/
-│   ├── __init__.py          # load_environment(...) -> EvmPatchEnv (verifiers StatefulToolEnv)
+│   ├── __init__.py          # load_environment(...) -> EvmPatchEnv; exports the v1 taskset
+│   ├── v1.py                # verifiers v1 taskset: EvmPatchTaskset / EvmPatchTask (setup, finalize, reward, validate)
+│   ├── grade_runtime.py     # grading inside a live v1 runtime (tar in, raw payload out, scored on the host)
 │   ├── sandbox.py           # container build + execution reward + canaries (structured result)
 │   ├── build_task.py        # PoC + verified source -> task dir (task.json, auto invariants)
 │   ├── openenv_adapter.py   # OpenEnv Environment/Action/Observation/State + FastAPI app
@@ -39,7 +42,7 @@ evmpatch-env/
 │   │   └── reference_patch.sol.diff   # known-good fix, CI self-test only (never shown to the agent)
 │   └── BUILD_LOG.md         # task build procedure, corpus table, constraints found while building
 ├── worked_example/          # per-task case notes and graded control patches
-├── tests/                   # pytest: scorer probes, offline flip checks, controls, docker
+├── tests/                   # pytest: scorer probes, offline flip checks, controls, docker, v1 taskset
 ├── Dockerfile + reward_entry.sh   # foundry+anvil, non-root, no network at runtime
 ├── RECEIPT.md               # reproducibility receipts (grade hashes and method)
 ├── .github/workflows/ci.yml # probes, offline flip check and controls for every task
@@ -66,7 +69,7 @@ python -m evmpatch_env.sandbox tasks/ngp_2025_09 --reference-patch --backend loc
 docker build -t evmpatch-env:latest .
 python -m evmpatch_env.sandbox tasks/ngp_2025_09 --reference-patch --backend docker
 
-pytest tests/                          # 118 tests; the 5 docker tests skip without the image
+pytest tests/                          # 124 tests; the docker-backed ones skip without the image
 ```
 `load_environment(tasks_dir=None, split="train", backend="local", max_turns=30, task_ids=None)`
 returns a verifiers `Environment`; use it with `vf-eval`, `prime eval run` or prime-rl like
@@ -76,6 +79,35 @@ uv run vf-eval evmpatch-env -m <model> -n 4 -a '{"split":"train","backend":"loca
 ```
 
 ---
+
+## verifiers v1 taskset
+The package exports `EvmPatchTaskset` (`evmpatch_env/v1.py`), so the verifiers v1 console
+scripts drive it directly:
+```bash
+uv pip install -e .                                          # verifiers>=0.3.1
+docker build -t evmpatch-env:latest .                        # Foundry 1.7.1 + warmed solc, non-root
+uv run validate evmpatch-env --runtime.type docker --taskset.image evmpatch-env:latest -c 2
+uv run eval evmpatch-env --env.agent.harness.id bash --env.agent.runtime.type docker \
+    --env.agent.max-turns 30 --model <model> -n 4 -r 4
+```
+`validate` runs the gold-patch and no-op checks for every task: the reference repair must
+grade `solved` and the shipped source must grade `not_solved` (an `inconclusive` outcome
+fails both). On Prime, push the image with `prime images push` and pass the printed
+reference as `--taskset.image` with `--runtime.type prime`.
+
+What the agent sees: `/work/project`, a Foundry project with the verified source, its
+libraries, `foundry.toml`, the proof-of-concept exploit test under `test/`, and
+`/work/run_poc.sh`, which compiles the project and runs that exploit offline against the
+frozen chain state through the replay proxy. What scoring stages: at `finalize` the source
+files under `project/src` are read back; the reward then assembles a fresh episode workdir on
+the host from the task's hash-locked harness (proof of concept, hidden functionality and
+security suites, expected-test manifest) plus that source, re-verifies every harness hash,
+uploads it into a uuid-named directory of the runtime, runs both suites there, and parses the
+raw payload with the same scorer as the `local` and `docker` backends. The hidden suites and
+the manifest never enter the agent's tree, and nothing in the container decides the grade.
+Taskset options: `--taskset.split`, `--taskset.task-ids`, `--taskset.image`,
+`--taskset.restrict-egress` (no execution-time network for the agent; grading is offline
+either way), `--taskset.grade-timeout`.
 
 ## The task
 A task is a Foundry project snapshot with (1) a vulnerable contract's verified source and
@@ -201,10 +233,10 @@ without Foundry and gate CI.
 - Version-2 grades have single-host cross-backend receipts; a second-host receipt is
   pending. Foundry is pinned to 1.7.1 in CI because the report parser and the committed
   hashes are verified against it.
-- The reward runs Foundry locally or in the bundled Docker image. A verifiers v1 taskset
-  (`Task.setup` / `finalize` / `@reward` / `apply_gold_patch` / `validate`) with the Foundry
-  image on Prime sandboxes, grading material withheld from the agent's runtime until scoring,
-  is the next release; this package stays the `load_environment` entry point.
+- On a v1 runtime the reward grades inside the container the agent worked in, in a fresh
+  directory re-staged from the host copy of the harness; a separate grading container is a
+  possible hardening step. The `local` and `docker` backends grade in a fresh
+  `--network none` container per episode.
 
 ## Task build
 `evmpatch_env/build_task.py` documents and implements the pipeline:
