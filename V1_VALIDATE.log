@@ -47,7 +47,7 @@ results: outputs/evmpatch-env--validate--fa6e7d8c
 }
 
 per-task rows (results.jsonl):
-  None                   valid=True reason=valid gold=None setup=None elapsed=10.61
-  None                   valid=True reason=valid gold=None setup=None elapsed=11.89
-  None                   valid=True reason=valid gold=None setup=None elapsed=10.18
-  None                   valid=True reason=valid gold=None setup=None elapsed=10.96
+  bitallx_2025_05        valid=True reason=valid gold=valid (10.2s) setup=valid (0.5s) elapsed=10.61s
+  goldreserve_2025_02    valid=True reason=valid gold=valid (11.4s) setup=valid (0.5s) elapsed=11.89s
+  mcai_2025_01           valid=True reason=valid gold=valid (9.7s) setup=valid (0.5s) elapsed=10.18s
+  ngp_2025_09            valid=True reason=valid gold=valid (10.5s) setup=valid (0.4s) elapsed=10.96s
