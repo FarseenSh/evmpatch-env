@@ -38,7 +38,7 @@ except Exception:                                    # pragma: no cover - option
 # here would make `python -m evmpatch_env.sandbox` emit a RuntimeWarning (the module would
 # already be in sys.modules when runpy executes it as __main__).
 
-__version__ = "0.2.1"
+__version__ = "0.3.0"
 
 SYSTEM_PROMPT = """You are a smart-contract security engineer. You are given the Solidity \
 source of a contract that was exploited on-chain, and a description of the incident. Your \
@@ -323,3 +323,15 @@ def load_environment(
         max_turns=max_turns,
         **kwargs,
     )
+
+
+# ------------------------------------------------------------- verifiers v1 taskset
+# The v1 plugin loader imports this package and expects exactly one `Taskset` subclass in
+# `__all__` (see evmpatch_env/v1.py). The grader and the task builder do not need
+# verifiers, so the export is soft: without verifiers>=0.3.1 the package still imports and
+# `python -m evmpatch_env.sandbox` still works, and only the v1 entry point is absent.
+try:
+    from .v1 import EvmPatchConfig, EvmPatchData, EvmPatchState, EvmPatchTask, EvmPatchTaskset  # noqa: E402,F401
+    __all__ = ["EvmPatchTaskset"]
+except Exception:  # pragma: no cover - verifiers absent
+    __all__ = []

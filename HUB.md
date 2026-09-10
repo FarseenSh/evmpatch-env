@@ -16,7 +16,8 @@ The package follows the Hub convention: a `[project]` block with `name`, `versio
 ## Local validation before pushing
 ```bash
 pip install -e .
-pytest tests/ -q                                   # 118 tests (113 without the Docker image)
+pytest tests/ -q                                   # 125 tests (the docker-backed ones skip without the image)
+uv run validate evmpatch-env --runtime.type docker --taskset.image evmpatch-env:latest -c 2
 python -m evmpatch_env.sandbox tasks/ngp_2025_09 --reference-patch --backend local --sha256
 uv run vf-eval evmpatch-env -m <model> -n 4 -a '{"split":"train","backend":"local"}'
 ```
@@ -34,6 +35,10 @@ The bundled forge-std under `tasks/*/project/lib/forge-std` is needed to compile
 ```bash
 prime env push --visibility public       # from the repo root (the dir with pyproject.toml)
 ```
+The package declares `verifiers>=0.3.1` and exports a v1 taskset, so the Hub lists it as a
+v1 (taskset) package by default; `--runtime v1` states it explicitly.
+```bash
+```
 The Hub renders `README.md` on the listing.
 
 ## Listing metadata
@@ -41,6 +46,8 @@ The Hub renders `README.md` on the listing.
 - **Title:** Execution-verified repair of real smart-contract exploits
 - **Tags:** `tool-use`, `multi-turn`, `agent`, `code`, `security`, `smart-contracts`,
   `solidity`, `evm`, `sandbox`, `eval`, `train`
+- **Runtime:** verifiers v1 taskset (`EvmPatchTaskset`; bash or codex harness on a
+  container runtime), plus the legacy `load_environment` multi-turn tool environment.
 - **Task type:** multi-turn tool environment (`list_files`, `read_file`, `apply_patch`,
   `run_tests`), three-valued conjunctive reward, 30-turn budget.
 - **Tasks:** four incidents (MCAI, NGP, GoldReserve, Bitallx; 2025), `task_version` 2, all

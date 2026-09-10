@@ -20,15 +20,21 @@ FROM ghcr.io/foundry-rs/foundry:v1.7.1
 
 USER root
 
-# Minimal python for the replay proxy + entrypoint. (Foundry image is Ubuntu 22.04.)
+# Minimal python for the replay proxy + entrypoint, and curl so a verifiers v1 harness can
+# bootstrap its tooling at setup time. (Foundry image is Ubuntu 22.04.)
 RUN apt-get update \
- && apt-get install -y --no-install-recommends python3 ca-certificates \
+ && apt-get install -y --no-install-recommends python3 ca-certificates curl \
  && rm -rf /var/lib/apt/lists/*
 
 # The base image already ships a non-root `foundry` user at uid 1000; reuse it rather
 # than creating a second uid-1000 account.
 COPY reward_entry.sh /opt/reward_entry.sh
 RUN chmod 0555 /opt/reward_entry.sh
+
+# /work is the agent's working tree and /grade a scratch root for grading on a verifiers
+# v1 runtime; both must be writable by the non-root user (a WORKDIR created implicitly
+# would belong to root).
+RUN mkdir -p /work /grade && chown foundry:foundry /work /grade
 
 USER foundry
 WORKDIR /work

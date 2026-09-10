@@ -1,6 +1,6 @@
 [project]
 name = "evmpatch-env"
-version = "0.2.1"
+version = "0.3.0"
 description = "Execution-verified RL environment for repairing real smart-contract exploits: Foundry proof-of-concept replay against frozen chain state, no-network reward, three-valued outcomes."
 readme = "README.md"
 license = { text = "Apache-2.0" }
@@ -44,6 +44,8 @@ include = [
 
 [tool.hatch.build.targets.wheel]
 include = ["evmpatch_env/**", "tasks/**"]
+# Editable installs put the repository root on sys.path instead of rewriting paths.
+dev-mode-dirs = ["."]
 
 [tool.hatch.build.targets.wheel.sources]
 "tasks" = "evmpatch_env/tasks"
