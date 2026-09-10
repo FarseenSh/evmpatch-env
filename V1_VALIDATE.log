@@ -1,0 +1,53 @@
+$ uv run validate evmpatch-env --runtime.type docker --taskset.image evmpatch-env:0.3.0-dev -c 2 --rich False -o outputs
+09:22:52    INFO validating 4/4 task(s) from evmpatch-env on the docker runtime (gold+setup)
+09:22:52    INFO results: outputs/evmpatch-env--validate--4096e7fa
+09:22:52    INFO docker: started container validate-gold-1-22fb4710 (image=evmpatch-env:0.3.0-dev)
+09:22:52    INFO docker: started container validate-gold-0-8a47c0de (image=evmpatch-env:0.3.0-dev)
+09:23:12    INFO docker: started container validate-setup-0-c37d0e54 (image=evmpatch-env:0.3.0-dev)
+09:23:12    INFO idx=0 valid=True reason=valid (20.6s)
+09:23:13    INFO docker: started container validate-gold-2-bd5da082 (image=evmpatch-env:0.3.0-dev)
+09:23:15    INFO docker: started container validate-setup-1-795f1213 (image=evmpatch-env:0.3.0-dev)
+09:23:15    INFO idx=1 valid=True reason=valid (23.4s)
+09:23:16    INFO docker: started container validate-gold-3-2461d2cb (image=evmpatch-env:0.3.0-dev)
+09:23:28    INFO docker: started container validate-setup-2-0bccdbce (image=evmpatch-env:0.3.0-dev)
+09:23:28    INFO idx=2 valid=True reason=valid (16.0s)
+09:23:36    INFO docker: started container validate-setup-3-483e940f (image=evmpatch-env:0.3.0-dev)
+09:23:37    INFO idx=3 valid=True reason=valid (21.8s)
+results: outputs/evmpatch-env--validate--4096e7fa
+{
+  "checks": {
+    "gold": {
+      "error": 0,
+      "invalid": 0,
+      "missing": 0,
+      "timeout": 0,
+      "valid": 4
+    },
+    "setup": {
+      "error": 0,
+      "invalid": 0,
+      "missing": 0,
+      "timeout": 0,
+      "valid": 4
+    }
+  },
+  "mode": "all",
+  "outcomes": {
+    "error": 0,
+    "invalid": 0,
+    "missing": 0,
+    "timeout": 0,
+    "valid": 4
+  },
+  "owed": 0,
+  "recorded": 4,
+  "terminal": 4,
+  "total": 4,
+  "valid_rate": 1.0
+}
+
+per-task rows (results.jsonl):
+  bitallx_2025_05        valid=True reason=valid gold=valid setup=valid elapsed=20.57s
+  goldreserve_2025_02    valid=True reason=valid gold=valid setup=valid elapsed=23.37s
+  mcai_2025_01           valid=True reason=valid gold=valid setup=valid elapsed=16.01s
+  ngp_2025_09            valid=True reason=valid gold=valid setup=valid elapsed=21.82s
