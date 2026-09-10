@@ -1,6 +1,6 @@
 [project]
 name = "evmpatch-env"
-version = "0.2.0"
+version = "0.2.1"
 description = "Execution-verified RL environment for repairing real smart-contract exploits: Foundry proof-of-concept replay against frozen chain state, no-network reward, three-valued outcomes."
 readme = "README.md"
 license = { text = "Apache-2.0" }

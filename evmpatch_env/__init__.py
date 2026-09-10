@@ -38,7 +38,7 @@ except Exception:                                    # pragma: no cover - option
 # here would make `python -m evmpatch_env.sandbox` emit a RuntimeWarning (the module would
 # already be in sys.modules when runpy executes it as __main__).
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 SYSTEM_PROMPT = """You are a smart-contract security engineer. You are given the Solidity \
 source of a contract that was exploited on-chain, and a description of the incident. Your \
@@ -136,13 +136,62 @@ def _diff_from_shipped(state: dict) -> dict[str, str] | None:
 
 
 # --------------------------------------------------------------------- reward funcs
+def _final_result(state: dict):
+    """Grade the episode's final source once and cache the RewardResult on the state."""
+    res = state.get("final_result")
+    if res is None:
+        from . import sandbox
+        patched = _diff_from_shipped(state)
+        res = sandbox.compute_reward(state["task_dir"], patched, backend=state["backend"])
+        state["final_result"] = res
+    return res
+
+
 def patch_solved_reward(state: dict, **kwargs) -> float:
     """Terminal, execution-verified reward: 1.0 iff the sandbox says the patch is solved."""
-    from . import sandbox
-    patched = _diff_from_shipped(state)
-    res = sandbox.compute_reward(state["task_dir"], patched, backend=state["backend"])
-    state["final_result"] = res
-    return res.score
+    return _final_result(state).score
+
+
+# Non-reward metrics (weight 0): the components of the final grade, so an evaluation
+# reports why an episode scored 0 (exploit still live, legitimate use broken, an undeclared
+# block reason, a compile failure) without any of it entering the scalar reward.
+def outcome_solved(state: dict, **kwargs) -> float:
+    return float(_final_result(state).outcome == "solved")
+
+
+def outcome_not_solved(state: dict, **kwargs) -> float:
+    return float(_final_result(state).outcome == "not_solved")
+
+
+def outcome_inconclusive(state: dict, **kwargs) -> float:
+    return float(_final_result(state).outcome == "inconclusive")
+
+
+def unrecognised_block_reason(state: dict, **kwargs) -> float:
+    """1.0 when the exploit failed for a reason the task does not declare as a block."""
+    res = _final_result(state)
+    return float(res.outcome == "inconclusive" and res.reason == "unrecognised_failure")
+
+
+def poc_blocked(state: dict, **kwargs) -> float:
+    return float(bool(_final_result(state).poc_blocked))
+
+
+def hidden_all_pass(state: dict, **kwargs) -> float:
+    return float(bool(_final_result(state).hidden_all_pass))
+
+
+def compiled(state: dict, **kwargs) -> float:
+    return float(bool(_final_result(state).compiled))
+
+
+def canary_fired(state: dict, **kwargs) -> float:
+    return float(bool(_final_result(state).canaries))
+
+
+GRADE_METRICS = (outcome_solved, outcome_not_solved, outcome_inconclusive,
+                 unrecognised_block_reason, poc_blocked, hidden_all_pass, compiled,
+                 canary_fired)
 
 
 # ------------------------------------------------------------------------- the env
@@ -262,7 +311,8 @@ def load_environment(
         })
 
     dataset = Dataset.from_list(rows)
-    rubric = vf.Rubric(funcs=[patch_solved_reward], weights=[1.0])
+    rubric = vf.Rubric(funcs=[patch_solved_reward, *GRADE_METRICS],
+                       weights=[1.0] + [0.0] * len(GRADE_METRICS))
 
     return EvmPatchEnv(
         task_index=index,
