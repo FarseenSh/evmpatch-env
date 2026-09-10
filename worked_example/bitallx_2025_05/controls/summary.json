@@ -1,0 +1,381 @@
+{
+  "task": "bitallx_2025_05",
+  "generated_utc": "2026-09-10T03:36:07Z",
+  "toolchain": {
+    "forge": "forge Version: 1.7.1\nCommit SHA: 4072e48705af9d93e3c0f6e29e93b5e9a40caed8\nBuild Timestamp: 2026-05-08T07:54:31.470926000Z (1778226871)\nBuild Profile: dist",
+    "python": "3.12.14",
+    "platform": "Darwin arm64",
+    "task_json_sha256": "3ed4ee24312754396ec37bd920e9a9bb586f6d33cb85550271a96cdd4958c83f",
+    "task_version": 2,
+    "manifest_version": 2,
+    "rpc_log_sha256": "830142c4019ba9a61d1597288ea8e29e941f9012d3229adbe29493940a7b8615",
+    "rpc_log_records": 79,
+    "shipped_source_sha256": "51a880e85eb8737820a20ee6b4952f0fddc02023444837677041ef327e7e3706",
+    "reference_patch_diff_sha256": "a6b95bbfbf227595c04ffc3cb1b980bc0ea956e91ac729a5f2a31b7931a8316e"
+  },
+  "seconds": 73.4,
+  "control_summary": {
+    "complete_repairs": {
+      "pass": 3,
+      "total": 3
+    },
+    "incomplete_repairs": {
+      "fail_with_residual_vulnerability": 2,
+      "total": 2
+    },
+    "non_repairs_caught_by_poc": {
+      "n": 1,
+      "total": 1
+    },
+    "destructive_bricked": {
+      "n": 2,
+      "total": 2
+    },
+    "infrastructure_inconclusive": {
+      "n": 1,
+      "total": 1
+    }
+  },
+  "non_benign_misses_in_controls": 0,
+  "rows": [
+    {
+      "name": "unpatched",
+      "kind": "baseline",
+      "expected": "not_solved 0.0, oracle Success, canary empty_patch",
+      "outcome": "not_solved",
+      "non_benign_rpc_misses": 0,
+      "benign_rpc_misses": 0,
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "empty_patch"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:Bitallx_Security:test_multi_element_over_request_pays_nothing()",
+        "test/hidden/security.t.sol:Bitallx_Security:test_single_element_over_request_from_fresh_payer_pays_nothing()",
+        "test/hidden/security.t.sol:Bitallx_Security:test_sum_over_funded_total_rejected_even_when_each_element_fits()"
+      ],
+      "failing_security": [
+        "test/hidden/security.t.sol:Bitallx_Security:test_multi_element_over_request_pays_nothing()",
+        "test/hidden/security.t.sol:Bitallx_Security:test_single_element_over_request_from_fresh_payer_pays_nothing()",
+        "test/hidden/security.t.sol:Bitallx_Security:test_sum_over_funded_total_rejected_even_when_each_element_fits()"
+      ],
+      "oracle_status": "Success",
+      "oracle_reason": null,
+      "core_sha256": "3311aff59a575e5a2ed71286559664b284ba7580c0e1c282e7ea2a5d760a9fe0",
+      "strict_sha256": "c398bbc218f55cdf118c8e4f8f4767017f2662b0b3087dc8f2d682cc1177ec7c",
+      "detail": "poc still exploitable; security obligations failing (incomplete repair); canaries: empty_patch"
+    },
+    {
+      "name": "reference",
+      "kind": "complete_repair",
+      "expected": "solved 1.0, no canary",
+      "outcome": "solved",
+      "non_benign_rpc_misses": 0,
+      "benign_rpc_misses": 0,
+      "reason": "",
+      "score": 1.0,
+      "poc_blocked": true,
+      "hidden_all_pass": true,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [],
+      "failing_security": [],
+      "oracle_status": "Failure",
+      "oracle_reason": "Payout total does not match the funded amount",
+      "core_sha256": "6ab3606f6d0fc6d017bbef39da2bbcfcd52537bef89758c46518aca84418ba55",
+      "strict_sha256": "0164491d777793056c490d3b59b18ef370c9bd996886082bc0574925ae83fc92",
+      "detail": "solved"
+    },
+    {
+      "name": "alt_complete_fix__sum_bounded",
+      "kind": "complete_repair",
+      "expected": "solved 1.0, no canary",
+      "outcome": "solved",
+      "non_benign_rpc_misses": 0,
+      "benign_rpc_misses": 0,
+      "reason": "",
+      "score": 1.0,
+      "poc_blocked": true,
+      "hidden_all_pass": true,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [],
+      "failing_security": [],
+      "oracle_status": "Failure",
+      "oracle_reason": "Payout total does not match the funded amount",
+      "core_sha256": "6ab3606f6d0fc6d017bbef39da2bbcfcd52537bef89758c46518aca84418ba55",
+      "strict_sha256": "0164491d777793056c490d3b59b18ef370c9bd996886082bc0574925ae83fc92",
+      "detail": "solved"
+    },
+    {
+      "name": "alt_complete_fix__capped_payout",
+      "kind": "complete_repair",
+      "expected": "solved 1.0, no canary",
+      "outcome": "solved",
+      "non_benign_rpc_misses": 0,
+      "benign_rpc_misses": 0,
+      "reason": "",
+      "score": 1.0,
+      "poc_blocked": true,
+      "hidden_all_pass": true,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [],
+      "failing_security": [],
+      "oracle_status": "Failure",
+      "oracle_reason": "exploit did not yield profit (patched?): 0 <= 2000000000000000000000",
+      "core_sha256": "6ab3606f6d0fc6d017bbef39da2bbcfcd52537bef89758c46518aca84418ba55",
+      "strict_sha256": "c519b3250efc2577138a0622f295100406a6c27c7c8d818c641a196db5b4d5bf",
+      "detail": "solved"
+    },
+    {
+      "name": "incomplete_fix__first_element_only",
+      "kind": "incomplete_repair",
+      "expected": "not_solved 0.0, poc_blocked, canary residual_vulnerability",
+      "outcome": "not_solved",
+      "non_benign_rpc_misses": 0,
+      "benign_rpc_misses": 0,
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": true,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "residual_vulnerability"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:Bitallx_Security:test_multi_element_over_request_pays_nothing()",
+        "test/hidden/security.t.sol:Bitallx_Security:test_sum_over_funded_total_rejected_even_when_each_element_fits()"
+      ],
+      "failing_security": [
+        "test/hidden/security.t.sol:Bitallx_Security:test_multi_element_over_request_pays_nothing()",
+        "test/hidden/security.t.sol:Bitallx_Security:test_sum_over_funded_total_rejected_even_when_each_element_fits()"
+      ],
+      "oracle_status": "Failure",
+      "oracle_reason": "Payout total does not match the funded amount",
+      "core_sha256": "c36f1eea6ce6ab132b76299df29964a9566e8086cdf0a7db00a33666aa9d903a",
+      "strict_sha256": "03db5f251b9d9253f365994b54d0063dc4402e4a32e4ea8f9533566f89b731cd",
+      "detail": "security obligations failing (incomplete repair); canaries: residual_vulnerability"
+    },
+    {
+      "name": "incomplete_fix__each_element_bounded",
+      "kind": "incomplete_repair",
+      "expected": "not_solved 0.0, poc_blocked, canary residual_vulnerability",
+      "outcome": "not_solved",
+      "non_benign_rpc_misses": 0,
+      "benign_rpc_misses": 0,
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": true,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "residual_vulnerability"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:Bitallx_Security:test_sum_over_funded_total_rejected_even_when_each_element_fits()"
+      ],
+      "failing_security": [
+        "test/hidden/security.t.sol:Bitallx_Security:test_sum_over_funded_total_rejected_even_when_each_element_fits()"
+      ],
+      "oracle_status": "Failure",
+      "oracle_reason": "Payout total does not match the funded amount",
+      "core_sha256": "35048ab5f6e63997717d265bd9e934a95f97ca7f91c7f2ee3824867d420e677e",
+      "strict_sha256": "e40bb2c5856cc36aa61eb2bb8bcf081766a50d1f512bef8be77b3e908f43fd12",
+      "detail": "security obligations failing (incomplete repair); canaries: residual_vulnerability"
+    },
+    {
+      "name": "non_repair__bound_only_when_funded",
+      "kind": "non_repair",
+      "expected": "not_solved 0.0, oracle Success (PoC catches it)",
+      "outcome": "not_solved",
+      "non_benign_rpc_misses": 0,
+      "benign_rpc_misses": 0,
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:Bitallx_Security:test_multi_element_over_request_pays_nothing()",
+        "test/hidden/security.t.sol:Bitallx_Security:test_single_element_over_request_from_fresh_payer_pays_nothing()"
+      ],
+      "failing_security": [
+        "test/hidden/security.t.sol:Bitallx_Security:test_multi_element_over_request_pays_nothing()",
+        "test/hidden/security.t.sol:Bitallx_Security:test_single_element_over_request_from_fresh_payer_pays_nothing()"
+      ],
+      "oracle_status": "Success",
+      "oracle_reason": null,
+      "core_sha256": "5b70aa193f447f737698ba3cec3fe99822198e9a532c5cde17a9b77319350e37",
+      "strict_sha256": "84a93e6988ed7d6ea241ab76476d4541676ca420d67e73fd9e10a00bae9ac728",
+      "detail": "poc still exploitable; security obligations failing (incomplete repair)"
+    },
+    {
+      "name": "recognised_reason__payout_always_reverts",
+      "kind": "destructive",
+      "expected": "not_solved 0.0, canary bricked",
+      "outcome": "not_solved",
+      "non_benign_rpc_misses": 0,
+      "benign_rpc_misses": 0,
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": true,
+      "hidden_all_pass": false,
+      "functional_all_pass": false,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "bricked"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/regression.t.sol:Bitallx_Regression:test_funded_batch_payout_distributes_correctly()"
+      ],
+      "failing_security": [],
+      "oracle_status": "Failure",
+      "oracle_reason": "Payout total does not match the funded amount",
+      "core_sha256": "3c743eea4cc1d02b9a39164cf121afc0ad080c14285475da00a061879796d522",
+      "strict_sha256": "63760f09fec879f86490b1e1c283f68035cafbb11ab8f89ad5cf72046c1a094d",
+      "detail": "hidden invariants failing; canaries: bricked"
+    },
+    {
+      "name": "fix_plus_storage_slot_shift",
+      "kind": "destructive",
+      "expected": "not_solved 0.0, canary bricked",
+      "outcome": "not_solved",
+      "non_benign_rpc_misses": 0,
+      "benign_rpc_misses": 0,
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": true,
+      "hidden_all_pass": false,
+      "functional_all_pass": false,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "bricked"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/regression.t.sol:Bitallx_Regression:test_live_storage_still_readable()",
+        "test/hidden/regression.t.sol:Bitallx_Regression:test_publisher_can_still_pay_a_reward()"
+      ],
+      "failing_security": [],
+      "oracle_status": "Failure",
+      "oracle_reason": "Payout total does not match the funded amount",
+      "core_sha256": "dd98e6e82efdbdb189016d62ad455be44f79a4f82bf73089f57e305c2743439d",
+      "strict_sha256": "95580ef9e6aa044845dff42495e8b6083c6e17a1c7e9b98d36404fd929297bfc",
+      "detail": "hidden invariants failing; canaries: bricked"
+    },
+    {
+      "name": "compile_failed",
+      "kind": "infrastructure",
+      "expected": "inconclusive/compile_failed, score 0.0",
+      "outcome": "inconclusive",
+      "non_benign_rpc_misses": 0,
+      "benign_rpc_misses": 0,
+      "reason": "compile_failed",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": false,
+      "compiled": false,
+      "diff_in_scope": false,
+      "tests_match_manifest": false,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "absent",
+        "dispatch_selectors": "absent",
+        "dispatch_control": "absent",
+        "not_vacuous": "absent"
+      },
+      "failing_hidden": [],
+      "failing_security": [],
+      "oracle_status": null,
+      "oracle_reason": null,
+      "core_sha256": "738590218e3547f507d00750ab23dbd503bc104884540beef00a325b0c971a8e",
+      "strict_sha256": "d0592c5c6fedf42bd2195a6a4b1c6d768a4b336d71103b7b8dc3f6a6f81aadb2",
+      "detail": "poc suite did not compile"
+    }
+  ]
+}

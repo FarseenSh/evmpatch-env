@@ -1,0 +1,160 @@
+{
+  "abi_invariants": {
+    "bytecode_selectors": "Success",
+    "dispatch_control": "Success",
+    "dispatch_selectors": "Success",
+    "not_vacuous": "Success"
+  },
+  "backend": "local",
+  "canaries": [
+    "empty_patch"
+  ],
+  "changed_files": [],
+  "compiled": true,
+  "detail": "poc still exploitable; security obligations failing (incomplete repair); canaries: empty_patch",
+  "diff_in_scope": true,
+  "functional_all_pass": true,
+  "hidden": {
+    "benign_rpc_misses": 0,
+    "compiled": true,
+    "failed": 3,
+    "passed": 10,
+    "ran": true,
+    "returncode": 1,
+    "rpc_misses": [],
+    "setup_failures": {},
+    "skipped": 0,
+    "stderr_tail": "",
+    "stdout_tail": "{\"test/hidden/invariants_auto.t.sol:AutoInvariants\":{\"duration\":\"56ms 495\u00b5s 167ns\",\"test_results\":{\"test_abi_selectors_dispatch()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":51290}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"239\u00b5s 541ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_abi_selectors_preserved()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":21762}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"950\u00b5s 542ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_contract_has_code()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":2933}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"621\u00b5s 250ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_selector_check_is_not_vacuous()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":6980}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"340\u00b5s 375ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_unknown_selector_is_rejected()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":4134}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"293\u00b5s 875ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]},\"test/hidden/regression.t.sol:Bitallx_Regression\":{\"duration\":\"61ms 849\u00b5s 625ns\",\"test_results\":{\"test_funded_batch_payout_distributes_correctly()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":257891}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"44ms 837\u00b5s 542ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_live_storage_still_readable()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":18488}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"2ms 568\u00b5s 83ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_owner_treasury_path_still_works()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":49935}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"48ms 957\u00b5s 958ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_payout_rejects_an_unfunded_payer()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":182804}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"7ms 203\u00b5s 833ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_publisher_can_still_pay_a_reward()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":51184}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"43ms 523\u00b5s 458ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]},\"test/hidden/security.t.sol:Bitallx_Security\":{\"duration\":\"65ms 550\u00b5s 250ns\",\"test_results\":{\"test_multi_element_over_request_pays_nothing()\":{\"status\":\"Failure\",\"reason\":\"unfunded multi-element payout drained the contract's own USDT treasury: 0 < 2029473999999999986000\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":693104}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"52ms 789\u00b5s 917ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_single_element_over_request_from_fresh_payer_pays_nothing()\":{\"status\":\"Failure\",\"reason\":\"unfunded single-element payout drained the contract's own USDT treasury: 0 < 2029473999999999986000\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":482226}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"7ms 579\u00b5s 791ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_sum_over_funded_total_rejected_even_when_each_element_fits()\":{\"status\":\"Failure\",\"reason\":\"a batch funded once and paid twice drained the contract's own USDT treasury: 1929473999999999986000 < 2029473999999999986000\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":739301}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"8ms 725\u00b5s 500ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]}}\n",
+    "structured": true,
+    "tests": {
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_dispatch()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_dispatch()",
+        "name": "test_abi_selectors_dispatch()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_preserved()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_preserved()",
+        "name": "test_abi_selectors_preserved()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_contract_has_code()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_contract_has_code()",
+        "name": "test_contract_has_code()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_selector_check_is_not_vacuous()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_selector_check_is_not_vacuous()",
+        "name": "test_selector_check_is_not_vacuous()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_unknown_selector_is_rejected()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_unknown_selector_is_rejected()",
+        "name": "test_unknown_selector_is_rejected()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/regression.t.sol:Bitallx_Regression:test_funded_batch_payout_distributes_correctly()": {
+        "id": "test/hidden/regression.t.sol:Bitallx_Regression:test_funded_batch_payout_distributes_correctly()",
+        "name": "test_funded_batch_payout_distributes_correctly()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:Bitallx_Regression"
+      },
+      "test/hidden/regression.t.sol:Bitallx_Regression:test_live_storage_still_readable()": {
+        "id": "test/hidden/regression.t.sol:Bitallx_Regression:test_live_storage_still_readable()",
+        "name": "test_live_storage_still_readable()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:Bitallx_Regression"
+      },
+      "test/hidden/regression.t.sol:Bitallx_Regression:test_owner_treasury_path_still_works()": {
+        "id": "test/hidden/regression.t.sol:Bitallx_Regression:test_owner_treasury_path_still_works()",
+        "name": "test_owner_treasury_path_still_works()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:Bitallx_Regression"
+      },
+      "test/hidden/regression.t.sol:Bitallx_Regression:test_payout_rejects_an_unfunded_payer()": {
+        "id": "test/hidden/regression.t.sol:Bitallx_Regression:test_payout_rejects_an_unfunded_payer()",
+        "name": "test_payout_rejects_an_unfunded_payer()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:Bitallx_Regression"
+      },
+      "test/hidden/regression.t.sol:Bitallx_Regression:test_publisher_can_still_pay_a_reward()": {
+        "id": "test/hidden/regression.t.sol:Bitallx_Regression:test_publisher_can_still_pay_a_reward()",
+        "name": "test_publisher_can_still_pay_a_reward()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:Bitallx_Regression"
+      },
+      "test/hidden/security.t.sol:Bitallx_Security:test_multi_element_over_request_pays_nothing()": {
+        "id": "test/hidden/security.t.sol:Bitallx_Security:test_multi_element_over_request_pays_nothing()",
+        "name": "test_multi_element_over_request_pays_nothing()",
+        "reason": "unfunded multi-element payout drained the contract's own USDT treasury: 0 < 2029473999999999986000",
+        "status": "Failure",
+        "suite": "test/hidden/security.t.sol:Bitallx_Security"
+      },
+      "test/hidden/security.t.sol:Bitallx_Security:test_single_element_over_request_from_fresh_payer_pays_nothing()": {
+        "id": "test/hidden/security.t.sol:Bitallx_Security:test_single_element_over_request_from_fresh_payer_pays_nothing()",
+        "name": "test_single_element_over_request_from_fresh_payer_pays_nothing()",
+        "reason": "unfunded single-element payout drained the contract's own USDT treasury: 0 < 2029473999999999986000",
+        "status": "Failure",
+        "suite": "test/hidden/security.t.sol:Bitallx_Security"
+      },
+      "test/hidden/security.t.sol:Bitallx_Security:test_sum_over_funded_total_rejected_even_when_each_element_fits()": {
+        "id": "test/hidden/security.t.sol:Bitallx_Security:test_sum_over_funded_total_rejected_even_when_each_element_fits()",
+        "name": "test_sum_over_funded_total_rejected_even_when_each_element_fits()",
+        "reason": "a batch funded once and paid twice drained the contract's own USDT treasury: 1929473999999999986000 < 2029473999999999986000",
+        "status": "Failure",
+        "suite": "test/hidden/security.t.sol:Bitallx_Security"
+      }
+    },
+    "timed_out": false
+  },
+  "hidden_all_pass": false,
+  "outcome": "not_solved",
+  "poc": {
+    "benign_rpc_misses": 0,
+    "compiled": true,
+    "failed": 0,
+    "passed": 1,
+    "ran": true,
+    "returncode": 0,
+    "rpc_misses": [],
+    "setup_failures": {},
+    "skipped": 0,
+    "stderr_tail": "",
+    "stdout_tail": "{\"test/poc.t.sol:Bitallx_PoC\":{\"duration\":\"14ms 976\u00b5s 167ns\",\"test_results\":{\"testExploit()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":102856}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"1ms 683\u00b5s 458ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]}}\n",
+    "structured": true,
+    "tests": {
+      "test/poc.t.sol:Bitallx_PoC:testExploit()": {
+        "id": "test/poc.t.sol:Bitallx_PoC:testExploit()",
+        "name": "testExploit()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/poc.t.sol:Bitallx_PoC"
+      }
+    },
+    "timed_out": false
+  },
+  "poc_blocked": false,
+  "poc_failure_kind": "none",
+  "reason": "",
+  "reason_detail": "poc still exploitable; security obligations failing (incomplete repair); canaries: empty_patch",
+  "reason_family": "",
+  "score": 0.0,
+  "solved": false,
+  "task_id": "bitallx_2025_05",
+  "tests_match_manifest": true
+}

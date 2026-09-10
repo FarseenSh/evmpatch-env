@@ -1,0 +1,18 @@
+{
+  "task_id": "goldreserve_2025_02",
+  "incident": "GoldReserve: profit entitlement follows the NFT but the claim record follows the address",
+  "source": "src/test/2025-02/GoldReserve_exp.sol",
+  "chain": "bsc",
+  "chain_id": 56,
+  "fork_block": 46278330,
+  "rpc_alias": "bsc",
+  "date_month": "2025-02",
+  "vulnerability_class": "reward-accounting / claim-debt-not-carried-on-transfer",
+  "victim_address": "0x7c77576a2b48504EBD9fF0810D799651f68742d3",
+  "patchable_globs": [
+    "src/contracts/*.sol"
+  ],
+  "patch_contract_ref": "src/contracts/Token.sol:GoldReserve",
+  "episode_budget": 30,
+  "notes": "claimProfit() computes entitlement from the caller's CURRENT ERC1155 balance times accumulatedProfitPerNFT, but records what has been paid in claimedProfitPerAddress[msg.sender]. The debt is therefore attached to an address while the entitlement is attached to the token, so moving the same NFTs to a fresh address resets the debt and the same profit can be claimed again -- and a freshly minted NFT inherits all profit accrued before it existed. The attacker flash-borrowed BNB, deposited it as profit, minted 8 NFTs that instantly 'owned' that profit, then walked them through 22 addresses claiming each time. Fix: carry the claim debt with the tokens in _update(), for mints as well as transfers."
+}

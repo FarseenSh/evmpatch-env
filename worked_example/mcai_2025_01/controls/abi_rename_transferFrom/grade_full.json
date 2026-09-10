@@ -1,0 +1,60 @@
+{
+  "abi_invariants": {
+    "bytecode_selectors": "absent",
+    "dispatch_control": "absent",
+    "dispatch_selectors": "absent",
+    "not_vacuous": "absent"
+  },
+  "backend": "local",
+  "canaries": [],
+  "changed_files": [
+    "src/contracts/Token.sol"
+  ],
+  "compiled": false,
+  "detail": "poc suite did not compile",
+  "diff_in_scope": false,
+  "functional_all_pass": false,
+  "hidden": {
+    "benign_rpc_misses": 0,
+    "compiled": false,
+    "failed": 0,
+    "passed": 0,
+    "ran": true,
+    "returncode": 1,
+    "rpc_misses": [],
+    "setup_failures": {},
+    "skipped": 0,
+    "stderr_tail": "Error: Compilation failed\n",
+    "stdout_tail": "Compiler run failed:\nError (7792): Function has override specified but does not override anything.\n   --> src/contracts/Token.sol:266:14:\n    |\n266 |     ) public override returns (bool) {\n    |              ^^^^^^^^\n\nError (3656): Contract \"MCAI\" should be marked as abstract.\n   --> src/contracts/Token.sol:158:1:\n    |\n158 | contract MCAI is Context, IERC20, Ownable {\n    | ^ (Relevant source part starts here and spans across multiple lines).\nNote: Missing implementation: \n  --> src/contracts/Token.sol:38:5:\n   |\n38 |     function transferFromRenamed(\n   |     ^ (Relevant source part starts here and spans across multiple lines).\n\n",
+    "structured": false,
+    "tests": {},
+    "timed_out": false
+  },
+  "hidden_all_pass": false,
+  "outcome": "inconclusive",
+  "poc": {
+    "benign_rpc_misses": 0,
+    "compiled": false,
+    "failed": 0,
+    "passed": 0,
+    "ran": true,
+    "returncode": 1,
+    "rpc_misses": [],
+    "setup_failures": {},
+    "skipped": 0,
+    "stderr_tail": "Error: Compilation failed\n",
+    "stdout_tail": "Compiler run failed:\nError (7792): Function has override specified but does not override anything.\n   --> src/contracts/Token.sol:266:14:\n    |\n266 |     ) public override returns (bool) {\n    |              ^^^^^^^^\n\nError (3656): Contract \"MCAI\" should be marked as abstract.\n   --> src/contracts/Token.sol:158:1:\n    |\n158 | contract MCAI is Context, IERC20, Ownable {\n    | ^ (Relevant source part starts here and spans across multiple lines).\nNote: Missing implementation: \n  --> src/contracts/Token.sol:38:5:\n   |\n38 |     function transferFromRenamed(\n   |     ^ (Relevant source part starts here and spans across multiple lines).\n\n",
+    "structured": false,
+    "tests": {},
+    "timed_out": false
+  },
+  "poc_blocked": false,
+  "poc_failure_kind": "",
+  "reason": "compile_failed",
+  "reason_detail": "poc suite did not compile",
+  "reason_family": "compile_failed",
+  "score": 0.0,
+  "solved": false,
+  "task_id": "mcai_2025_01",
+  "tests_match_manifest": false
+}

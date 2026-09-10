@@ -1,0 +1,53 @@
+[project]
+name = "evmpatch-env"
+version = "0.2.0"
+description = "Execution-verified RL environment for repairing real smart-contract exploits: Foundry proof-of-concept replay against frozen chain state, no-network reward, three-valued outcomes."
+readme = "README.md"
+license = { text = "Apache-2.0" }
+tags = ["tool-use", "multi-turn", "agent", "code", "security", "smart-contracts", "solidity", "evm", "sandbox", "eval", "train"]
+requires-python = ">=3.11"
+dependencies = [
+    "verifiers>=0.3.1",
+    "datasets",
+]
+
+[project.urls]
+Repository = "https://github.com/FarseenSh/evmpatch-env"
+
+# Optional: only needed for the OpenEnv-native adapter (evmpatch_env/openenv_adapter.py).
+# The verifiers environment itself does not require it.
+[project.optional-dependencies]
+openenv = ["openenv"]
+dev = ["ruff", "pytest"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# The wheel must carry the task corpus (project source, hash-locked harness, frozen chain
+# state) and the container entrypoint, so `prime env install` / `pip install` gives a
+# runnable environment with no checkout. Inside the wheel they live under evmpatch_env/;
+# the package resolves both locations (see evmpatch_env.default_tasks_dir).
+[tool.hatch.build.targets.sdist]
+include = [
+    "evmpatch_env/**",
+    "tasks/**",
+    "tests/**",
+    "worked_example/**",
+    ".github/**",
+    "Dockerfile",
+    "reward_entry.sh",
+    "*.md",
+    "LICENSE",
+    "NOTICE",
+]
+
+[tool.hatch.build.targets.wheel]
+include = ["evmpatch_env/**", "tasks/**"]
+
+[tool.hatch.build.targets.wheel.sources]
+"tasks" = "evmpatch_env/tasks"
+
+[tool.hatch.build.targets.wheel.force-include]
+"reward_entry.sh" = "evmpatch_env/reward_entry.sh"
+"Dockerfile" = "evmpatch_env/Dockerfile"

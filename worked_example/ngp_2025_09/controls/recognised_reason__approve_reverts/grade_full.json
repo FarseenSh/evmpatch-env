@@ -1,0 +1,169 @@
+{
+  "abi_invariants": {
+    "bytecode_selectors": "Success",
+    "dispatch_control": "Success",
+    "dispatch_selectors": "Success",
+    "not_vacuous": "Success"
+  },
+  "backend": "local",
+  "canaries": [
+    "bricked"
+  ],
+  "changed_files": [
+    "src/contracts/Token.sol"
+  ],
+  "compiled": true,
+  "detail": "hidden invariants failing; exploit oracle failed for an undeclared reason ('PRECONDITION_UNREADABLE: approve() reverted before the exploit ran'); canaries: bricked",
+  "diff_in_scope": true,
+  "functional_all_pass": false,
+  "hidden": {
+    "benign_rpc_misses": 0,
+    "compiled": true,
+    "failed": 5,
+    "passed": 9,
+    "ran": true,
+    "returncode": 1,
+    "rpc_misses": [],
+    "setup_failures": {},
+    "skipped": 0,
+    "stderr_tail": "",
+    "stdout_tail": "83}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"47ms 210\u00b5s 542ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_trading_flags_still_open()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":6460}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"3ms 153\u00b5s\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]},\"test/hidden/invariants_auto.t.sol:AutoInvariants\":{\"duration\":\"128ms 544\u00b5s 167ns\",\"test_results\":{\"test_abi_selectors_dispatch()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":340281}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"591\u00b5s 125ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_abi_selectors_preserved()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":141867}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"204\u00b5s 583ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_contract_has_code()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":2933}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"322\u00b5s 667ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_selector_check_is_not_vacuous()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":6980}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"224\u00b5s 541ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_unknown_selector_is_rejected()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":4179}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"178\u00b5s 42ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]},\"test/hidden/regression.t.sol:NGP_Regression\":{\"duration\":\"76ms 603\u00b5s 375ns\",\"test_results\":{\"test_metadata_preserved()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":14099}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"5ms 279\u00b5s 666ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_normal_transfer_works()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":206842}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"35ms 868\u00b5s 458ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_price_view_works()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":17714}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"33ms 747\u00b5s 41ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]},\"test/hidden/security.t.sol:NGP_Security\":{\"duration\":\"117ms 867\u00b5s 458ns\",\"test_results\":{\"test_direct_transfer_to_the_pair_moves_nothing_out_of_it()\":{\"status\":\"Failure\",\"reason\":\"a direct transfer to the pair moved NGP OUT of it: the pool is still being drained inside someone else's transfer: 3500000000000000000000 != 0\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":409919}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"75ms 657\u00b5s 459ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_ordinary_sell_moves_no_tokens_out_of_the_pair()\":{\"status\":\"Failure\",\"reason\":\"BEP20: transfer amount exceeds balance\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":441340}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"46ms 293\u00b5s 375ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_pair_keeps_every_token_an_ordinary_sell_sends_it()\":{\"status\":\"Failure\",\"reason\":\"BEP20: transfer amount exceeds balance\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":442602}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"46ms 360\u00b5s 750ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_treasury_and_reward_are_not_funded_out_of_the_pair()\":{\"status\":\"Failure\",\"reason\":\"BEP20: transfer amount exceeds balance\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":441296}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"46ms 379\u00b5s 791ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]}}\n",
+    "structured": true,
+    "tests": {
+      "test/hidden/amm_regression.t.sol:NGP_AmmRegression:test_amm_buy_then_sell_round_trip()": {
+        "id": "test/hidden/amm_regression.t.sol:NGP_AmmRegression:test_amm_buy_then_sell_round_trip()",
+        "name": "test_amm_buy_then_sell_round_trip()",
+        "reason": "BEP20: transfer amount exceeds balance",
+        "status": "Failure",
+        "suite": "test/hidden/amm_regression.t.sol:NGP_AmmRegression"
+      },
+      "test/hidden/amm_regression.t.sol:NGP_AmmRegression:test_trading_flags_still_open()": {
+        "id": "test/hidden/amm_regression.t.sol:NGP_AmmRegression:test_trading_flags_still_open()",
+        "name": "test_trading_flags_still_open()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/amm_regression.t.sol:NGP_AmmRegression"
+      },
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_dispatch()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_dispatch()",
+        "name": "test_abi_selectors_dispatch()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_preserved()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_preserved()",
+        "name": "test_abi_selectors_preserved()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_contract_has_code()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_contract_has_code()",
+        "name": "test_contract_has_code()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_selector_check_is_not_vacuous()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_selector_check_is_not_vacuous()",
+        "name": "test_selector_check_is_not_vacuous()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_unknown_selector_is_rejected()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_unknown_selector_is_rejected()",
+        "name": "test_unknown_selector_is_rejected()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/regression.t.sol:NGP_Regression:test_metadata_preserved()": {
+        "id": "test/hidden/regression.t.sol:NGP_Regression:test_metadata_preserved()",
+        "name": "test_metadata_preserved()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:NGP_Regression"
+      },
+      "test/hidden/regression.t.sol:NGP_Regression:test_normal_transfer_works()": {
+        "id": "test/hidden/regression.t.sol:NGP_Regression:test_normal_transfer_works()",
+        "name": "test_normal_transfer_works()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:NGP_Regression"
+      },
+      "test/hidden/regression.t.sol:NGP_Regression:test_price_view_works()": {
+        "id": "test/hidden/regression.t.sol:NGP_Regression:test_price_view_works()",
+        "name": "test_price_view_works()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:NGP_Regression"
+      },
+      "test/hidden/security.t.sol:NGP_Security:test_direct_transfer_to_the_pair_moves_nothing_out_of_it()": {
+        "id": "test/hidden/security.t.sol:NGP_Security:test_direct_transfer_to_the_pair_moves_nothing_out_of_it()",
+        "name": "test_direct_transfer_to_the_pair_moves_nothing_out_of_it()",
+        "reason": "a direct transfer to the pair moved NGP OUT of it: the pool is still being drained inside someone else's transfer: 3500000000000000000000 != 0",
+        "status": "Failure",
+        "suite": "test/hidden/security.t.sol:NGP_Security"
+      },
+      "test/hidden/security.t.sol:NGP_Security:test_ordinary_sell_moves_no_tokens_out_of_the_pair()": {
+        "id": "test/hidden/security.t.sol:NGP_Security:test_ordinary_sell_moves_no_tokens_out_of_the_pair()",
+        "name": "test_ordinary_sell_moves_no_tokens_out_of_the_pair()",
+        "reason": "BEP20: transfer amount exceeds balance",
+        "status": "Failure",
+        "suite": "test/hidden/security.t.sol:NGP_Security"
+      },
+      "test/hidden/security.t.sol:NGP_Security:test_pair_keeps_every_token_an_ordinary_sell_sends_it()": {
+        "id": "test/hidden/security.t.sol:NGP_Security:test_pair_keeps_every_token_an_ordinary_sell_sends_it()",
+        "name": "test_pair_keeps_every_token_an_ordinary_sell_sends_it()",
+        "reason": "BEP20: transfer amount exceeds balance",
+        "status": "Failure",
+        "suite": "test/hidden/security.t.sol:NGP_Security"
+      },
+      "test/hidden/security.t.sol:NGP_Security:test_treasury_and_reward_are_not_funded_out_of_the_pair()": {
+        "id": "test/hidden/security.t.sol:NGP_Security:test_treasury_and_reward_are_not_funded_out_of_the_pair()",
+        "name": "test_treasury_and_reward_are_not_funded_out_of_the_pair()",
+        "reason": "BEP20: transfer amount exceeds balance",
+        "status": "Failure",
+        "suite": "test/hidden/security.t.sol:NGP_Security"
+      }
+    },
+    "timed_out": false
+  },
+  "hidden_all_pass": false,
+  "outcome": "not_solved",
+  "poc": {
+    "benign_rpc_misses": 0,
+    "compiled": true,
+    "failed": 1,
+    "passed": 0,
+    "ran": true,
+    "returncode": 1,
+    "rpc_misses": [],
+    "setup_failures": {},
+    "skipped": 0,
+    "stderr_tail": "",
+    "stdout_tail": "{\"test/poc.t.sol:NGP_PoC\":{\"duration\":\"31ms 329\u00b5s 291ns\",\"test_results\":{\"testExploit()\":{\"status\":\"Failure\",\"reason\":\"PRECONDITION_UNREADABLE: approve() reverted before the exploit ran\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":77270}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"1ms 217\u00b5s 958ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]}}\n",
+    "structured": true,
+    "tests": {
+      "test/poc.t.sol:NGP_PoC:testExploit()": {
+        "id": "test/poc.t.sol:NGP_PoC:testExploit()",
+        "name": "testExploit()",
+        "reason": "PRECONDITION_UNREADABLE: approve() reverted before the exploit ran",
+        "status": "Failure",
+        "suite": "test/poc.t.sol:NGP_PoC"
+      }
+    },
+    "timed_out": false
+  },
+  "poc_blocked": false,
+  "poc_failure_kind": "revert",
+  "reason": "",
+  "reason_detail": "hidden invariants failing; exploit oracle failed for an undeclared reason ('PRECONDITION_UNREADABLE: approve() reverted before the exploit ran'); canaries: bricked",
+  "reason_family": "",
+  "score": 0.0,
+  "solved": false,
+  "task_id": "ngp_2025_09",
+  "tests_match_manifest": true
+}

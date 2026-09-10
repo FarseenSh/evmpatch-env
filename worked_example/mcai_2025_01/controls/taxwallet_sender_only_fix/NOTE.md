@@ -1,0 +1,1 @@
+Rejects only msg.sender == _taxWallet and leaves the _deadWallet branch of the same broken function, so any caller can still burn any holder's balance with no approval. Expected: not_solved, canary residual_vulnerability.

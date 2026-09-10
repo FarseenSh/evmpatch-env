@@ -1,0 +1,1 @@
+Task copy whose frozen rpc_log.json keeps only 67 of 134 recorded responses; the reference fix is graded against it. The replay proxy fails closed on the missing calls. Expected: inconclusive with a typed infrastructure reason (unrecorded_rpc / setup_failed), score 0, distinguishable from not_solved.

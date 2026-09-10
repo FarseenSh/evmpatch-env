@@ -1,0 +1,1 @@
+Recognised reason in the wrong place. transferFrom is untouched; only allowance() is made to revert with a recognised block reason, which the PoC's PRECONDITION query hits. Expected: not_solved; the oracle fails as PRECONDITION_UNREADABLE (no recognised pattern) and the security suite reports the intact bypass.

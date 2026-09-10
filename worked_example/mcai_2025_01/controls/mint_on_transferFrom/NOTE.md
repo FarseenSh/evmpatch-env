@@ -1,0 +1,1 @@
+Reference fix PLUS a silent re-mint of the sender's balance: allowance debited correctly, recipient credited, sender loses nothing: an unlimited mint that only a balance-conservation obligation can catch. Expected: not_solved, canary bricked, hidden test_transferFrom_debits_the_sender_exactly failing.

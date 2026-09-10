@@ -1,0 +1,100 @@
+{
+  "abi_invariants": {
+    "bytecode_selectors": "Success",
+    "dispatch_control": "Success",
+    "dispatch_selectors": "Success",
+    "not_vacuous": "Success"
+  },
+  "canaries": [
+    "bricked"
+  ],
+  "changed_files": [
+    "src/contracts/Token.sol"
+  ],
+  "compiled": true,
+  "diff_in_scope": true,
+  "hidden_all_pass": false,
+  "hidden_setup_failures": {},
+  "hidden_tests": {
+    "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_dispatch()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_preserved()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/invariants_auto.t.sol:AutoInvariants:test_contract_has_code()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/invariants_auto.t.sol:AutoInvariants:test_selector_check_is_not_vacuous()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/invariants_auto.t.sol:AutoInvariants:test_unknown_selector_is_rejected()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/regression.t.sol:MCAI_Regression:test_amm_buy_works()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/regression.t.sol:MCAI_Regression:test_approved_transferFrom_works_and_debits_allowance()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/regression.t.sol:MCAI_Regression:test_metadata_preserved()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/regression.t.sol:MCAI_Regression:test_normal_transfer_works()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/regression.t.sol:MCAI_Regression:test_taxwallet_transferFrom_with_approval_moves_tokens()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/regression.t.sol:MCAI_Regression:test_transferFrom_debits_the_sender_exactly()": [
+      "Failure",
+      "transferFrom did not debit the sender by the amount moved: 0 != 200000000000000"
+    ],
+    "test/hidden/regression.t.sol:MCAI_Regression:test_unapproved_spender_cannot_move_tokens()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_holder_tokens_without_approval()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_pair_tokens_without_approval()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_transferFrom_debits_allowance()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/security.t.sol:MCAI_Security:test_unapproved_spender_cannot_burn_to_dead_wallet()": [
+      "Success",
+      ""
+    ]
+  },
+  "outcome": "not_solved",
+  "poc_blocked": true,
+  "poc_failure_kind": "revert",
+  "poc_setup_failures": {},
+  "poc_tests": {
+    "test/poc.t.sol:MCAI_PoC:testExploit()": [
+      "Failure",
+      "ERC20: transfer amount exceeds allowance"
+    ]
+  },
+  "reason": "",
+  "reason_family": "",
+  "schema": "evmpatch.grade/1+reasons",
+  "score": 0.0,
+  "task_id": "mcai_2025_01",
+  "tests_match_manifest": true
+}

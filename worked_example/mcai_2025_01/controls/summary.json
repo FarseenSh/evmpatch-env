@@ -1,0 +1,451 @@
+{
+  "task": "mcai_2025_01",
+  "generated_utc": "2026-09-10T03:36:14Z",
+  "toolchain": {
+    "forge": "forge Version: 1.7.1\nCommit SHA: 4072e48705af9d93e3c0f6e29e93b5e9a40caed8\nBuild Timestamp: 2026-05-08T07:54:31.470926000Z (1778226871)\nBuild Profile: dist",
+    "python": "3.12.14",
+    "platform": "Darwin arm64",
+    "task_json_sha256": "5fd0ac58af5472a53e22b86f178e2de6e1b0dad330d50c28db1e9cd88b0afba2",
+    "rpc_log_sha256": "70a9702e329e1bab56128a0eb5b6e905f8367dde4487ecff7d7e5504e353bbaf",
+    "rpc_log_records": 134,
+    "shipped_source_sha256": "8c3bf6647112d88d19970a09c1b86f8a5947bd1d59335ec570b0fbe307a2ea53",
+    "reference_patch_diff_sha256": "5233375122066b78e679984c353349041f4207e167957cb11ead20fe50e2c4dd"
+  },
+  "seconds": 80.1,
+  "rows": [
+    {
+      "name": "unpatched",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "empty_patch"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_holder_tokens_without_approval()",
+        "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_pair_tokens_without_approval()",
+        "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_transferFrom_debits_allowance()",
+        "test/hidden/security.t.sol:MCAI_Security:test_unapproved_spender_cannot_burn_to_dead_wallet()"
+      ],
+      "core_sha256": "ffb200f260eae35d939a863fe339eee1d8f0502d4b2070fedae377cff79b4f07",
+      "strict_sha256": "f0ba49a67926477b9c864bb26725689144e6cfc453181a1407da4425a9b57399",
+      "detail": "poc still exploitable; security obligations failing (incomplete repair); canaries: empty_patch"
+    },
+    {
+      "name": "reference",
+      "outcome": "solved",
+      "reason": "",
+      "score": 1.0,
+      "poc_blocked": true,
+      "hidden_all_pass": true,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [],
+      "core_sha256": "f34d89bad812c6b59ac44136ceea05b35044b03c38bbdaafbe8b391ae5c1963e",
+      "strict_sha256": "253011648b813ff772ba4ba1a49e22c59abcc17e178cbe23cb8069f973ea61a5",
+      "detail": "solved"
+    },
+    {
+      "name": "noop_identical",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "empty_patch"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_holder_tokens_without_approval()",
+        "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_pair_tokens_without_approval()",
+        "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_transferFrom_debits_allowance()",
+        "test/hidden/security.t.sol:MCAI_Security:test_unapproved_spender_cannot_burn_to_dead_wallet()"
+      ],
+      "core_sha256": "ffb200f260eae35d939a863fe339eee1d8f0502d4b2070fedae377cff79b4f07",
+      "strict_sha256": "f0ba49a67926477b9c864bb26725689144e6cfc453181a1407da4425a9b57399",
+      "detail": "poc still exploitable; security obligations failing (incomplete repair); canaries: empty_patch"
+    },
+    {
+      "name": "revert_all_transferFrom",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": false,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "bricked"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/regression.t.sol:MCAI_Regression:test_approved_transferFrom_works_and_debits_allowance()",
+        "test/hidden/regression.t.sol:MCAI_Regression:test_taxwallet_transferFrom_with_approval_moves_tokens()",
+        "test/hidden/regression.t.sol:MCAI_Regression:test_transferFrom_debits_the_sender_exactly()",
+        "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_transferFrom_debits_allowance()"
+      ],
+      "core_sha256": "eb1734ba697795540dd9ee76fc7fa6662a9032e79543223375f292189e0ac059",
+      "strict_sha256": "55cd27a343e05eb91b884f97548c8132053d16ae4227537f043e2a2be92fb530",
+      "detail": "hidden invariants failing; exploit oracle failed for an undeclared reason ('transferFrom disabled'); canaries: bricked"
+    },
+    {
+      "name": "abi_rename_transferFrom",
+      "outcome": "inconclusive",
+      "reason": "compile_failed",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": false,
+      "compiled": false,
+      "diff_in_scope": false,
+      "tests_match_manifest": false,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "absent",
+        "dispatch_selectors": "absent",
+        "dispatch_control": "absent",
+        "not_vacuous": "absent"
+      },
+      "failing_hidden": [],
+      "core_sha256": "a133c9ddf396a4546015090ced6a0f0229f35526f2b7fb0374e7063acc6add19",
+      "strict_sha256": "8433f35c387053373af13cf7e033930537b671a06d662051c77f4f07012b977b",
+      "detail": "poc suite did not compile"
+    },
+    {
+      "name": "fix_plus_abi_drop_setTaxWallet",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": true,
+      "hidden_all_pass": false,
+      "functional_all_pass": false,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "bricked"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Failure",
+        "dispatch_selectors": "Failure",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_dispatch()",
+        "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_preserved()"
+      ],
+      "core_sha256": "06563fcf20b391c9c0610c26c13652dd1a647b96aea288f50bf740b33248fb00",
+      "strict_sha256": "fc1339889647b93f6a148171081e395aa51c4772fee3f2c90d74a0cabe471c5a",
+      "detail": "hidden invariants failing; canaries: bricked"
+    },
+    {
+      "name": "harness_edit_poc",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": false,
+      "compiled": false,
+      "diff_in_scope": false,
+      "tests_match_manifest": false,
+      "canaries": [
+        "out_of_scope_edit:tests/poc.t.sol"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "absent",
+        "dispatch_selectors": "absent",
+        "dispatch_control": "absent",
+        "not_vacuous": "absent"
+      },
+      "failing_hidden": [],
+      "core_sha256": "0134726c25516f5879bfef33e245459cc29d48ada389c87cdb3a431711ca4549",
+      "strict_sha256": "983a1689c0d978622ead96354605bc28b6b0a8fde2a61e834cc8afb879e09f7c",
+      "detail": "out-of-scope/harness edit: out_of_scope_edit:tests/poc.t.sol"
+    },
+    {
+      "name": "pair_only_allowance_fix",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": true,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "residual_vulnerability"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_holder_tokens_without_approval()",
+        "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_transferFrom_debits_allowance()",
+        "test/hidden/security.t.sol:MCAI_Security:test_unapproved_spender_cannot_burn_to_dead_wallet()"
+      ],
+      "core_sha256": "c33047f9a41cad2d0195ed11d0b0a010963d4e16b05be9c4287b404cb7761538",
+      "strict_sha256": "d89c0d53efa911c610c0e9659e899d85961debf8b803b1fdc2861a1d483f4c14",
+      "detail": "security obligations failing (incomplete repair); canaries: residual_vulnerability"
+    },
+    {
+      "name": "allowance_query_sabotage",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "residual_vulnerability"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_holder_tokens_without_approval()",
+        "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_pair_tokens_without_approval()",
+        "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_transferFrom_debits_allowance()",
+        "test/hidden/security.t.sol:MCAI_Security:test_unapproved_spender_cannot_burn_to_dead_wallet()"
+      ],
+      "core_sha256": "80248fb8fe0a6ac9c5f673fc5f0af9999bd290e6da87bbd43c53efcf57ac85d4",
+      "strict_sha256": "62592fa1039612b2479dffc8cf97edba67565f86fea75a063d0888c419c60526",
+      "detail": "hidden invariants failing; exploit oracle failed for an undeclared reason ('PRECONDITION_UNREADABLE: allowance() view reverted'); canaries: residual_vulnerability"
+    },
+    {
+      "name": "path_traversal_poc_edit",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": false,
+      "compiled": false,
+      "diff_in_scope": false,
+      "tests_match_manifest": false,
+      "canaries": [
+        "out_of_scope_edit:src/contracts/../../test/poc.t.sol"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "absent",
+        "dispatch_selectors": "absent",
+        "dispatch_control": "absent",
+        "not_vacuous": "absent"
+      },
+      "failing_hidden": [],
+      "core_sha256": "4b5a52f97b0b42c0872b43e30242f3e7b76371d328b681c16f8eb0840f85da01",
+      "strict_sha256": "6a7b5ee3fc985ff8ab4adebda8edb223845792efe7cc2e333c9f189213f2c28b",
+      "detail": "out-of-scope/harness edit: out_of_scope_edit:src/contracts/../../test/poc.t.sol"
+    },
+    {
+      "name": "mint_on_transferFrom",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": true,
+      "hidden_all_pass": false,
+      "functional_all_pass": false,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "bricked"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/regression.t.sol:MCAI_Regression:test_transferFrom_debits_the_sender_exactly()"
+      ],
+      "core_sha256": "dfa8535b2ddc712f897401e67fd33e87827f6d8a2a0dcb20bb43ea2462ddb391",
+      "strict_sha256": "714abacfe48a77e2fda70cb495533b4dd3b1f164c9e3e58c62aa1375cf39d4f3",
+      "detail": "hidden invariants failing; canaries: bricked"
+    },
+    {
+      "name": "taxwallet_sender_only_fix",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": true,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "residual_vulnerability"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:MCAI_Security:test_unapproved_spender_cannot_burn_to_dead_wallet()"
+      ],
+      "core_sha256": "aeac1b3ac3b6227145f819133f0db929ab06fc28b847edcb1a52297ef08833e6",
+      "strict_sha256": "06387ac34c64cdbfb44855003433669dbcbb4421d321807ca02463a827b02337",
+      "detail": "security obligations failing (incomplete repair); canaries: residual_vulnerability"
+    },
+    {
+      "name": "decimals_downgrade",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": true,
+      "hidden_all_pass": false,
+      "functional_all_pass": false,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "bricked"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/regression.t.sol:MCAI_Regression:test_metadata_preserved()"
+      ],
+      "core_sha256": "a291bf6d4aa66b96877952df13260e27e3a7da1e342077f1d7ab46c4e8d95c88",
+      "strict_sha256": "3c59b6ffd4b9a3ef37542513536e79fd746dd64f92632903edd258fdb2d9c49e",
+      "detail": "hidden invariants failing; canaries: bricked"
+    },
+    {
+      "name": "compile_failed",
+      "outcome": "inconclusive",
+      "reason": "compile_failed",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": false,
+      "compiled": false,
+      "diff_in_scope": false,
+      "tests_match_manifest": false,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "absent",
+        "dispatch_selectors": "absent",
+        "dispatch_control": "absent",
+        "not_vacuous": "absent"
+      },
+      "failing_hidden": [],
+      "core_sha256": "a133c9ddf396a4546015090ced6a0f0229f35526f2b7fb0374e7063acc6add19",
+      "strict_sha256": "8433f35c387053373af13cf7e033930537b671a06d662051c77f4f07012b977b",
+      "detail": "poc suite did not compile"
+    },
+    {
+      "name": "unrecorded_rpc_truncated_state",
+      "outcome": "inconclusive",
+      "reason": "unrecorded_rpc",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": false,
+      "compiled": true,
+      "diff_in_scope": false,
+      "tests_match_manifest": false,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "absent",
+        "dispatch_selectors": "absent",
+        "dispatch_control": "absent",
+        "not_vacuous": "absent"
+      },
+      "failing_hidden": [
+        "test/hidden/regression.t.sol:MCAI_Regression:test_amm_buy_works()",
+        "test/hidden/regression.t.sol:MCAI_Regression:test_approved_transferFrom_works_and_debits_allowance()",
+        "test/hidden/regression.t.sol:MCAI_Regression:test_normal_transfer_works()",
+        "test/hidden/regression.t.sol:MCAI_Regression:test_taxwallet_transferFrom_with_approval_moves_tokens()",
+        "test/hidden/regression.t.sol:MCAI_Regression:test_transferFrom_debits_the_sender_exactly()",
+        "test/hidden/regression.t.sol:MCAI_Regression:test_unapproved_spender_cannot_move_tokens()",
+        "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_holder_tokens_without_approval()",
+        "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_pair_tokens_without_approval()",
+        "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_transferFrom_debits_allowance()",
+        "test/hidden/security.t.sol:MCAI_Security:test_unapproved_spender_cannot_burn_to_dead_wallet()"
+      ],
+      "core_sha256": "7343aa7f94fa37e2a449ac4c6d003b0e7a0c108600e30362f164e3ec84e0285d",
+      "strict_sha256": "e4f09261440f898b00d00c24f158e8f08f8df9f8aa2b71abb6e7bae894cfbe69",
+      "detail": "hidden suite hit 16 unrecorded RPC call(s): eth_getBalance, eth_getCode, eth_getStorageAt, eth_getTransactionCount"
+    },
+    {
+      "name": "docker_reference",
+      "outcome": "solved",
+      "reason": "",
+      "score": 1.0,
+      "poc_blocked": true,
+      "hidden_all_pass": true,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [],
+      "core_sha256": "f34d89bad812c6b59ac44136ceea05b35044b03c38bbdaafbe8b391ae5c1963e",
+      "strict_sha256": "253011648b813ff772ba4ba1a49e22c59abcc17e178cbe23cb8069f973ea61a5",
+      "detail": "solved"
+    }
+  ]
+}

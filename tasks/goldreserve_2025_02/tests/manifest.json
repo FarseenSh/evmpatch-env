@@ -1,0 +1,44 @@
+{
+  "version": 2,
+  "id_format": "<test file path>:<contract>:<function signature>",
+  "poc": {
+    "exploit_oracle": "test/poc.t.sol:GoldReserve_PoC:testExploit()",
+    "tests": [
+      "test/poc.t.sol:GoldReserve_PoC:testExploit()"
+    ],
+    "count": 1,
+    "accepted_block_kinds": [
+      "assertion",
+      "revert"
+    ],
+    "recognised_block_reasons": [
+      "*assertion failed*",
+      "*exploit did not yield profit*",
+      "Nada a reclamar"
+    ],
+    "recognised_block_reasons_note": "These are matched against whatever reason forge reports for the oracle, and forge reports one reason per test with no idea which statement produced it. Their breadth is therefore bounded by the PoC's structure, not by the patterns: tests/poc.t.sol runs the whole attack inside pancakeV3FlashCallback in three phases and converts every precondition read, every setup call into the patched contract (mintPrice, depositProfit, mint) and the post-drain flash-loan repayment into a PRECONDITION_/POST_DRAIN_ reason that appears in no pattern here, so the only statements that can still produce a recognised reason are the repeated claimProfit() calls and the rotations that carry them (the exploit step) and the final profit assertion."
+  },
+  "hidden": {
+    "tests": [
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_dispatch()",
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_preserved()",
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_contract_has_code()",
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_selector_check_is_not_vacuous()",
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_unknown_selector_is_rejected()",
+      "test/hidden/regression.t.sol:GoldReserve_Regression:test_metadata_preserved()",
+      "test/hidden/regression.t.sol:GoldReserve_Regression:test_mint_then_deposit_then_claim_pays_the_holder()",
+      "test/hidden/regression.t.sol:GoldReserve_Regression:test_mint_works()",
+      "test/hidden/regression.t.sol:GoldReserve_Regression:test_nft_transfer_works()",
+      "test/hidden/security.t.sol:GoldReserve_Security:test_a_holder_is_paid_only_for_the_nfts_it_held_when_profit_accrued()",
+      "test/hidden/security.t.sol:GoldReserve_Security:test_moving_the_nfts_to_a_fresh_address_cannot_reclaim_the_same_profit()",
+      "test/hidden/security.t.sol:GoldReserve_Security:test_nft_minted_after_a_deposit_inherits_no_profit()"
+    ],
+    "count": 12,
+    "security_tests": [
+      "test/hidden/security.t.sol:GoldReserve_Security:test_a_holder_is_paid_only_for_the_nfts_it_held_when_profit_accrued()",
+      "test/hidden/security.t.sol:GoldReserve_Security:test_moving_the_nfts_to_a_fresh_address_cannot_reclaim_the_same_profit()",
+      "test/hidden/security.t.sol:GoldReserve_Security:test_nft_minted_after_a_deposit_inherits_no_profit()"
+    ],
+    "security_tests_note": "Every id listed here FAILS on the shipped vulnerable contract by construction: each asserts a property the GoldReserve bug violates (a freshly minted NFT inheriting profit that accrued before it existed; the same NFTs being walked to a fresh address to claim the same accrual again). They must pass for a repair to be credited; a failure confined to them is an INCOMPLETE repair (canary residual_vulnerability), not a broken contract (canary bricked). The remaining hidden ids are legitimate-use obligations that hold before and after a repair."
+  }
+}

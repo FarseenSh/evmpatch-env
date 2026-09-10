@@ -1,0 +1,1 @@
+Reference fix PLUS deleting public setTaxWallet(address) (not in IERC20, so it compiles and blocks the exploit). Only the ABI-preservation invariants can reject it. Expected: not_solved, bytecode_selectors + dispatch_selectors Failure, canary bricked.

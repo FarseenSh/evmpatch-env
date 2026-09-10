@@ -1,0 +1,33 @@
+--- shipped/Token.sol
++++ variant/Token.sol
+@@ -3937,6 +3937,30 @@
+         require(success, "Falha ao enviar fundos");
+     }
+ 
++    // ALTERNATIVE COMPLETE REPAIR: settle the debt, then call super.
++    function _update(
++        address from,
++        address to,
++        uint256[] memory ids,
++        uint256[] memory values
++    ) internal virtual override {
++        uint256 moved = 0;
++        for (uint256 i = 0; i < values.length; i++) {
++            moved += values[i];
++        }
++        if (moved > 0) {
++            uint256 debt = (moved * accumulatedProfitPerNFT) / 1e18;
++            if (to != address(0)) {
++                claimedProfitPerAddress[to] += debt;
++            }
++            if (from != address(0)) {
++                uint256 owed = claimedProfitPerAddress[from];
++                claimedProfitPerAddress[from] = owed > debt ? owed - debt : 0;
++            }
++        }
++        super._update(from, to, ids, values);
++    }
++
+     function _balanceOfAllNFTs(address account) internal view returns (uint256) {
+         uint256 totalUserBalance = 0;
+         for (uint256 i = 0; i < TOTAL_VARIATIONS; i++) {

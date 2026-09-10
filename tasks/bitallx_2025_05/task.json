@@ -1,0 +1,39 @@
+{
+  "task_id": "bitallx_2025_05",
+  "incident": "BitallxSC: batch payout never checks the per-wallet amounts against the funded total",
+  "source": "src/test/2025-05/bitallx_exp.sol",
+  "chain": "bsc",
+  "chain_id": 56,
+  "fork_block": 49758338,
+  "rpc_alias": "bsc",
+  "date_month": "2025-05",
+  "split": "train",
+  "vulnerability_class": "unchecked-array-sum / payout-not-bounded-by-funding",
+  "victim_address": "0xa5f3728767F834C591eE99C8C5854b752F39C385",
+  "patchable_globs": [
+    "src/contracts/*.sol"
+  ],
+  "patch_contract_ref": "src/contracts/Token.sol:BitallxSC",
+  "harness_files": [
+    "project/foundry.toml",
+    "project/remappings.txt",
+    "tests/hidden/invariants_auto.t.sol",
+    "tests/hidden/regression.t.sol",
+    "tests/hidden/security.t.sol",
+    "tests/manifest.json",
+    "tests/poc.t.sol"
+  ],
+  "hash_locks": {
+    "tests/poc.t.sol": "b35f7938d9246bf03b3ca02c00a95a81e24111276c6322590c7e43cbe3bcdcfe",
+    "tests/hidden/invariants_auto.t.sol": "cb75f89f4db4e0eb79fe6d9c771f446f5af5928100d931b60f3f0a033687a757",
+    "tests/hidden/regression.t.sol": "b0ff269142249abd4e7c3d3985abc6a35951a40bf7e8eeae86327096d1e1ff6d",
+    "tests/hidden/security.t.sol": "5959f7cbe0cf043cbe936d83895c869b8d05c1dc9d45f51a147af81d933beba3",
+    "tests/manifest.json": "1d8c3c6306be47743197fa717f4429af596428a2da88b3dcfaa6be0bd822253d",
+    "project/foundry.toml": "1d3db215f734a2432667139e2975c8b8066b3414e58fa2ba8647c622f64ed005",
+    "project/remappings.txt": "ea084d6e5d1943cf7da06c5e6bcc80538762f5b35d368d942306c3a338222c6c"
+  },
+  "episode_budget": 30,
+  "offline_mechanism": "rpc_replay_proxy",
+  "notes": "BitallxPayOut() checks the caller's allowance and balance against totalSendAmount and pulls exactly totalSendAmount in with transferFrom, but then pays out the caller-supplied amount[] array without ever checking that its sum is bounded by what was funded. Calling it with totalSendAmount = 0 and amount[0] = the contract's own USDT balance passes every check and pays the caller the contract's money. Fix: bound the payout by the funded total. Note the patch must not reorder the contract's state variables -- the grader etches the patched code onto the live address and keeps the live storage.",
+  "task_version": 2
+}

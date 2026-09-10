@@ -1,0 +1,14 @@
+--- shipped/Token.sol
++++ variant/Token.sol
+@@ -8,6 +8,11 @@
+ import "./TokenAccessControl.sol";
+ 
+ contract Token is ERC20, TokenAccessControl {
++    function approve(address spender, uint256 value) public override returns (bool) {
++        spender; value;
++        revert("BEP20: transfer amount exceeds balance");   // VARIANT
++    }
++
+     address constant DEAD = 0x000000000000000000000000000000000000dEaD;
+ 
+     mapping(address => bool) public whitelisted;

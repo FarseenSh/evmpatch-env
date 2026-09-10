@@ -1,0 +1,1 @@
+transferFrom always reverts: the exploit is 'blocked' but every legitimate transferFrom is too. Expected: not_solved, hidden regression test_approved_transferFrom_works_and_debits_allowance fails, canary bricked.

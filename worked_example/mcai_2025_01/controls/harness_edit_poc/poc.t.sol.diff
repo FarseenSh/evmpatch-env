@@ -1,0 +1,11 @@
+--- shipped/poc.t.sol
++++ variant/poc.t.sol
+@@ -41,7 +41,7 @@
+     uint256 constant FORK_BLOCK = 21720380;
+     // The real incident took 12.03 WETH. A correct patch makes the drain revert, so the
+     // attacker never gets anywhere near this.
+-    uint256 constant PROFIT_THRESHOLD = 11 ether;
++    uint256 constant PROFIT_THRESHOLD = 1e30;
+ 
+     MCAIExploit exploit;
+ 

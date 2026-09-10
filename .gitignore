@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+*.log
+out/
+cache/
+
+# never commit anything that could carry an RPC endpoint or key
+*.env
+.secrets/
+**/rpc_url*
+**/*secret*
+
+# build and test artifacts
+dist/
+build/
+*.egg-info/
+.pytest_cache/

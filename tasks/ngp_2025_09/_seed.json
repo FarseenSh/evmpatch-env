@@ -1,0 +1,18 @@
+{
+  "task_id": "ngp_2025_09",
+  "incident": "NGP token price manipulation via sync() in _update()",
+  "source": "src/test/2025-09/NGP_exp.sol",
+  "chain": "bsc",
+  "chain_id": 56,
+  "fork_block": 61515894,
+  "rpc_alias": "bsc",
+  "date_month": "2025-09",
+  "vulnerability_class": "amm-reserve-manipulation / mid-transfer-sync",
+  "victim_address": "0xd2F26200cD524dB097Cf4ab7cC2E5C38aB6ae5c9",
+  "patchable_globs": [
+    "src/contracts/*.sol"
+  ],
+  "episode_budget": 30,
+  "notes": "Sell path drained treasury+reward from the pair then called pair.sync() inside the seller's own _update, letting the seller re-price reserves mid-sell. Fix removes the mid-transfer pool drain + sync. Reward: PoC exploit oracle must flip PASS->FAIL while all hidden invariants stay PASS. Verified offline (rpc_replay proxy, 60 slots).",
+  "patch_contract_ref": "src/contracts/Token.sol:Token"
+}

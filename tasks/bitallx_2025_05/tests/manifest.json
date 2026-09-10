@@ -1,0 +1,45 @@
+{
+  "version": 2,
+  "id_format": "<test file path>:<contract>:<function signature>",
+  "poc": {
+    "exploit_oracle": "test/poc.t.sol:Bitallx_PoC:testExploit()",
+    "tests": [
+      "test/poc.t.sol:Bitallx_PoC:testExploit()"
+    ],
+    "count": 1,
+    "accepted_block_kinds": [
+      "assertion",
+      "revert"
+    ],
+    "recognised_block_reasons": [
+      "*assertion failed*",
+      "*exploit did not yield profit*",
+      "Payout total does not match the funded amount"
+    ],
+    "recognised_block_reasons_note": "These are matched against whatever reason forge reports for the oracle, and forge reports one reason per test with no idea which statement produced it. Their breadth is therefore bounded by the PoC's structure, not by the patterns: tests/poc.t.sol converts the precondition read and the post-drain profit read into PRECONDITION_/POST_DRAIN_ reasons that appear in no pattern here, so the only statements that can still produce a recognised reason are the attack construction (the exploit step) and the final profit assertion. The monetisation inside the attack constructor moves USDT, which is not in patchable_globs, and its only failure string is the harness literal 'profit transfer failed', which no pattern recognises."
+  },
+  "hidden": {
+    "tests": [
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_dispatch()",
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_preserved()",
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_contract_has_code()",
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_selector_check_is_not_vacuous()",
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_unknown_selector_is_rejected()",
+      "test/hidden/regression.t.sol:Bitallx_Regression:test_funded_batch_payout_distributes_correctly()",
+      "test/hidden/regression.t.sol:Bitallx_Regression:test_live_storage_still_readable()",
+      "test/hidden/regression.t.sol:Bitallx_Regression:test_owner_treasury_path_still_works()",
+      "test/hidden/regression.t.sol:Bitallx_Regression:test_payout_rejects_an_unfunded_payer()",
+      "test/hidden/regression.t.sol:Bitallx_Regression:test_publisher_can_still_pay_a_reward()",
+      "test/hidden/security.t.sol:Bitallx_Security:test_multi_element_over_request_pays_nothing()",
+      "test/hidden/security.t.sol:Bitallx_Security:test_single_element_over_request_from_fresh_payer_pays_nothing()",
+      "test/hidden/security.t.sol:Bitallx_Security:test_sum_over_funded_total_rejected_even_when_each_element_fits()"
+    ],
+    "count": 13,
+    "security_tests": [
+      "test/hidden/security.t.sol:Bitallx_Security:test_multi_element_over_request_pays_nothing()",
+      "test/hidden/security.t.sol:Bitallx_Security:test_single_element_over_request_from_fresh_payer_pays_nothing()",
+      "test/hidden/security.t.sol:Bitallx_Security:test_sum_over_funded_total_rejected_even_when_each_element_fits()"
+    ],
+    "security_tests_note": "Every id listed here FAILS on the shipped vulnerable contract by construction: each asserts a property the BitallxSC unchecked-array-sum bug violates, on USDT balances rather than on a return value or a view. They must pass for a repair to be credited; a failure confined to them is an INCOMPLETE repair (canary residual_vulnerability), not a broken contract (canary bricked). Each is phrased 'revert OR pay nothing beyond the funded total' and asserted through try/catch on balance deltas, so an alternative complete repair that reverts with a different string, or caps instead of reverting, is not penalised. The remaining hidden ids are legitimate-use obligations that hold before and after a repair."
+  }
+}

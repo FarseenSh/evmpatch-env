@@ -1,0 +1,16 @@
+evmpatch-env
+Copyright 2026 Farseen Shaikh (SCAR, https://scarai.xyz)
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Third-party material bundled with the tasks:
+
+- The proof-of-concept exploit tests (tasks/*/tests/poc.t.sol) are derived from
+  DeFiHackLabs, https://github.com/SunWeb3Sec/DeFiHackLabs, Copyright SunWeb3Sec and
+  contributors, Apache License 2.0. Each task's task.json records the originating file.
+- The contract sources under tasks/*/project/src are reproduced from the public
+  block-explorer verification of the exploited contracts (Sourcify / Blockscout) with
+  their original headers, and are the work of their respective authors. They are
+  included as research material for the repair task, not relicensed.
+- forge-std under tasks/*/project/lib is Apache-2.0 / MIT (dual), Copyright Foundry
+  contributors.

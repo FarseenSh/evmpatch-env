@@ -1,0 +1,15 @@
+--- shipped/Token.sol
++++ variant/Token.sol
+@@ -100,8 +100,11 @@
+     
+         IBEP20(tokencontract).transferFrom(msg.sender, address(this), totalSendAmount);
+     
++        uint256 remaining = totalSendAmount;
+         for (uint256 i = 0; i < wallet.length; i++) {
+-            IBEP20(tokencontract).transfer(wallet[i], amount[i]);
++            uint256 pay = amount[i] <= remaining ? amount[i] : remaining;
++            remaining -= pay;
++            IBEP20(tokencontract).transfer(wallet[i], pay);
+         }
+     
+     }

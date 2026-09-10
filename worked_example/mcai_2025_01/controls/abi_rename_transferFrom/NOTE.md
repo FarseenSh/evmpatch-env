@@ -1,0 +1,1 @@
+transferFrom renamed (removed from the ABI). The contract implements IERC20, so the project stops compiling. Expected: inconclusive/compile_failed, score 0 (a compile failure is never credited as a block).

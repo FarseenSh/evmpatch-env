@@ -1,0 +1,31 @@
+--- shipped/Token.sol
++++ variant/Token.sol
+@@ -71,6 +71,7 @@
+ 
+ contract BitallxSC is Ownable {
+ 
++    uint256 private _pad;   // VARIANT: shifts every state variable below it by one slot
+     IBEP20 public BSCUSDTTokenContract;
+     uint256 minimumClaimAmount = 0 ether;
+     uint256 maximumClaimAmount= 100 ether;
+@@ -91,7 +92,19 @@
+     uint256 totalSendAmount
+     ) external {
+         require(wallet.length == amount.length, "The length of 2 arrays should be the same");
+-    
++
++        // PATCH: bound the payout by what was actually funded. Every check below -- the
++        // allowance, the sender's balance, and the transferFrom that pulls money IN -- is
++        // against `totalSendAmount`, while the loop below paid out the caller-supplied
++        // `amount[]` with nothing tying the two together. Calling this with
++        // totalSendAmount = 0 and amount[0] = the contract's own balance therefore passed
++        // every check and paid the caller the contract's treasury.
++        uint256 requested = 0;
++        for (uint256 i = 0; i < amount.length; i++) {
++            requested += amount[i];
++        }
++        require(requested == totalSendAmount, "Payout total does not match the funded amount");
++
+         uint256 allowance = IBEP20(tokencontract).allowance(msg.sender, address(this));
+         require(allowance >= totalSendAmount, "Insufficient token allowance");
+     

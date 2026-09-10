@@ -1,0 +1,39 @@
+{
+  "task_id": "goldreserve_2025_02",
+  "incident": "GoldReserve: profit entitlement follows the NFT but the claim record follows the address",
+  "source": "src/test/2025-02/GoldReserve_exp.sol",
+  "chain": "bsc",
+  "chain_id": 56,
+  "fork_block": 46278330,
+  "rpc_alias": "bsc",
+  "date_month": "2025-02",
+  "split": "train",
+  "vulnerability_class": "reward-accounting / claim-debt-not-carried-on-transfer",
+  "victim_address": "0x7c77576a2b48504EBD9fF0810D799651f68742d3",
+  "patchable_globs": [
+    "src/contracts/*.sol"
+  ],
+  "patch_contract_ref": "src/contracts/Token.sol:GoldReserve",
+  "harness_files": [
+    "project/foundry.toml",
+    "project/remappings.txt",
+    "tests/hidden/invariants_auto.t.sol",
+    "tests/hidden/regression.t.sol",
+    "tests/hidden/security.t.sol",
+    "tests/manifest.json",
+    "tests/poc.t.sol"
+  ],
+  "hash_locks": {
+    "tests/poc.t.sol": "6b5775248c5e80aefe2915a35520de7f98028f15e1ac7d708d7f6d09ad069e38",
+    "tests/hidden/invariants_auto.t.sol": "29eb424b87ebede1701f3ddca17202ef8ab6d58f7021a09b7766944c931919a7",
+    "tests/hidden/regression.t.sol": "b1f902ce356fe30e1e1c5441fa5ced15f32ea30f9155028d5f58d9cec9351593",
+    "tests/hidden/security.t.sol": "e9a9a2c6d40b32abdefb55d560e94c9c4229c5b171ad1bd21f5aeef4910a8b87",
+    "tests/manifest.json": "e972595424976ac0ac5d10dc68933047d353ac4653c910542a469c5c8af21de9",
+    "project/foundry.toml": "5f55f5f098df96939987224e1306187209d17835121bd3342712c05c94f5a51f",
+    "project/remappings.txt": "ea084d6e5d1943cf7da06c5e6bcc80538762f5b35d368d942306c3a338222c6c"
+  },
+  "episode_budget": 30,
+  "offline_mechanism": "rpc_replay_proxy",
+  "notes": "claimProfit() computes entitlement from the caller's CURRENT ERC1155 balance times accumulatedProfitPerNFT, but records what has been paid in claimedProfitPerAddress[msg.sender]. The debt is therefore attached to an address while the entitlement is attached to the token, so moving the same NFTs to a fresh address resets the debt and the same profit can be claimed again -- and a freshly minted NFT inherits all profit accrued before it existed. The attacker flash-borrowed BNB, deposited it as profit, minted 8 NFTs that instantly 'owned' that profit, then walked them through 22 addresses claiming each time. Fix: carry the claim debt with the tokens in _update(), for mints as well as transfers.",
+  "task_version": 2
+}

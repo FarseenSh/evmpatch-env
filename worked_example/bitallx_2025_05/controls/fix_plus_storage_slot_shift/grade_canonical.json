@@ -1,0 +1,88 @@
+{
+  "abi_invariants": {
+    "bytecode_selectors": "Success",
+    "dispatch_control": "Success",
+    "dispatch_selectors": "Success",
+    "not_vacuous": "Success"
+  },
+  "canaries": [
+    "bricked"
+  ],
+  "changed_files": [
+    "src/contracts/Token.sol"
+  ],
+  "compiled": true,
+  "diff_in_scope": true,
+  "hidden_all_pass": false,
+  "hidden_setup_failures": {},
+  "hidden_tests": {
+    "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_dispatch()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_preserved()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/invariants_auto.t.sol:AutoInvariants:test_contract_has_code()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/invariants_auto.t.sol:AutoInvariants:test_selector_check_is_not_vacuous()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/invariants_auto.t.sol:AutoInvariants:test_unknown_selector_is_rejected()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/regression.t.sol:Bitallx_Regression:test_funded_batch_payout_distributes_correctly()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/regression.t.sol:Bitallx_Regression:test_live_storage_still_readable()": [
+      "Failure",
+      "configured USDT contract moved: 0x0000000000000000000000000000000000000000 != 0x55d398326f99059fF775485246999027B3197955"
+    ],
+    "test/hidden/regression.t.sol:Bitallx_Regression:test_owner_treasury_path_still_works()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/regression.t.sol:Bitallx_Regression:test_payout_rejects_an_unfunded_payer()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/regression.t.sol:Bitallx_Regression:test_publisher_can_still_pay_a_reward()": [
+      "Failure",
+      "Claim amount below minimum limit!"
+    ],
+    "test/hidden/security.t.sol:Bitallx_Security:test_multi_element_over_request_pays_nothing()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/security.t.sol:Bitallx_Security:test_single_element_over_request_from_fresh_payer_pays_nothing()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/security.t.sol:Bitallx_Security:test_sum_over_funded_total_rejected_even_when_each_element_fits()": [
+      "Success",
+      ""
+    ]
+  },
+  "outcome": "not_solved",
+  "poc_blocked": true,
+  "poc_failure_kind": "revert",
+  "poc_setup_failures": {},
+  "poc_tests": {
+    "test/poc.t.sol:Bitallx_PoC:testExploit()": [
+      "Failure",
+      "Payout total does not match the funded amount"
+    ]
+  },
+  "reason": "",
+  "reason_family": "",
+  "schema": "evmpatch.grade/1+reasons",
+  "score": 0.0,
+  "task_id": "bitallx_2025_05",
+  "tests_match_manifest": true
+}

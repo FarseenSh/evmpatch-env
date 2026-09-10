@@ -1,0 +1,1 @@
+Reference fix PLUS an edit to the hash-locked PoC (profit threshold raised so the oracle could never pass). Expected: not_solved with diff_in_scope=false and canary out_of_scope_edit:tests/poc.t.sol, decided BEFORE any forge run.

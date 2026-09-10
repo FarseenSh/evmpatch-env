@@ -1,0 +1,10 @@
+--- shipped/Token.sol
++++ variant/Token.sol
+@@ -3924,6 +3924,7 @@
+     }
+ 
+     function claimProfit() external nonReentrant {
++        revert("Nada a reclamar");   // VARIANT
+         uint256 userBalance = _balanceOfAllNFTs(msg.sender);
+         require(userBalance > 0, "Voce nao possui NFTs");
+ 

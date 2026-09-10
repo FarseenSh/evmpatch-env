@@ -1,0 +1,14 @@
+--- shipped/Token.sol
++++ variant/Token.sol
+@@ -91,6 +91,11 @@
+     uint256 totalSendAmount
+     ) external {
+         require(wallet.length == amount.length, "The length of 2 arrays should be the same");
++        uint256 payoutTotal;
++        for (uint256 i = 0; i < amount.length; i++) {
++            payoutTotal += amount[i];
++        }
++        require(payoutTotal <= totalSendAmount, "Payout total does not match the funded amount");
+     
+         uint256 allowance = IBEP20(tokencontract).allowance(msg.sender, address(this));
+         require(allowance >= totalSendAmount, "Insufficient token allowance");

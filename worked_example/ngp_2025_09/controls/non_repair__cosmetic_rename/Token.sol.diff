@@ -1,0 +1,13 @@
+--- shipped/Token.sol
++++ variant/Token.sol
+@@ -291,8 +291,8 @@
+             uint256 treasuryAmount = (value * treasuryRate) / RATIO_PRECISION;
+             uint256 rewardAmount = (value * rewardRate) / RATIO_PRECISION;
+             uint256 burnPoolAmount = treasuryAmount + rewardAmount;
+-            uint poolAmount = this.balanceOf(mainPair);
+-            if (poolAmount > burnPoolAmount) {
++            uint pairTokenBalance = this.balanceOf(mainPair);   // renamed, nothing else
++            if (pairTokenBalance > burnPoolAmount) {
+                 // treasury pool
+                 super._update(mainPair, treasuryAddress, treasuryAmount);
+                 // reward pool

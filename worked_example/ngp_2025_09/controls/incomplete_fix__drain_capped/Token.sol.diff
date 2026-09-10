@@ -1,0 +1,18 @@
+--- shipped/Token.sol
++++ variant/Token.sol
+@@ -293,11 +293,12 @@
+             uint256 burnPoolAmount = treasuryAmount + rewardAmount;
+             uint poolAmount = this.balanceOf(mainPair);
+             if (poolAmount > burnPoolAmount) {
+-                // treasury pool
++                // VARIANT: drain bounded and sync removed; the pair is still debited.
++                uint256 drainCap = poolAmount / 100;
++                if (treasuryAmount > drainCap) treasuryAmount = drainCap;
++                if (rewardAmount > drainCap) rewardAmount = drainCap;
+                 super._update(mainPair, treasuryAddress, treasuryAmount);
+-                // reward pool
+                 super._update(mainPair, rewardPoolAddress, rewardAmount);
+-                IUniswapV2Pair(mainPair).sync();
+             }
+             value = value - totalFee;
+             emit FlowIntoPool(

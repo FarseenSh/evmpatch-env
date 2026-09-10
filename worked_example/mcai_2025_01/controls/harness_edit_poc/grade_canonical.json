@@ -1,0 +1,31 @@
+{
+  "abi_invariants": {
+    "bytecode_selectors": "absent",
+    "dispatch_control": "absent",
+    "dispatch_selectors": "absent",
+    "not_vacuous": "absent"
+  },
+  "canaries": [
+    "out_of_scope_edit:tests/poc.t.sol"
+  ],
+  "changed_files": [
+    "src/contracts/Token.sol",
+    "tests/poc.t.sol"
+  ],
+  "compiled": false,
+  "diff_in_scope": false,
+  "hidden_all_pass": false,
+  "hidden_setup_failures": {},
+  "hidden_tests": {},
+  "outcome": "not_solved",
+  "poc_blocked": false,
+  "poc_failure_kind": "",
+  "poc_setup_failures": {},
+  "poc_tests": {},
+  "reason": "",
+  "reason_family": "",
+  "schema": "evmpatch.grade/1+reasons",
+  "score": 0.0,
+  "task_id": "mcai_2025_01",
+  "tests_match_manifest": false
+}

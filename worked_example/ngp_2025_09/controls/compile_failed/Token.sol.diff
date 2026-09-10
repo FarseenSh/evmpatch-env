@@ -1,0 +1,29 @@
+--- shipped/Token.sol
++++ variant/Token.sol
+@@ -246,6 +246,7 @@
+         }
+     }
+ 
++    this line is not solidity;
+     function _update(
+         address from,
+         address to,
+@@ -291,14 +292,10 @@
+             uint256 treasuryAmount = (value * treasuryRate) / RATIO_PRECISION;
+             uint256 rewardAmount = (value * rewardRate) / RATIO_PRECISION;
+             uint256 burnPoolAmount = treasuryAmount + rewardAmount;
+-            uint poolAmount = this.balanceOf(mainPair);
+-            if (poolAmount > burnPoolAmount) {
+-                // treasury pool
+-                super._update(mainPair, treasuryAddress, treasuryAmount);
+-                // reward pool
+-                super._update(mainPair, rewardPoolAddress, rewardAmount);
+-                IUniswapV2Pair(mainPair).sync();
+-            }
++            // PATCH: removed mid-transfer pool draining + sync() that let a seller
++            // re-price reserves within their own sell. Fees are taken from the seller,
++            // not silently pulled out of the pair, so the AMM invariant is preserved.
++            treasuryAmount; rewardAmount; burnPoolAmount; // retained for event below
+             value = value - totalFee;
+             emit FlowIntoPool(
+                 from,

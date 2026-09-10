@@ -1,0 +1,11 @@
+--- shipped/Token.sol
++++ variant/Token.sol
+@@ -297,7 +297,7 @@
+                 super._update(mainPair, treasuryAddress, treasuryAmount);
+                 // reward pool
+                 super._update(mainPair, rewardPoolAddress, rewardAmount);
+-                IUniswapV2Pair(mainPair).sync();
++                // VARIANT: sync removed, pool drain kept
+             }
+             value = value - totalFee;
+             emit FlowIntoPool(

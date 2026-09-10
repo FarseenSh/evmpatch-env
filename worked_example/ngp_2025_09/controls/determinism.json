@@ -1,0 +1,30 @@
+{
+  "all_core_hashes_identical": true,
+  "core_sha256_by_run": [
+    {
+      "alt_fix__fees_charged_to_seller": "cb637d0428a31635a00386ccd3ce65430aa1cd71a4cda05752a6806225465b94",
+      "compile_failed": "965db891ebb4e150e800679a5786581a120336d36fbf14bf93434718e8f71bd2",
+      "fix_plus_sell_path_disabled": "fee0babf9d17e350047e2f7d06b0a390bbf0684783fd6bc7849f6b92b28fea5d",
+      "incomplete_fix__drain_capped": "55603bbcfc5c8fb28f0753fa476231087bc9ea09e31b37275374e135e51ef840",
+      "incomplete_fix__sync_only_removed": "55603bbcfc5c8fb28f0753fa476231087bc9ea09e31b37275374e135e51ef840",
+      "non_repair__cosmetic_rename": "153930c934f39d21979946035a2a16110da3f564cc12b10f83165601c7b6a977",
+      "noop_identical": "25b53d32310daa49483bc7f910779928be9c4b3639bcd78029c391de1cab77df",
+      "recognised_reason__approve_reverts": "fee0babf9d17e350047e2f7d06b0a390bbf0684783fd6bc7849f6b92b28fea5d",
+      "reference": "cb637d0428a31635a00386ccd3ce65430aa1cd71a4cda05752a6806225465b94",
+      "unpatched": "25b53d32310daa49483bc7f910779928be9c4b3639bcd78029c391de1cab77df"
+    },
+    {
+      "alt_fix__fees_charged_to_seller": "cb637d0428a31635a00386ccd3ce65430aa1cd71a4cda05752a6806225465b94",
+      "compile_failed": "965db891ebb4e150e800679a5786581a120336d36fbf14bf93434718e8f71bd2",
+      "fix_plus_sell_path_disabled": "fee0babf9d17e350047e2f7d06b0a390bbf0684783fd6bc7849f6b92b28fea5d",
+      "incomplete_fix__drain_capped": "55603bbcfc5c8fb28f0753fa476231087bc9ea09e31b37275374e135e51ef840",
+      "incomplete_fix__sync_only_removed": "55603bbcfc5c8fb28f0753fa476231087bc9ea09e31b37275374e135e51ef840",
+      "non_repair__cosmetic_rename": "153930c934f39d21979946035a2a16110da3f564cc12b10f83165601c7b6a977",
+      "noop_identical": "25b53d32310daa49483bc7f910779928be9c4b3639bcd78029c391de1cab77df",
+      "recognised_reason__approve_reverts": "fee0babf9d17e350047e2f7d06b0a390bbf0684783fd6bc7849f6b92b28fea5d",
+      "reference": "cb637d0428a31635a00386ccd3ce65430aa1cd71a4cda05752a6806225465b94",
+      "unpatched": "25b53d32310daa49483bc7f910779928be9c4b3639bcd78029c391de1cab77df"
+    }
+  ],
+  "runs": 2
+}

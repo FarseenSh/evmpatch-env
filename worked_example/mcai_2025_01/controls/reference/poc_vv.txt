@@ -1,0 +1,17 @@
+Compiling 21 files with Solc 0.8.26
+Solc 0.8.26 finished in 952.00ms
+Compiler run successful!
+
+Ran 1 test for test/poc.t.sol:MCAI_PoC
+[FAIL: ERC20: transfer amount exceeds allowance] testExploit() (gas: 72393)
+Suite result: FAILED. 0 passed; 1 failed; 0 skipped; finished in 18.69ms (5.15ms CPU time)
+
+Ran 1 test suite in 19.72ms (18.69ms CPU time): 0 tests passed, 1 failed, 0 skipped (1 total tests)
+
+Failing tests:
+Encountered 1 failing test in test/poc.t.sol:MCAI_PoC
+[FAIL: ERC20: transfer amount exceeds allowance] testExploit() (gas: 72393)
+
+Encountered a total of 1 failing tests, 0 tests succeeded
+
+Tip: Run `forge test --rerun` to retry only the 1 failed test

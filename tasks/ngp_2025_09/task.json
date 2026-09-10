@@ -1,0 +1,41 @@
+{
+  "task_id": "ngp_2025_09",
+  "incident": "NGP token price manipulation via sync() in _update()",
+  "source": "src/test/2025-09/NGP_exp.sol",
+  "chain": "bsc",
+  "chain_id": 56,
+  "fork_block": 61515894,
+  "rpc_alias": "bsc",
+  "date_month": "2025-09",
+  "split": "train",
+  "vulnerability_class": "amm-reserve-manipulation / mid-transfer-sync",
+  "victim_address": "0xd2F26200cD524dB097Cf4ab7cC2E5C38aB6ae5c9",
+  "patchable_globs": [
+    "src/contracts/*.sol"
+  ],
+  "patch_contract_ref": "src/contracts/Token.sol:Token",
+  "harness_files": [
+    "project/foundry.toml",
+    "project/remappings.txt",
+    "tests/hidden/amm_regression.t.sol",
+    "tests/hidden/invariants_auto.t.sol",
+    "tests/hidden/regression.t.sol",
+    "tests/hidden/security.t.sol",
+    "tests/manifest.json",
+    "tests/poc.t.sol"
+  ],
+  "hash_locks": {
+    "tests/poc.t.sol": "12a608e7e26c665749c02c9ad0586921ac559ad10fe6362e5deed29e0ecb49d3",
+    "tests/hidden/amm_regression.t.sol": "e61749b52f4159450f01c6d4d60691a3b5a27cb8eae5971a885310bc63422ac8",
+    "tests/hidden/invariants_auto.t.sol": "18220c4497daf9c1f99b3565fdcf54ab12bc6de9bf59f76655970ff8f59200f8",
+    "tests/hidden/regression.t.sol": "9e47392070f4e84d5bf042edfb7d97e0f1ac51940883762da09d480174d38cf8",
+    "tests/hidden/security.t.sol": "988138401eddd4bfc6399b15f999faac7bb6d33cac4c5ff3feb8c2cabbe5aa36",
+    "tests/manifest.json": "779b0b267da0a6f12cb5e7967c5f0937aabfd718c6d3c9e3b3e1edcf5e13ce01",
+    "project/foundry.toml": "346a6fe0d5e3cd2e8ae9f2c3b5f47da348e9e09f1b1fdf222173f8fe79b9f0bd",
+    "project/remappings.txt": "86234603b06c11cf48843e41ee1f6ac564556858c2beecfc63bff08c21f35b3a"
+  },
+  "episode_budget": 30,
+  "offline_mechanism": "rpc_replay_proxy",
+  "notes": "Sell path drained treasury+reward from the pair then called pair.sync() inside the seller's own _update, letting the seller re-price reserves mid-sell. Fix removes the mid-transfer pool drain + sync. Reward: PoC exploit oracle must flip PASS->FAIL while all hidden invariants stay PASS. Verified offline (rpc_replay proxy, 60 slots).",
+  "task_version": 2
+}

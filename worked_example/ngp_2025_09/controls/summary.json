@@ -1,0 +1,347 @@
+{
+  "task": "ngp_2025_09",
+  "generated_utc": "2026-09-10T03:36:10Z",
+  "toolchain": {
+    "forge": "forge Version: 1.7.1\nCommit SHA: 4072e48705af9d93e3c0f6e29e93b5e9a40caed8\nBuild Timestamp: 2026-05-08T07:54:31.470926000Z (1778226871)\nBuild Profile: dist",
+    "python": "3.12.14",
+    "platform": "Darwin arm64",
+    "task_json_sha256": "0cab8856e681d608bbc1c68e6b19f195542a510535ddc61fc9404c99b9175adb",
+    "rpc_log_sha256": "e6da2c723ef906b78bd9aec23151727feaeb302dfadb694ed8bf068fc577c8b2",
+    "rpc_log_records": 139,
+    "shipped_source_sha256": "1b2978fe2e5b5a3b3ca7b7dd6542313d0ca00971505b12494409b7a74d0046be",
+    "reference_patch_diff_sha256": "a2915c73c189667b7946223d11f5caae3ec4a43a54e3b4ef2cd0b99918fdddf7",
+    "security_suite_sha256": "988138401eddd4bfc6399b15f999faac7bb6d33cac4c5ff3feb8c2cabbe5aa36"
+  },
+  "seconds": 75.9,
+  "rows": [
+    {
+      "name": "unpatched",
+      "kind": "baseline",
+      "expected": "not_solved / oracle Success / canary empty_patch",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "empty_patch"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:NGP_Security:test_direct_transfer_to_the_pair_moves_nothing_out_of_it()",
+        "test/hidden/security.t.sol:NGP_Security:test_ordinary_sell_moves_no_tokens_out_of_the_pair()",
+        "test/hidden/security.t.sol:NGP_Security:test_pair_keeps_every_token_an_ordinary_sell_sends_it()",
+        "test/hidden/security.t.sol:NGP_Security:test_treasury_and_reward_are_not_funded_out_of_the_pair()"
+      ],
+      "oracle_status": "Success",
+      "oracle_reason": null,
+      "core_sha256": "25b53d32310daa49483bc7f910779928be9c4b3639bcd78029c391de1cab77df",
+      "strict_sha256": "a79700ceb81bcee8c9894ba3413dd9a9d5d58691ec8163fea4f60b7a2d9f17f3",
+      "detail": "poc still exploitable; security obligations failing (incomplete repair); canaries: empty_patch",
+      "seconds": 7.1
+    },
+    {
+      "name": "reference",
+      "kind": "complete_repair",
+      "expected": "solved 1.0",
+      "outcome": "solved",
+      "reason": "",
+      "score": 1.0,
+      "poc_blocked": true,
+      "hidden_all_pass": true,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [],
+      "oracle_status": "Failure",
+      "oracle_reason": "BEP20: transfer amount exceeds balance",
+      "core_sha256": "cb637d0428a31635a00386ccd3ce65430aa1cd71a4cda05752a6806225465b94",
+      "strict_sha256": "65466943ed575d6709a890c84423e1e0abe1290d881c15cb919aa5dc391c6464",
+      "detail": "solved",
+      "seconds": 7.9
+    },
+    {
+      "name": "alt_fix__fees_charged_to_seller",
+      "kind": "complete_repair",
+      "expected": "solved 1.0",
+      "outcome": "solved",
+      "reason": "",
+      "score": 1.0,
+      "poc_blocked": true,
+      "hidden_all_pass": true,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [],
+      "oracle_status": "Failure",
+      "oracle_reason": "BEP20: transfer amount exceeds balance",
+      "core_sha256": "cb637d0428a31635a00386ccd3ce65430aa1cd71a4cda05752a6806225465b94",
+      "strict_sha256": "65466943ed575d6709a890c84423e1e0abe1290d881c15cb919aa5dc391c6464",
+      "detail": "solved",
+      "seconds": 9.2
+    },
+    {
+      "name": "incomplete_fix__sync_only_removed",
+      "kind": "incomplete_repair",
+      "expected": "not_solved 0.0 / poc_blocked / canary residual_vulnerability",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": true,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "residual_vulnerability"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:NGP_Security:test_direct_transfer_to_the_pair_moves_nothing_out_of_it()",
+        "test/hidden/security.t.sol:NGP_Security:test_ordinary_sell_moves_no_tokens_out_of_the_pair()",
+        "test/hidden/security.t.sol:NGP_Security:test_pair_keeps_every_token_an_ordinary_sell_sends_it()",
+        "test/hidden/security.t.sol:NGP_Security:test_treasury_and_reward_are_not_funded_out_of_the_pair()"
+      ],
+      "oracle_status": "Failure",
+      "oracle_reason": "BEP20: transfer amount exceeds balance",
+      "core_sha256": "55603bbcfc5c8fb28f0753fa476231087bc9ea09e31b37275374e135e51ef840",
+      "strict_sha256": "82ce207216bc7216146296c8470950355a471d3aabdb81d00067063598920e76",
+      "detail": "security obligations failing (incomplete repair); canaries: residual_vulnerability",
+      "seconds": 7.8
+    },
+    {
+      "name": "incomplete_fix__drain_capped",
+      "kind": "incomplete_repair",
+      "expected": "not_solved 0.0 / poc_blocked / canary residual_vulnerability",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": true,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "residual_vulnerability"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:NGP_Security:test_direct_transfer_to_the_pair_moves_nothing_out_of_it()",
+        "test/hidden/security.t.sol:NGP_Security:test_ordinary_sell_moves_no_tokens_out_of_the_pair()",
+        "test/hidden/security.t.sol:NGP_Security:test_pair_keeps_every_token_an_ordinary_sell_sends_it()",
+        "test/hidden/security.t.sol:NGP_Security:test_treasury_and_reward_are_not_funded_out_of_the_pair()"
+      ],
+      "oracle_status": "Failure",
+      "oracle_reason": "BEP20: transfer amount exceeds balance",
+      "core_sha256": "55603bbcfc5c8fb28f0753fa476231087bc9ea09e31b37275374e135e51ef840",
+      "strict_sha256": "82ce207216bc7216146296c8470950355a471d3aabdb81d00067063598920e76",
+      "detail": "security obligations failing (incomplete repair); canaries: residual_vulnerability",
+      "seconds": 7.1
+    },
+    {
+      "name": "non_repair__cosmetic_rename",
+      "kind": "non_repair",
+      "expected": "not_solved 0.0 / oracle Success",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:NGP_Security:test_direct_transfer_to_the_pair_moves_nothing_out_of_it()",
+        "test/hidden/security.t.sol:NGP_Security:test_ordinary_sell_moves_no_tokens_out_of_the_pair()",
+        "test/hidden/security.t.sol:NGP_Security:test_pair_keeps_every_token_an_ordinary_sell_sends_it()",
+        "test/hidden/security.t.sol:NGP_Security:test_treasury_and_reward_are_not_funded_out_of_the_pair()"
+      ],
+      "oracle_status": "Success",
+      "oracle_reason": null,
+      "core_sha256": "153930c934f39d21979946035a2a16110da3f564cc12b10f83165601c7b6a977",
+      "strict_sha256": "5fd319bfccdc26dd07ef1cf7f4cb75281547b69969082a3392fd2a3eb5a9fff1",
+      "detail": "poc still exploitable; security obligations failing (incomplete repair)",
+      "seconds": 9.0
+    },
+    {
+      "name": "noop_identical",
+      "kind": "non_repair",
+      "expected": "not_solved 0.0 / canary empty_patch",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "empty_patch"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:NGP_Security:test_direct_transfer_to_the_pair_moves_nothing_out_of_it()",
+        "test/hidden/security.t.sol:NGP_Security:test_ordinary_sell_moves_no_tokens_out_of_the_pair()",
+        "test/hidden/security.t.sol:NGP_Security:test_pair_keeps_every_token_an_ordinary_sell_sends_it()",
+        "test/hidden/security.t.sol:NGP_Security:test_treasury_and_reward_are_not_funded_out_of_the_pair()"
+      ],
+      "oracle_status": "Success",
+      "oracle_reason": null,
+      "core_sha256": "25b53d32310daa49483bc7f910779928be9c4b3639bcd78029c391de1cab77df",
+      "strict_sha256": "a79700ceb81bcee8c9894ba3413dd9a9d5d58691ec8163fea4f60b7a2d9f17f3",
+      "detail": "poc still exploitable; security obligations failing (incomplete repair); canaries: empty_patch",
+      "seconds": 6.8
+    },
+    {
+      "name": "recognised_reason__approve_reverts",
+      "kind": "destructive",
+      "expected": "not_solved 0.0 / canary bricked",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": false,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "bricked"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/amm_regression.t.sol:NGP_AmmRegression:test_amm_buy_then_sell_round_trip()",
+        "test/hidden/security.t.sol:NGP_Security:test_direct_transfer_to_the_pair_moves_nothing_out_of_it()",
+        "test/hidden/security.t.sol:NGP_Security:test_ordinary_sell_moves_no_tokens_out_of_the_pair()",
+        "test/hidden/security.t.sol:NGP_Security:test_pair_keeps_every_token_an_ordinary_sell_sends_it()",
+        "test/hidden/security.t.sol:NGP_Security:test_treasury_and_reward_are_not_funded_out_of_the_pair()"
+      ],
+      "oracle_status": "Failure",
+      "oracle_reason": "PRECONDITION_UNREADABLE: approve() reverted before the exploit ran",
+      "core_sha256": "fee0babf9d17e350047e2f7d06b0a390bbf0684783fd6bc7849f6b92b28fea5d",
+      "strict_sha256": "b4f2c5bf2ad0e6dc5ac8cd31fb686d63ea74cfc6ac604f872b059693f2291cd4",
+      "detail": "hidden invariants failing; exploit oracle failed for an undeclared reason ('PRECONDITION_UNREADABLE: approve() reverted before the exploit ran'); canaries: bricked",
+      "seconds": 10.2
+    },
+    {
+      "name": "fix_plus_sell_path_disabled",
+      "kind": "destructive",
+      "expected": "not_solved 0.0 / canary bricked",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": false,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "bricked"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/amm_regression.t.sol:NGP_AmmRegression:test_amm_buy_then_sell_round_trip()",
+        "test/hidden/security.t.sol:NGP_Security:test_direct_transfer_to_the_pair_moves_nothing_out_of_it()",
+        "test/hidden/security.t.sol:NGP_Security:test_ordinary_sell_moves_no_tokens_out_of_the_pair()",
+        "test/hidden/security.t.sol:NGP_Security:test_pair_keeps_every_token_an_ordinary_sell_sends_it()",
+        "test/hidden/security.t.sol:NGP_Security:test_treasury_and_reward_are_not_funded_out_of_the_pair()"
+      ],
+      "oracle_status": "Failure",
+      "oracle_reason": "TransferHelper: TRANSFER_FROM_FAILED",
+      "core_sha256": "fee0babf9d17e350047e2f7d06b0a390bbf0684783fd6bc7849f6b92b28fea5d",
+      "strict_sha256": "ad7643920f4088a9ad8d9aace1e555893d7268f8e7e3b0c12d1794e27104f857",
+      "detail": "hidden invariants failing; exploit oracle failed for an undeclared reason ('TransferHelper: TRANSFER_FROM_FAILED'); canaries: bricked",
+      "seconds": 9.8
+    },
+    {
+      "name": "compile_failed",
+      "kind": "infrastructure",
+      "expected": "inconclusive / compile_failed / score 0",
+      "outcome": "inconclusive",
+      "reason": "compile_failed",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": false,
+      "compiled": false,
+      "diff_in_scope": false,
+      "tests_match_manifest": false,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "absent",
+        "dispatch_selectors": "absent",
+        "dispatch_control": "absent",
+        "not_vacuous": "absent"
+      },
+      "failing_hidden": [],
+      "oracle_status": null,
+      "oracle_reason": null,
+      "core_sha256": "965db891ebb4e150e800679a5786581a120336d36fbf14bf93434718e8f71bd2",
+      "strict_sha256": "8b98f9fbbaadcb3645b1e0279380fda7ec38a6308661cb56df56f63c34590bf6",
+      "detail": "poc suite did not compile",
+      "seconds": 0.8
+    }
+  ]
+}

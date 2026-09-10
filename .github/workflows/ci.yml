@@ -1,0 +1,107 @@
+name: ci
+
+# The workflow is deliberately small: every job runs offline against the committed task
+# state, and the expensive containment check stays local (see below).
+#
+# What it proves, in order of cost:
+#   1. the scorer probes, over the real scorer, with no Foundry at all (~1s). This
+#      includes the patch-key/traversal and workdir-harness probes, which touch a task
+#      directory on disk but still need no Foundry;
+#   2. every shipped task really flips on its own reference patch, offline (~2 min);
+#   3. the worked examples and control suites: for every task the reference and an
+#      alternative complete repair grade solved, and the hostile variants (incomplete
+#      repairs, precondition sabotage, path-traversal patch key, silent re-mint) grade 0.
+#      These need Foundry but no network.
+# The `docker --network none` backend is NOT exercised here: it needs a ~750 MB image and
+# proves containment, which a hosted runner already provides differently. Run it locally
+# with `docker build -t evmpatch-env:latest . && pytest tests/test_docker_backend.py`.
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Pure-python: the scorer probes need neither Foundry nor a network, so they gate
+  # everything else and fail in seconds when the grader regresses.
+  probes:
+    name: scorer probes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pytest
+      - name: scorer probes and canonical-grade invariants
+        run: pytest tests/test_scorer_probes.py -q
+
+  tasks:
+    name: task flip check (offline)
+    needs: probes
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pytest
+
+      - name: install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          # Pinned: the grader's report parser and the committed receipt hashes are
+          # verified against 1.7.1, and a silent toolchain bump would change grades.
+          version: v1.7.1
+
+      - name: warm the solc builds the tasks need
+        # Reward time runs with FOUNDRY_OFFLINE=true and a fail-closed RPC proxy, so every
+        # compiler a task pins must already be on disk. Do it once, here, with a network.
+        # 0.8.26 -> mcai_2025_01, goldreserve_2025_02 (pinned in their foundry.toml)
+        # 0.8.30 -> bitallx_2025_05 (pinned) and ngp_2025_09 (unpinned, `pragma ^0.8.28`,
+        #           so forge resolves it to the newest warmed build that satisfies it)
+        # Nothing pins anything older; a version that no task can resolve to only adds
+        # runtime, so the list is exactly the two the corpus needs.
+        run: |
+          set -eux
+          mkdir -p /tmp/warm/src && cd /tmp/warm
+          printf '[profile.default]\nsrc = "src"\nout = "out"\nlibs = []\n' > foundry.toml
+          for v in 0.8.30 0.8.26; do
+            printf '// SPDX-License-Identifier: UNLICENSED\npragma solidity %s;\ncontract W { function f() external pure returns (uint256) { return 1; } }\n' "$v" > src/W.sol
+            forge build --use "$v"
+          done
+
+      - name: every task flips on its own reference patch, offline
+        # No network is reachable from the graded process: state comes from each task's
+        # committed state/rpc_log.json through the fail-closed replay proxy.
+        run: pytest tests/test_all_tasks.py tests/test_ngp_flip.py -q
+
+      - name: worked examples and control suites for every task
+        # tests/test_worked_example_mcai.py grades the MCAI case card's hostile variants
+        # (pair-only allowance fix, allowance-view sabotage, path-traversal patch key, silent
+        # re-mint); tests/test_controls_<task>.py do the same for the other three tasks
+        # (complete repairs must grade solved, incomplete repairs must grade not_solved with
+        # the residual_vulnerability canary). Without this step CI would still pass while any
+        # of those regressions returned.
+        run: |
+          pytest tests/test_worked_example_mcai.py -q
+          pytest tests/test_controls_ngp_2025_09.py tests/test_controls_goldreserve_2025_02.py tests/test_controls_bitallx_2025_05.py -q
+
+      - name: cross-host grade hashes
+        # Prints the canonical grade hash for every task. Compare against RECEIPT.md when
+        # investigating a reproducibility question; not asserted here, because a deliberate
+        # toolchain bump should show up as a readable diff rather than a red build.
+        if: always()
+        run: |
+          for t in tasks/*/; do
+            echo "== $(basename "$t")"
+            python -m evmpatch_env.sandbox "$t" --reference-patch --backend local --sha256 || true
+          done

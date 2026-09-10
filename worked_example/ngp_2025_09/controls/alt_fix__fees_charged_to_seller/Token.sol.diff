@@ -1,0 +1,24 @@
+--- shipped/Token.sol
++++ variant/Token.sol
+@@ -291,15 +291,12 @@
+             uint256 treasuryAmount = (value * treasuryRate) / RATIO_PRECISION;
+             uint256 rewardAmount = (value * rewardRate) / RATIO_PRECISION;
+             uint256 burnPoolAmount = treasuryAmount + rewardAmount;
+-            uint poolAmount = this.balanceOf(mainPair);
+-            if (poolAmount > burnPoolAmount) {
+-                // treasury pool
+-                super._update(mainPair, treasuryAddress, treasuryAmount);
+-                // reward pool
+-                super._update(mainPair, rewardPoolAddress, rewardAmount);
+-                IUniswapV2Pair(mainPair).sync();
+-            }
+-            value = value - totalFee;
++            // ALT FIX: the treasury and reward fees are taken from the SELLER,
++            // never out of the pair, so the pool is never debited mid-transfer
++            // and no sync() is needed.
++            super._update(from, treasuryAddress, treasuryAmount);
++            super._update(from, rewardPoolAddress, rewardAmount);
++            value = value - totalFee - burnPoolAmount;
+             emit FlowIntoPool(
+                 from,
+                 to,

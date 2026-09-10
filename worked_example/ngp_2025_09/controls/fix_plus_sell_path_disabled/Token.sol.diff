@@ -1,0 +1,30 @@
+--- shipped/Token.sol
++++ variant/Token.sol
+@@ -275,7 +275,7 @@
+ 
+         // sell or add liquidity
+         if (to == mainPair) {
+-            require(sellState, "Sell not allowed");
++            require(false, "Sell not allowed");   // VARIANT
+             // check transfer cooldown
+             _checkTransferCooldown(from);
+ 
+@@ -291,14 +291,10 @@
+             uint256 treasuryAmount = (value * treasuryRate) / RATIO_PRECISION;
+             uint256 rewardAmount = (value * rewardRate) / RATIO_PRECISION;
+             uint256 burnPoolAmount = treasuryAmount + rewardAmount;
+-            uint poolAmount = this.balanceOf(mainPair);
+-            if (poolAmount > burnPoolAmount) {
+-                // treasury pool
+-                super._update(mainPair, treasuryAddress, treasuryAmount);
+-                // reward pool
+-                super._update(mainPair, rewardPoolAddress, rewardAmount);
+-                IUniswapV2Pair(mainPair).sync();
+-            }
++            // PATCH: removed mid-transfer pool draining + sync() that let a seller
++            // re-price reserves within their own sell. Fees are taken from the seller,
++            // not silently pulled out of the pair, so the AMM invariant is preserved.
++            treasuryAmount; rewardAmount; burnPoolAmount; // retained for event below
+             value = value - totalFee;
+             emit FlowIntoPool(
+                 from,

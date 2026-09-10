@@ -1,0 +1,39 @@
+{
+  "task_id": "mcai_2025_01",
+  "incident": "MCAI tax wallet drained the Uniswap V2 pair by bypassing transferFrom allowance accounting",
+  "source": "src/test/2025-01/MCAI_exp.sol",
+  "chain": "ethereum",
+  "chain_id": 1,
+  "fork_block": 21720380,
+  "rpc_alias": "mainnet",
+  "date_month": "2025-01",
+  "split": "train",
+  "vulnerability_class": "broken-access-control / allowance-bypass-in-transferFrom",
+  "victim_address": "0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8",
+  "patchable_globs": [
+    "src/contracts/*.sol"
+  ],
+  "patch_contract_ref": "src/contracts/Token.sol:MCAI",
+  "harness_files": [
+    "project/foundry.toml",
+    "project/remappings.txt",
+    "tests/hidden/invariants_auto.t.sol",
+    "tests/hidden/regression.t.sol",
+    "tests/hidden/security.t.sol",
+    "tests/manifest.json",
+    "tests/poc.t.sol"
+  ],
+  "hash_locks": {
+    "tests/poc.t.sol": "ee55e83ae6c2934c9b000415e5f8c33141106640fcdc97a8ceef59242c2cb201",
+    "tests/hidden/invariants_auto.t.sol": "6bc5e80f559eced3790c5c0365ecceedd8cc0761fd34ff8c6eae5517cb6cdc7a",
+    "tests/hidden/regression.t.sol": "17ddff66a5fefeecfae5bac5e00a8349db36fa1f3834b02a3d9ef83c18d122a5",
+    "tests/hidden/security.t.sol": "bd92195b037d1a3346ba11f6c648bfeb9001072275a664794371aa86d93b798f",
+    "tests/manifest.json": "e1dc865d483c1af543b42a01d18a934df0f023bc2fe9a58e21419edf99409e73",
+    "project/foundry.toml": "ce9fbaa074b457273a4a185b61a1184187b1e862123ca4ce0cde5fb50570eb5f",
+    "project/remappings.txt": "ea084d6e5d1943cf7da06c5e6bcc80538762f5b35d368d942306c3a338222c6c"
+  },
+  "episode_budget": 30,
+  "offline_mechanism": "rpc_replay_proxy",
+  "notes": "transferFrom() moves the tokens FIRST and only then debits the allowance, and the amount it debits comes from _decreaseAllowance(), which returns 0 whenever the caller is the tax wallet. So the tax wallet could call transferFrom on ANY holder with no approval at all. The attacker (who controlled the tax wallet) pulled 99.99% of the MCAI/WETH pair's MCAI, sync()'d the pair at the tiny remaining reserve, and sold the drained supply for ETH. Fix: always debit the full amount from the caller's allowance. Reward: the PoC exploit oracle must flip PASS->FAIL while all hidden invariants stay PASS.",
+  "task_version": 2
+}

@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "id_format": "<test file path>:<contract>:<function signature>",
+  "poc": {
+    "exploit_oracle": "test/poc.t.sol:NGP_PoC:testExploit()",
+    "tests": [
+      "test/poc.t.sol:NGP_PoC:testExploit()"
+    ],
+    "count": 1,
+    "accepted_block_kinds": [
+      "assertion",
+      "revert"
+    ],
+    "recognised_block_reasons": [
+      "*assertion failed*",
+      "*exploit did not yield profit*",
+      "BEP20: transfer amount exceeds balance"
+    ],
+    "recognised_block_reasons_note": "These are matched against whatever reason forge reports for the oracle, and forge reports one reason per test with no idea which statement produced it. Their breadth is therefore bounded by the PoC's structure, not by the patterns: tests/poc.t.sol converts the flash-loan callback's approvals and its balanceOf() read into PRECONDITION_ reasons that appear in no pattern here, so the only statements that can still produce a recognised reason are the two router swaps, the flash-loan repayment (an unrepayable loan is a genuine block) and the final profit assertion."
+  },
+  "hidden": {
+    "tests": [
+      "test/hidden/amm_regression.t.sol:NGP_AmmRegression:test_amm_buy_then_sell_round_trip()",
+      "test/hidden/amm_regression.t.sol:NGP_AmmRegression:test_trading_flags_still_open()",
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_dispatch()",
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_preserved()",
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_contract_has_code()",
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_selector_check_is_not_vacuous()",
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_unknown_selector_is_rejected()",
+      "test/hidden/regression.t.sol:NGP_Regression:test_metadata_preserved()",
+      "test/hidden/regression.t.sol:NGP_Regression:test_normal_transfer_works()",
+      "test/hidden/regression.t.sol:NGP_Regression:test_price_view_works()",
+      "test/hidden/security.t.sol:NGP_Security:test_direct_transfer_to_the_pair_moves_nothing_out_of_it()",
+      "test/hidden/security.t.sol:NGP_Security:test_ordinary_sell_moves_no_tokens_out_of_the_pair()",
+      "test/hidden/security.t.sol:NGP_Security:test_pair_keeps_every_token_an_ordinary_sell_sends_it()",
+      "test/hidden/security.t.sol:NGP_Security:test_treasury_and_reward_are_not_funded_out_of_the_pair()"
+    ],
+    "count": 14,
+    "security_tests": [
+      "test/hidden/security.t.sol:NGP_Security:test_direct_transfer_to_the_pair_moves_nothing_out_of_it()",
+      "test/hidden/security.t.sol:NGP_Security:test_ordinary_sell_moves_no_tokens_out_of_the_pair()",
+      "test/hidden/security.t.sol:NGP_Security:test_pair_keeps_every_token_an_ordinary_sell_sends_it()",
+      "test/hidden/security.t.sol:NGP_Security:test_treasury_and_reward_are_not_funded_out_of_the_pair()"
+    ],
+    "security_tests_note": "Every id listed here FAILS on the shipped vulnerable contract by construction: each asserts a property the NGP bug violates \u2014 during an ordinary sell (or a direct transfer to the pair) the token moves the treasury and reward fees OUT OF THE PAIR inside the seller's own transfer. They must pass for a repair to be credited; a failure confined to them is an INCOMPLETE repair (canary residual_vulnerability), not a broken contract (canary bricked). The remaining hidden ids are legitimate-use obligations that hold before and after a repair. Balance-conservation and 'the pair must not lose tokens' assertions are VACUOUS on this token \u2014 the fees are proportional, so the pair still nets a gain on every sell \u2014 which is why these obligations are written against the Transfer event log."
+  }
+}

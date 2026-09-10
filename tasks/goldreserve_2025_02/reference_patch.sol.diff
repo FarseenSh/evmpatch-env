@@ -1,0 +1,43 @@
+--- a/src/contracts/Token.sol
++++ b/src/contracts/Token.sol
+@@ -3937,6 +3937,40 @@
+         require(success, "Falha ao enviar fundos");
+     }
+ 
++    // PATCH: carry the claim debt with the tokens.
++    //
++    // Entitlement is computed from the CURRENT balance (`balance * accumulatedProfitPerNFT`)
++    // while the paid-out record lived on the address, so the same NFTs could be walked
++    // through fresh addresses and claim the same profit again, and a freshly minted NFT
++    // silently inherited every unit of profit accrued before it existed. Settling the debt
++    // in _update() -- on mints as well as transfers -- keeps entitlement and record on the
++    // same side of the ledger, so claimProfit() can only ever pay profit that accrued while
++    // the caller actually held the token.
++    function _update(
++        address from,
++        address to,
++        uint256[] memory ids,
++        uint256[] memory values
++    ) internal virtual override {
++        super._update(from, to, ids, values);
++
++        uint256 moved = 0;
++        for (uint256 i = 0; i < values.length; i++) {
++            moved += values[i];
++        }
++        if (moved == 0) {
++            return;
++        }
++        uint256 debt = (moved * accumulatedProfitPerNFT) / 1e18;
++        if (to != address(0)) {
++            claimedProfitPerAddress[to] += debt;
++        }
++        if (from != address(0)) {
++            uint256 owed = claimedProfitPerAddress[from];
++            claimedProfitPerAddress[from] = owed > debt ? owed - debt : 0;
++        }
++    }
++
+     function _balanceOfAllNFTs(address account) internal view returns (uint256) {
+         uint256 totalUserBalance = 0;
+         for (uint256 i = 0; i < TOTAL_VARIATIONS; i++) {

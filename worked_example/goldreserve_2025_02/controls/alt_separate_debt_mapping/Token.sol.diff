@@ -1,0 +1,53 @@
+--- shipped/Token.sol
++++ variant/Token.sol
+@@ -3883,6 +3883,10 @@
+     // Base URI para os metadados
+     string public baseURI = "https://bafybeifdufm6dv3unfkamcqyletrs4mogtiyft43lybqmfawv6uolayw2u.ipfs.dweb.link/";
+ 
++    // ALTERNATIVE COMPLETE REPAIR: profit that accrued before the caller held
++    // the token, carried with the token instead of with the address.
++    mapping(address => uint256) internal _profitDebt;
++
+     constructor(address initialOwner) ERC1155("") Ownable(initialOwner) {}
+ 
+     function uri(uint256 id) public view override returns (string memory) {
+@@ -3928,13 +3932,38 @@
+         require(userBalance > 0, "Voce nao possui NFTs");
+ 
+         uint256 totalEntitlement = (userBalance * accumulatedProfitPerNFT) / 1e18;
+-        uint256 toClaim = totalEntitlement - claimedProfitPerAddress[msg.sender];
++        uint256 settled = claimedProfitPerAddress[msg.sender] + _profitDebt[msg.sender];
++        uint256 toClaim = totalEntitlement > settled ? totalEntitlement - settled : 0;
+         require(toClaim > 0, "Nada a reclamar");
+ 
+         claimedProfitPerAddress[msg.sender] = totalEntitlement;
+ 
+         (bool success, ) = payable(msg.sender).call{value: toClaim}("");
+         require(success, "Falha ao enviar fundos");
++    }
++
++    // ALTERNATIVE COMPLETE REPAIR: a separate debt ledger.
++    function _update(
++        address from,
++        address to,
++        uint256[] memory ids,
++        uint256[] memory values
++    ) internal virtual override {
++        uint256 moved = 0;
++        for (uint256 i = 0; i < values.length; i++) {
++            moved += values[i];
++        }
++        if (moved > 0) {
++            uint256 debt = (moved * accumulatedProfitPerNFT) / 1e18;
++            if (to != address(0)) {
++                _profitDebt[to] += debt;
++            }
++            if (from != address(0)) {
++                uint256 owed = _profitDebt[from];
++                _profitDebt[from] = owed > debt ? owed - debt : 0;
++            }
++        }
++        super._update(from, to, ids, values);
+     }
+ 
+     function _balanceOfAllNFTs(address account) internal view returns (uint256) {

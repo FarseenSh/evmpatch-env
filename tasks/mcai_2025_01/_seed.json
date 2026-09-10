@@ -1,0 +1,18 @@
+{
+  "task_id": "mcai_2025_01",
+  "incident": "MCAI tax wallet drained the Uniswap V2 pair by bypassing transferFrom allowance accounting",
+  "source": "src/test/2025-01/MCAI_exp.sol",
+  "chain": "ethereum",
+  "chain_id": 1,
+  "fork_block": 21720380,
+  "rpc_alias": "mainnet",
+  "date_month": "2025-01",
+  "vulnerability_class": "broken-access-control / allowance-bypass-in-transferFrom",
+  "victim_address": "0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8",
+  "patchable_globs": [
+    "src/contracts/*.sol"
+  ],
+  "patch_contract_ref": "src/contracts/Token.sol:MCAI",
+  "episode_budget": 30,
+  "notes": "transferFrom() moves the tokens FIRST and only then debits the allowance, and the amount it debits comes from _decreaseAllowance(), which returns 0 whenever the caller is the tax wallet. So the tax wallet could call transferFrom on ANY holder with no approval at all. The attacker (who controlled the tax wallet) pulled 99.99% of the MCAI/WETH pair's MCAI, sync()'d the pair at the tiny remaining reserve, and sold the drained supply for ETH. Fix: always debit the full amount from the caller's allowance. Reward: the PoC exploit oracle must flip PASS->FAIL while all hidden invariants stay PASS."
+}

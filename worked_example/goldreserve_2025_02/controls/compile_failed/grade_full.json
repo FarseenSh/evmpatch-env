@@ -1,0 +1,60 @@
+{
+  "abi_invariants": {
+    "bytecode_selectors": "absent",
+    "dispatch_control": "absent",
+    "dispatch_selectors": "absent",
+    "not_vacuous": "absent"
+  },
+  "backend": "local",
+  "canaries": [],
+  "changed_files": [
+    "src/contracts/Token.sol"
+  ],
+  "compiled": false,
+  "detail": "poc suite did not compile",
+  "diff_in_scope": false,
+  "functional_all_pass": false,
+  "hidden": {
+    "benign_rpc_misses": 0,
+    "compiled": false,
+    "failed": 0,
+    "passed": 0,
+    "ran": true,
+    "returncode": 1,
+    "rpc_misses": [],
+    "setup_failures": {},
+    "skipped": 0,
+    "stderr_tail": "Error: Compilation failed\n",
+    "stdout_tail": "Compiler run failed:\nError (2314): Expected ';' but got 'is'\n    --> src/contracts/Token.sol:3926:15:\n     |\n3926 |     this line is not solidity;\n     |               ^^\n\n",
+    "structured": false,
+    "tests": {},
+    "timed_out": false
+  },
+  "hidden_all_pass": false,
+  "outcome": "inconclusive",
+  "poc": {
+    "benign_rpc_misses": 0,
+    "compiled": false,
+    "failed": 0,
+    "passed": 0,
+    "ran": true,
+    "returncode": 1,
+    "rpc_misses": [],
+    "setup_failures": {},
+    "skipped": 0,
+    "stderr_tail": "Error: Compilation failed\n",
+    "stdout_tail": "Compiler run failed:\nError (2314): Expected ';' but got 'is'\n    --> src/contracts/Token.sol:3926:15:\n     |\n3926 |     this line is not solidity;\n     |               ^^\n\n",
+    "structured": false,
+    "tests": {},
+    "timed_out": false
+  },
+  "poc_blocked": false,
+  "poc_failure_kind": "",
+  "reason": "compile_failed",
+  "reason_detail": "poc suite did not compile",
+  "reason_family": "compile_failed",
+  "score": 0.0,
+  "solved": false,
+  "task_id": "goldreserve_2025_02",
+  "tests_match_manifest": false
+}

@@ -1,0 +1,155 @@
+{
+  "abi_invariants": {
+    "bytecode_selectors": "Success",
+    "dispatch_control": "Success",
+    "dispatch_selectors": "Success",
+    "not_vacuous": "Success"
+  },
+  "backend": "local",
+  "canaries": [
+    "residual_vulnerability"
+  ],
+  "changed_files": [
+    "src/contracts/Token.sol"
+  ],
+  "compiled": true,
+  "detail": "security obligations failing (incomplete repair); canaries: residual_vulnerability",
+  "diff_in_scope": true,
+  "functional_all_pass": true,
+  "hidden": {
+    "benign_rpc_misses": 0,
+    "compiled": true,
+    "failed": 2,
+    "passed": 10,
+    "ran": true,
+    "returncode": 1,
+    "rpc_misses": [],
+    "setup_failures": {},
+    "skipped": 0,
+    "stderr_tail": "",
+    "stdout_tail": "{\"test/hidden/invariants_auto.t.sol:AutoInvariants\":{\"duration\":\"39ms 1\u00b5s 333ns\",\"test_results\":{\"test_abi_selectors_dispatch()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":265360}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"449\u00b5s 792ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_abi_selectors_preserved()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":75196}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"241\u00b5s 750ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_contract_has_code()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":2933}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"94\u00b5s 333ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_selector_check_is_not_vacuous()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":6980}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"136\u00b5s 83ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_unknown_selector_is_rejected()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":4135}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"46\u00b5s 625ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]},\"test/hidden/regression.t.sol:GoldReserve_Regression\":{\"duration\":\"107ms 258\u00b5s 333ns\",\"test_results\":{\"test_metadata_preserved()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":42178}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"5ms 151\u00b5s 916ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_mint_then_deposit_then_claim_pays_the_holder()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":213221}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"45ms 500\u00b5s 708ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_mint_works()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":79620}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"63ms 336\u00b5s 41ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_nft_transfer_works()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":116250}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"94ms 255\u00b5s 209ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]},\"test/hidden/security.t.sol:GoldReserve_Security\":{\"duration\":\"101ms 650\u00b5s 84ns\",\"test_results\":{\"test_a_holder_is_paid_only_for_the_nfts_it_held_when_profit_accrued()\":{\"status\":\"Failure\",\"reason\":\"minting after the deposit increased the holder's payout for that deposit: 641025641025641025 !~= 256410256410256410 (max delta: 1, real delta: 384615384615384615)\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":412599}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"88ms 726\u00b5s 708ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_moving_the_nfts_to_a_fresh_address_cannot_reclaim_the_same_profit()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":385292}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"72ms 135\u00b5s 958ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_nft_minted_after_a_deposit_inherits_no_profit()\":{\"status\":\"Failure\",\"reason\":\"an NFT minted AFTER the deposit was paid profit that accrued before it existed: 394736842105263157 != 0\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":233196}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"79ms 451\u00b5s 250ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]}}\n",
+    "structured": true,
+    "tests": {
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_dispatch()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_dispatch()",
+        "name": "test_abi_selectors_dispatch()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_preserved()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_preserved()",
+        "name": "test_abi_selectors_preserved()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_contract_has_code()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_contract_has_code()",
+        "name": "test_contract_has_code()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_selector_check_is_not_vacuous()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_selector_check_is_not_vacuous()",
+        "name": "test_selector_check_is_not_vacuous()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_unknown_selector_is_rejected()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_unknown_selector_is_rejected()",
+        "name": "test_unknown_selector_is_rejected()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/regression.t.sol:GoldReserve_Regression:test_metadata_preserved()": {
+        "id": "test/hidden/regression.t.sol:GoldReserve_Regression:test_metadata_preserved()",
+        "name": "test_metadata_preserved()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:GoldReserve_Regression"
+      },
+      "test/hidden/regression.t.sol:GoldReserve_Regression:test_mint_then_deposit_then_claim_pays_the_holder()": {
+        "id": "test/hidden/regression.t.sol:GoldReserve_Regression:test_mint_then_deposit_then_claim_pays_the_holder()",
+        "name": "test_mint_then_deposit_then_claim_pays_the_holder()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:GoldReserve_Regression"
+      },
+      "test/hidden/regression.t.sol:GoldReserve_Regression:test_mint_works()": {
+        "id": "test/hidden/regression.t.sol:GoldReserve_Regression:test_mint_works()",
+        "name": "test_mint_works()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:GoldReserve_Regression"
+      },
+      "test/hidden/regression.t.sol:GoldReserve_Regression:test_nft_transfer_works()": {
+        "id": "test/hidden/regression.t.sol:GoldReserve_Regression:test_nft_transfer_works()",
+        "name": "test_nft_transfer_works()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:GoldReserve_Regression"
+      },
+      "test/hidden/security.t.sol:GoldReserve_Security:test_a_holder_is_paid_only_for_the_nfts_it_held_when_profit_accrued()": {
+        "id": "test/hidden/security.t.sol:GoldReserve_Security:test_a_holder_is_paid_only_for_the_nfts_it_held_when_profit_accrued()",
+        "name": "test_a_holder_is_paid_only_for_the_nfts_it_held_when_profit_accrued()",
+        "reason": "minting after the deposit increased the holder's payout for that deposit: 641025641025641025 !~= 256410256410256410 (max delta: 1, real delta: 384615384615384615)",
+        "status": "Failure",
+        "suite": "test/hidden/security.t.sol:GoldReserve_Security"
+      },
+      "test/hidden/security.t.sol:GoldReserve_Security:test_moving_the_nfts_to_a_fresh_address_cannot_reclaim_the_same_profit()": {
+        "id": "test/hidden/security.t.sol:GoldReserve_Security:test_moving_the_nfts_to_a_fresh_address_cannot_reclaim_the_same_profit()",
+        "name": "test_moving_the_nfts_to_a_fresh_address_cannot_reclaim_the_same_profit()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/security.t.sol:GoldReserve_Security"
+      },
+      "test/hidden/security.t.sol:GoldReserve_Security:test_nft_minted_after_a_deposit_inherits_no_profit()": {
+        "id": "test/hidden/security.t.sol:GoldReserve_Security:test_nft_minted_after_a_deposit_inherits_no_profit()",
+        "name": "test_nft_minted_after_a_deposit_inherits_no_profit()",
+        "reason": "an NFT minted AFTER the deposit was paid profit that accrued before it existed: 394736842105263157 != 0",
+        "status": "Failure",
+        "suite": "test/hidden/security.t.sol:GoldReserve_Security"
+      }
+    },
+    "timed_out": false
+  },
+  "hidden_all_pass": false,
+  "outcome": "not_solved",
+  "poc": {
+    "benign_rpc_misses": 0,
+    "compiled": true,
+    "failed": 1,
+    "passed": 0,
+    "ran": true,
+    "returncode": 1,
+    "rpc_misses": [],
+    "setup_failures": {},
+    "skipped": 0,
+    "stderr_tail": "",
+    "stdout_tail": "{\"test/poc.t.sol:GoldReserve_PoC\":{\"duration\":\"255ms 663\u00b5s 209ns\",\"test_results\":{\"testExploit()\":{\"status\":\"Failure\",\"reason\":\"Nada a reclamar\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":449254}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"193ms 594\u00b5s 625ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]}}\n",
+    "structured": true,
+    "tests": {
+      "test/poc.t.sol:GoldReserve_PoC:testExploit()": {
+        "id": "test/poc.t.sol:GoldReserve_PoC:testExploit()",
+        "name": "testExploit()",
+        "reason": "Nada a reclamar",
+        "status": "Failure",
+        "suite": "test/poc.t.sol:GoldReserve_PoC"
+      }
+    },
+    "timed_out": false
+  },
+  "poc_blocked": true,
+  "poc_failure_kind": "revert",
+  "reason": "",
+  "reason_detail": "security obligations failing (incomplete repair); canaries: residual_vulnerability",
+  "reason_family": "",
+  "score": 0.0,
+  "solved": false,
+  "task_id": "goldreserve_2025_02",
+  "tests_match_manifest": true
+}

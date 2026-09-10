@@ -1,0 +1,18 @@
+{
+  "task_id": "bitallx_2025_05",
+  "incident": "BitallxSC: batch payout never checks the per-wallet amounts against the funded total",
+  "source": "src/test/2025-05/bitallx_exp.sol",
+  "chain": "bsc",
+  "chain_id": 56,
+  "fork_block": 49758338,
+  "rpc_alias": "bsc",
+  "date_month": "2025-05",
+  "vulnerability_class": "unchecked-array-sum / payout-not-bounded-by-funding",
+  "victim_address": "0xa5f3728767F834C591eE99C8C5854b752F39C385",
+  "patchable_globs": [
+    "src/contracts/*.sol"
+  ],
+  "patch_contract_ref": "src/contracts/Token.sol:BitallxSC",
+  "episode_budget": 30,
+  "notes": "BitallxPayOut() checks the caller's allowance and balance against totalSendAmount and pulls exactly totalSendAmount in with transferFrom, but then pays out the caller-supplied amount[] array without ever checking that its sum is bounded by what was funded. Calling it with totalSendAmount = 0 and amount[0] = the contract's own USDT balance passes every check and pays the caller the contract's money. Fix: bound the payout by the funded total. Note the patch must not reorder the contract's state variables -- the grader etches the patched code onto the live address and keeps the live storage."
+}

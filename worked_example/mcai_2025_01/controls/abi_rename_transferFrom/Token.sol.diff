@@ -1,0 +1,11 @@
+--- shipped/Token.sol
++++ variant/Token.sol
+@@ -35,7 +35,7 @@
+ 
+     function approve(address spender, uint256 amount) external returns (bool);
+ 
+-    function transferFrom(
++    function transferFromRenamed(
+         address sender,
+         address recipient,
+         uint256 amount

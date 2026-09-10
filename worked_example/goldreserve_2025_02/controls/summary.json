@@ -1,0 +1,362 @@
+{
+  "task": "goldreserve_2025_02",
+  "generated_utc": "2026-09-10T03:36:08Z",
+  "toolchain": {
+    "forge": "forge Version: 1.7.1",
+    "python": "3.12.14",
+    "platform": "Darwin arm64",
+    "task_json_sha256": "84db927e41ddb0bdb4ad0e79bae4430aeefeeef08ef4b781f2d4953f55345633",
+    "rpc_log_sha256": "02b95ebb01b77e2f921031bb2259926e63ba66ad4186e0d088059b8e49b624ff",
+    "rpc_log_records": 1020,
+    "shipped_source_sha256": "54b51566595d376c5369ba8e88e58ad70e829e915a5b2e364c1ac0b930a4dba9",
+    "reference_patch_diff_sha256": "47cfe87d8a1be6517018ac1224bffa4cf22c0e660a134f1cc1016a1c49a791d6",
+    "security_tests_sha256": "e9a9a2c6d40b32abdefb55d560e94c9c4229c5b171ad1bd21f5aeef4910a8b87"
+  },
+  "seconds": 73.4,
+  "rows": [
+    {
+      "name": "unpatched",
+      "kind": "baseline",
+      "expected": "not_solved 0.0, oracle Success, canary empty_patch",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "empty_patch"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:GoldReserve_Security:test_a_holder_is_paid_only_for_the_nfts_it_held_when_profit_accrued()",
+        "test/hidden/security.t.sol:GoldReserve_Security:test_moving_the_nfts_to_a_fresh_address_cannot_reclaim_the_same_profit()",
+        "test/hidden/security.t.sol:GoldReserve_Security:test_nft_minted_after_a_deposit_inherits_no_profit()"
+      ],
+      "oracle_status": "Success",
+      "oracle_reason": null,
+      "core_sha256": "546fc03a14c547127f0cf075289f844bee4cd8faf7cc0ef1b77453df3a15b866",
+      "strict_sha256": "74c9d6f8c892afd4030de452d9997993c6ba45bc41b9adb7da9edcd4a28d8026",
+      "seconds": 6.4,
+      "detail": "poc still exploitable; security obligations failing (incomplete repair); canaries: empty_patch"
+    },
+    {
+      "name": "noop_identical",
+      "kind": "baseline",
+      "expected": "not_solved 0.0, oracle Success, canary empty_patch",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "empty_patch"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:GoldReserve_Security:test_a_holder_is_paid_only_for_the_nfts_it_held_when_profit_accrued()",
+        "test/hidden/security.t.sol:GoldReserve_Security:test_moving_the_nfts_to_a_fresh_address_cannot_reclaim_the_same_profit()",
+        "test/hidden/security.t.sol:GoldReserve_Security:test_nft_minted_after_a_deposit_inherits_no_profit()"
+      ],
+      "oracle_status": "Success",
+      "oracle_reason": null,
+      "core_sha256": "546fc03a14c547127f0cf075289f844bee4cd8faf7cc0ef1b77453df3a15b866",
+      "strict_sha256": "74c9d6f8c892afd4030de452d9997993c6ba45bc41b9adb7da9edcd4a28d8026",
+      "seconds": 6.8,
+      "detail": "poc still exploitable; security obligations failing (incomplete repair); canaries: empty_patch"
+    },
+    {
+      "name": "reference",
+      "kind": "complete_repair",
+      "expected": "solved 1.0",
+      "outcome": "solved",
+      "reason": "",
+      "score": 1.0,
+      "poc_blocked": true,
+      "hidden_all_pass": true,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [],
+      "oracle_status": "Failure",
+      "oracle_reason": "Nada a reclamar",
+      "core_sha256": "fd82c8e0842b0c008a5161adbd27bb8458668f208c1d4ab576f89da73ed4e0ea",
+      "strict_sha256": "fedc3b17c6e10f680349ce36d7dbac716571cd395ae109e733b5f2003f396868",
+      "seconds": 6.5,
+      "detail": "solved"
+    },
+    {
+      "name": "alt_settle_before_super",
+      "kind": "complete_repair",
+      "expected": "solved 1.0",
+      "outcome": "solved",
+      "reason": "",
+      "score": 1.0,
+      "poc_blocked": true,
+      "hidden_all_pass": true,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [],
+      "oracle_status": "Failure",
+      "oracle_reason": "Nada a reclamar",
+      "core_sha256": "fd82c8e0842b0c008a5161adbd27bb8458668f208c1d4ab576f89da73ed4e0ea",
+      "strict_sha256": "fedc3b17c6e10f680349ce36d7dbac716571cd395ae109e733b5f2003f396868",
+      "seconds": 8.1,
+      "detail": "solved"
+    },
+    {
+      "name": "alt_separate_debt_mapping",
+      "kind": "complete_repair",
+      "expected": "solved 1.0",
+      "outcome": "solved",
+      "reason": "",
+      "score": 1.0,
+      "poc_blocked": true,
+      "hidden_all_pass": true,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [],
+      "oracle_status": "Failure",
+      "oracle_reason": "Nada a reclamar",
+      "core_sha256": "fd82c8e0842b0c008a5161adbd27bb8458668f208c1d4ab576f89da73ed4e0ea",
+      "strict_sha256": "fedc3b17c6e10f680349ce36d7dbac716571cd395ae109e733b5f2003f396868",
+      "seconds": 6.6,
+      "detail": "solved"
+    },
+    {
+      "name": "incomplete_fix__debt_on_transfer_only",
+      "kind": "incomplete_repair",
+      "expected": "not_solved 0.0, canary residual_vulnerability, PoC blocked",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": true,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "residual_vulnerability"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:GoldReserve_Security:test_a_holder_is_paid_only_for_the_nfts_it_held_when_profit_accrued()",
+        "test/hidden/security.t.sol:GoldReserve_Security:test_nft_minted_after_a_deposit_inherits_no_profit()"
+      ],
+      "oracle_status": "Failure",
+      "oracle_reason": "Nada a reclamar",
+      "core_sha256": "664d400bd9595769c517e96286ae8f8aa8354c76c6b7086eb15de3865e813393",
+      "strict_sha256": "f445f43232bb769cb34b4023bd624f0dc41cca66fcd00b0b4e4b2c31f5e51034",
+      "seconds": 6.8,
+      "detail": "security obligations failing (incomplete repair); canaries: residual_vulnerability"
+    },
+    {
+      "name": "incomplete_fix__debt_on_mint_only",
+      "kind": "incomplete_repair",
+      "expected": "not_solved 0.0, canary residual_vulnerability, PoC blocked",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": true,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "residual_vulnerability"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:GoldReserve_Security:test_moving_the_nfts_to_a_fresh_address_cannot_reclaim_the_same_profit()"
+      ],
+      "oracle_status": "Failure",
+      "oracle_reason": "Nada a reclamar",
+      "core_sha256": "9b55ebce09c37ef4aef9449acf14916d727e76d1b95003df701048359dc5e5c1",
+      "strict_sha256": "8e956853f861eeb8af66de4b7a4712ccdfb5d938522c047db1ed07563012921a",
+      "seconds": 7.0,
+      "detail": "security obligations failing (incomplete repair); canaries: residual_vulnerability"
+    },
+    {
+      "name": "non_repair__settle_on_burn_only",
+      "kind": "non_repair",
+      "expected": "not_solved 0.0, oracle Success",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/security.t.sol:GoldReserve_Security:test_a_holder_is_paid_only_for_the_nfts_it_held_when_profit_accrued()",
+        "test/hidden/security.t.sol:GoldReserve_Security:test_moving_the_nfts_to_a_fresh_address_cannot_reclaim_the_same_profit()",
+        "test/hidden/security.t.sol:GoldReserve_Security:test_nft_minted_after_a_deposit_inherits_no_profit()"
+      ],
+      "oracle_status": "Success",
+      "oracle_reason": null,
+      "core_sha256": "b599647c054680d996736958a0f3a4fd5ca9d4dbb89adbdfdab8f57df2cb9c0c",
+      "strict_sha256": "6e199dd3fc03ba592656ab24e6767c7cba5faf93d4b373929913156008f5a7f4",
+      "seconds": 6.1,
+      "detail": "poc still exploitable; security obligations failing (incomplete repair)"
+    },
+    {
+      "name": "recognised_reason__claim_always_reverts",
+      "kind": "destructive",
+      "expected": "not_solved 0.0, canary bricked",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": true,
+      "hidden_all_pass": false,
+      "functional_all_pass": false,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "bricked"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/regression.t.sol:GoldReserve_Regression:test_mint_then_deposit_then_claim_pays_the_holder()",
+        "test/hidden/security.t.sol:GoldReserve_Security:test_a_holder_is_paid_only_for_the_nfts_it_held_when_profit_accrued()",
+        "test/hidden/security.t.sol:GoldReserve_Security:test_moving_the_nfts_to_a_fresh_address_cannot_reclaim_the_same_profit()"
+      ],
+      "oracle_status": "Failure",
+      "oracle_reason": "Nada a reclamar",
+      "core_sha256": "8a555a54cc0ad7cf0c65990349eaff6650ef4c8befbb7f40faa4080013dc432d",
+      "strict_sha256": "06144228f7a631522ddc903ab0eab9ff8584755ff8fbabdfa0bc05b317a8a485",
+      "seconds": 9.1,
+      "detail": "hidden invariants failing; canaries: bricked"
+    },
+    {
+      "name": "fix_plus_abi_drop_setMintPrice",
+      "kind": "destructive",
+      "expected": "not_solved 0.0, canary bricked",
+      "outcome": "not_solved",
+      "reason": "",
+      "score": 0.0,
+      "poc_blocked": true,
+      "hidden_all_pass": false,
+      "functional_all_pass": false,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [
+        "bricked"
+      ],
+      "abi_invariants": {
+        "bytecode_selectors": "Failure",
+        "dispatch_selectors": "Failure",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [
+        "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_dispatch()",
+        "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_preserved()"
+      ],
+      "oracle_status": "Failure",
+      "oracle_reason": "Nada a reclamar",
+      "core_sha256": "54e75e1f2457e7c12388a2865b95ce8864c41f9efecf1be54be5e2bf03bd38f1",
+      "strict_sha256": "802e0653a34723edeee07df1dd00b0a21f6c41a6a2a7237518e1d2d9b18be4d5",
+      "seconds": 7.6,
+      "detail": "hidden invariants failing; canaries: bricked"
+    },
+    {
+      "name": "compile_failed",
+      "kind": "infrastructure",
+      "expected": "inconclusive/compile_failed, score 0",
+      "outcome": "inconclusive",
+      "reason": "compile_failed",
+      "score": 0.0,
+      "poc_blocked": false,
+      "hidden_all_pass": false,
+      "functional_all_pass": false,
+      "compiled": false,
+      "diff_in_scope": false,
+      "tests_match_manifest": false,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "absent",
+        "dispatch_selectors": "absent",
+        "dispatch_control": "absent",
+        "not_vacuous": "absent"
+      },
+      "failing_hidden": [],
+      "oracle_status": null,
+      "oracle_reason": null,
+      "core_sha256": "732e038a3ccd25ffaebede01abc7cf50bcf311bef8eaae9a9ed5629eb1348bd8",
+      "strict_sha256": "a8cbd0832d7d8d52a03a7265af747d10b62779f3a9dc67debe561b5e66dc3329",
+      "seconds": 2.2,
+      "detail": "poc suite did not compile"
+    }
+  ]
+}

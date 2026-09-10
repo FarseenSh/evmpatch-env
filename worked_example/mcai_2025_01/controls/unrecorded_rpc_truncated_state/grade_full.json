@@ -1,0 +1,229 @@
+{
+  "abi_invariants": {
+    "bytecode_selectors": "absent",
+    "dispatch_control": "absent",
+    "dispatch_selectors": "absent",
+    "not_vacuous": "absent"
+  },
+  "backend": "local",
+  "canaries": [],
+  "changed_files": [
+    "src/contracts/Token.sol"
+  ],
+  "compiled": true,
+  "detail": "hidden suite hit 16 unrecorded RPC call(s): eth_getBalance, eth_getCode, eth_getStorageAt, eth_getTransactionCount",
+  "diff_in_scope": false,
+  "functional_all_pass": false,
+  "hidden": {
+    "benign_rpc_misses": 0,
+    "compiled": true,
+    "failed": 10,
+    "passed": 1,
+    "ran": true,
+    "returncode": 1,
+    "rpc_misses": [
+      {
+        "benign": false,
+        "method": "eth_getStorageAt",
+        "params": "[\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0xa6eef7e35abe7026729641147f7915573c7e97b47efa546f5f6e3230263bcb49\", \"0x14b6d3c\"]"
+      },
+      {
+        "benign": false,
+        "method": "eth_getStorageAt",
+        "params": "[\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0xada5da3403a647afe8ac6178adca33712e991aaf721ac75dcbb964a3dc1b2e0c\", \"0x14b6d3c\"]"
+      },
+      {
+        "benign": false,
+        "method": "eth_getBalance",
+        "params": "[\"0x0000000000000000000000000000000000b0bb1e\", \"0x14b6d3c\"]"
+      },
+      {
+        "benign": false,
+        "method": "eth_getTransactionCount",
+        "params": "[\"0x0000000000000000000000000000000000b0bb1e\", \"0x14b6d3c\"]"
+      },
+      {
+        "benign": false,
+        "method": "eth_getCode",
+        "params": "[\"0x0000000000000000000000000000000000b0bb1e\", \"0x14b6d3c\"]"
+      },
+      {
+        "benign": false,
+        "method": "eth_getStorageAt",
+        "params": "[\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0xcd077454f9a8b6b2a4a301928260d89ae82ae1500ef9f420b6fb7333cfb35710\", \"0x14b6d3c\"]"
+      },
+      {
+        "benign": false,
+        "method": "eth_getStorageAt",
+        "params": "[\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0x8fae7ff504a4aa7fa0cff40a5843b2f7c06686b99f0505c3fcf34319b56e3d6f\", \"0x14b6d3c\"]"
+      },
+      {
+        "benign": false,
+        "method": "eth_getStorageAt",
+        "params": "[\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0x32e9ba82ba1265c9db926e9f9e962d57e5bafa865969165f9eae202cc0771166\", \"0x14b6d3c\"]"
+      },
+      {
+        "benign": false,
+        "method": "eth_getStorageAt",
+        "params": "[\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0x351fef4637e11852f19f90d04aa41a03476cb4c3e3cada1f85f2a448e2bdf52f\", \"0x14b6d3c\"]"
+      },
+      {
+        "benign": false,
+        "method": "eth_getStorageAt",
+        "params": "[\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0xaa53e09608157f4979af27cf9d88070bc3c98332836bbfbbab7fe00366e72497\", \"0x14b6d3c\"]"
+      },
+      {
+        "benign": false,
+        "method": "eth_getBalance",
+        "params": "[\"0x00000000000000000000000000000000000117e4\", \"0x14b6d3c\"]"
+      },
+      {
+        "benign": false,
+        "method": "eth_getTransactionCount",
+        "params": "[\"0x00000000000000000000000000000000000117e4\", \"0x14b6d3c\"]"
+      },
+      {
+        "benign": false,
+        "method": "eth_getBalance",
+        "params": "[\"0x00000000000000000000000000000000000a11ce\", \"0x14b6d3c\"]"
+      },
+      {
+        "benign": false,
+        "method": "eth_getTransactionCount",
+        "params": "[\"0x00000000000000000000000000000000000a11ce\", \"0x14b6d3c\"]"
+      },
+      {
+        "benign": false,
+        "method": "eth_getCode",
+        "params": "[\"0x00000000000000000000000000000000000a11ce\", \"0x14b6d3c\"]"
+      },
+      {
+        "benign": false,
+        "method": "eth_getStorageAt",
+        "params": "[\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0x9589181ae2674f1203ccaa7dd8d5025a225ab99c750c8a862817e54b29e60ec7\", \"0x14b6d3c\"]"
+      }
+    ],
+    "setup_failures": {
+      "test/hidden/invariants_auto.t.sol:AutoInvariants": "EVM error; database error: failed to get storage for 0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 at 75506153327051474587906755573858019282972751592871715030499431892688993766217: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getStorageAt [\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0xa6eef7e35abe7026729641147f7915"
+    },
+    "skipped": 0,
+    "stderr_tail": "[\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0x351fef4637e11852f19f90d04aa41a address=0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 index=24029004644379172903573199032907279622822360070542495345659692722274166502703\n2026-09-10T03:36:02.098831Z ERROR sharedbackend: Failed to send/recv `storage` err=failed to get storage for 0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 at 77041382601556914856323004842713349145705265199234382265622304951109847295127: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getStorageAt [\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0xaa53e09608157f4979af27cf9d8807 address=0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 index=77041382601556914856323004842713349145705265199234382265622304951109847295127\n2026-09-10T03:36:02.099996Z ERROR sharedbackend: Failed to send/recv `basic` err=failed to get account for 0x00000000000000000000000000000000000117E4: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getBalance [\"0x00000000000000000000000000000000000117e4\", \"0x14b6d3c\"] address=0x00000000000000000000000000000000000117E4\n2026-09-10T03:36:02.104446Z ERROR sharedbackend: Failed to send/recv `basic` err=failed to get account for 0x00000000000000000000000000000000000A11cE: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getBalance [\"0x00000000000000000000000000000000000a11ce\", \"0x14b6d3c\"] address=0x00000000000000000000000000000000000A11cE\n2026-09-10T03:36:02.120544Z ERROR sharedbackend: Failed to send/recv `storage` err=failed to get storage for 0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 at 67636838853495343560857180560514193218047062097941764749123491324338045849287: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getStorageAt [\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0x9589181ae2674f1203ccaa7dd8d502 address=0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 index=67636838853495343560857180560514193218047062097941764749123491324338045849287\n",
+    "stdout_tail": "6e9f9e962d\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":0}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"101ms 139\u00b5s 375ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_transferFrom_debits_the_sender_exactly()\":{\"status\":\"Failure\",\"reason\":\"EVM error; database error: failed to get storage for 0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 at 67636838853495343560857180560514193218047062097941764749123491324338045849287: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getStorageAt [\\\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\\\", \\\"0x9589181ae2674f1203ccaa7dd8d502\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":0}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"129ms 196\u00b5s\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_unapproved_spender_cannot_move_tokens()\":{\"status\":\"Failure\",\"reason\":\"EVM error; database error: failed to get storage for 0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 at 92737304782526971453854896467636928138423086763491661016762623338135157954320: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getStorageAt [\\\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\\\", \\\"0xcd077454f9a8b6b2a4a301928260d8\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":0}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"7ms 808\u00b5s 708ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]},\"test/hidden/security.t.sol:MCAI_Security\":{\"duration\":\"131ms 18\u00b5s 125ns\",\"test_results\":{\"test_taxwallet_cannot_move_holder_tokens_without_approval()\":{\"status\":\"Failure\",\"reason\":\"EVM error; database error: failed to get storage for 0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 at 78543158553598686148638835834949107218613625935040866044242186441045927734796: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getStorageAt [\\\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\\\", \\\"0xada5da3403a647afe8ac6178adca33\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":0}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"5ms 354\u00b5s 458ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_taxwallet_cannot_move_pair_tokens_without_approval()\":{\"status\":\"Failure\",\"reason\":\"EVM error; database error: failed to get storage for 0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 at 64989051864140497098367551748748378792513452267687878274729726101262200356207: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getStorageAt [\\\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\\\", \\\"0x8fae7ff504a4aa7fa0cff40a5843b2\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":0}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"16ms 465\u00b5s 958ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_taxwallet_transferFrom_debits_allowance()\":{\"status\":\"Failure\",\"reason\":\"EVM error; database error: failed to get storage for 0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 at 24029004644379172903573199032907279622822360070542495345659692722274166502703: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getStorageAt [\\\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\\\", \\\"0x351fef4637e11852f19f90d04aa41a\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":0}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"106ms 35\u00b5s 167ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_unapproved_spender_cannot_burn_to_dead_wallet()\":{\"status\":\"Failure\",\"reason\":\"EVM error; database error: failed to get storage for 0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 at 77041382601556914856323004842713349145705265199234382265622304951109847295127: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getStorageAt [\\\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\\\", \\\"0xaa53e09608157f4979af27cf9d8807\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":0}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"108ms 304\u00b5s 84ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]}}\n",
+    "structured": true,
+    "tests": {
+      "test/hidden/regression.t.sol:MCAI_Regression:test_amm_buy_works()": {
+        "id": "test/hidden/regression.t.sol:MCAI_Regression:test_amm_buy_works()",
+        "name": "test_amm_buy_works()",
+        "reason": "vm.deal: failed to get account for 0x0000000000000000000000000000000000b0bb1E: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getBalance [\"0x0000000000000000000000000000000000b0bb1e\", \"0x14b6d3c\"]",
+        "status": "Failure",
+        "suite": "test/hidden/regression.t.sol:MCAI_Regression"
+      },
+      "test/hidden/regression.t.sol:MCAI_Regression:test_approved_transferFrom_works_and_debits_allowance()": {
+        "id": "test/hidden/regression.t.sol:MCAI_Regression:test_approved_transferFrom_works_and_debits_allowance()",
+        "name": "test_approved_transferFrom_works_and_debits_allowance()",
+        "reason": "vm.prank: failed to get account for 0x00000000000000000000000000000000000117E4: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getBalance [\"0x00000000000000000000000000000000000117e4\", \"0x14b6d3c\"]",
+        "status": "Failure",
+        "suite": "test/hidden/regression.t.sol:MCAI_Regression"
+      },
+      "test/hidden/regression.t.sol:MCAI_Regression:test_metadata_preserved()": {
+        "id": "test/hidden/regression.t.sol:MCAI_Regression:test_metadata_preserved()",
+        "name": "test_metadata_preserved()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:MCAI_Regression"
+      },
+      "test/hidden/regression.t.sol:MCAI_Regression:test_normal_transfer_works()": {
+        "id": "test/hidden/regression.t.sol:MCAI_Regression:test_normal_transfer_works()",
+        "name": "test_normal_transfer_works()",
+        "reason": "vm.prank: failed to get account for 0x00000000000000000000000000000000000A11cE: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getBalance [\"0x00000000000000000000000000000000000a11ce\", \"0x14b6d3c\"]",
+        "status": "Failure",
+        "suite": "test/hidden/regression.t.sol:MCAI_Regression"
+      },
+      "test/hidden/regression.t.sol:MCAI_Regression:test_taxwallet_transferFrom_with_approval_moves_tokens()": {
+        "id": "test/hidden/regression.t.sol:MCAI_Regression:test_taxwallet_transferFrom_with_approval_moves_tokens()",
+        "name": "test_taxwallet_transferFrom_with_approval_moves_tokens()",
+        "reason": "EVM error; database error: failed to get storage for 0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 at 23028605044465907330590143408402628608607601776866354202691344135048377340262: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getStorageAt [\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0x32e9ba82ba1265c9db926e9f9e962d",
+        "status": "Failure",
+        "suite": "test/hidden/regression.t.sol:MCAI_Regression"
+      },
+      "test/hidden/regression.t.sol:MCAI_Regression:test_transferFrom_debits_the_sender_exactly()": {
+        "id": "test/hidden/regression.t.sol:MCAI_Regression:test_transferFrom_debits_the_sender_exactly()",
+        "name": "test_transferFrom_debits_the_sender_exactly()",
+        "reason": "EVM error; database error: failed to get storage for 0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 at 67636838853495343560857180560514193218047062097941764749123491324338045849287: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getStorageAt [\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0x9589181ae2674f1203ccaa7dd8d502",
+        "status": "Failure",
+        "suite": "test/hidden/regression.t.sol:MCAI_Regression"
+      },
+      "test/hidden/regression.t.sol:MCAI_Regression:test_unapproved_spender_cannot_move_tokens()": {
+        "id": "test/hidden/regression.t.sol:MCAI_Regression:test_unapproved_spender_cannot_move_tokens()",
+        "name": "test_unapproved_spender_cannot_move_tokens()",
+        "reason": "EVM error; database error: failed to get storage for 0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 at 92737304782526971453854896467636928138423086763491661016762623338135157954320: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getStorageAt [\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0xcd077454f9a8b6b2a4a301928260d8",
+        "status": "Failure",
+        "suite": "test/hidden/regression.t.sol:MCAI_Regression"
+      },
+      "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_holder_tokens_without_approval()": {
+        "id": "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_holder_tokens_without_approval()",
+        "name": "test_taxwallet_cannot_move_holder_tokens_without_approval()",
+        "reason": "EVM error; database error: failed to get storage for 0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 at 78543158553598686148638835834949107218613625935040866044242186441045927734796: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getStorageAt [\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0xada5da3403a647afe8ac6178adca33",
+        "status": "Failure",
+        "suite": "test/hidden/security.t.sol:MCAI_Security"
+      },
+      "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_pair_tokens_without_approval()": {
+        "id": "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_pair_tokens_without_approval()",
+        "name": "test_taxwallet_cannot_move_pair_tokens_without_approval()",
+        "reason": "EVM error; database error: failed to get storage for 0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 at 64989051864140497098367551748748378792513452267687878274729726101262200356207: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getStorageAt [\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0x8fae7ff504a4aa7fa0cff40a5843b2",
+        "status": "Failure",
+        "suite": "test/hidden/security.t.sol:MCAI_Security"
+      },
+      "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_transferFrom_debits_allowance()": {
+        "id": "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_transferFrom_debits_allowance()",
+        "name": "test_taxwallet_transferFrom_debits_allowance()",
+        "reason": "EVM error; database error: failed to get storage for 0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 at 24029004644379172903573199032907279622822360070542495345659692722274166502703: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getStorageAt [\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0x351fef4637e11852f19f90d04aa41a",
+        "status": "Failure",
+        "suite": "test/hidden/security.t.sol:MCAI_Security"
+      },
+      "test/hidden/security.t.sol:MCAI_Security:test_unapproved_spender_cannot_burn_to_dead_wallet()": {
+        "id": "test/hidden/security.t.sol:MCAI_Security:test_unapproved_spender_cannot_burn_to_dead_wallet()",
+        "name": "test_unapproved_spender_cannot_burn_to_dead_wallet()",
+        "reason": "EVM error; database error: failed to get storage for 0x810B5902CB2ac2Fa63dFE4A6935EA32aED975cc8 at 77041382601556914856323004842713349145705265199234382265622304951109847295127: server returned an error response: error code -32000: OFFLINE: unrecorded eth_getStorageAt [\"0x810b5902cb2ac2fa63dfe4a6935ea32aed975cc8\", \"0xaa53e09608157f4979af27cf9d8807",
+        "status": "Failure",
+        "suite": "test/hidden/security.t.sol:MCAI_Security"
+      }
+    },
+    "timed_out": false
+  },
+  "hidden_all_pass": false,
+  "outcome": "inconclusive",
+  "poc": {
+    "benign_rpc_misses": 0,
+    "compiled": true,
+    "failed": 1,
+    "passed": 0,
+    "ran": true,
+    "returncode": 1,
+    "rpc_misses": [],
+    "setup_failures": {},
+    "skipped": 0,
+    "stderr_tail": "",
+    "stdout_tail": "{\"test/poc.t.sol:MCAI_PoC\":{\"duration\":\"154ms 302\u00b5s 583ns\",\"test_results\":{\"testExploit()\":{\"status\":\"Failure\",\"reason\":\"ERC20: transfer amount exceeds allowance\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":72393}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"35ms 902\u00b5s 500ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]}}\n",
+    "structured": true,
+    "tests": {
+      "test/poc.t.sol:MCAI_PoC:testExploit()": {
+        "id": "test/poc.t.sol:MCAI_PoC:testExploit()",
+        "name": "testExploit()",
+        "reason": "ERC20: transfer amount exceeds allowance",
+        "status": "Failure",
+        "suite": "test/poc.t.sol:MCAI_PoC"
+      }
+    },
+    "timed_out": false
+  },
+  "poc_blocked": false,
+  "poc_failure_kind": "",
+  "reason": "unrecorded_rpc",
+  "reason_detail": "hidden suite hit 16 unrecorded RPC call(s): eth_getBalance, eth_getCode, eth_getStorageAt, eth_getTransactionCount",
+  "reason_family": "unrecorded_rpc",
+  "score": 0.0,
+  "solved": false,
+  "task_id": "mcai_2025_01",
+  "tests_match_manifest": false
+}

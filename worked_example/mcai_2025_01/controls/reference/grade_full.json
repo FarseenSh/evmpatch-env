@@ -1,0 +1,181 @@
+{
+  "abi_invariants": {
+    "bytecode_selectors": "Success",
+    "dispatch_control": "Success",
+    "dispatch_selectors": "Success",
+    "not_vacuous": "Success"
+  },
+  "backend": "local",
+  "canaries": [],
+  "changed_files": [
+    "src/contracts/Token.sol"
+  ],
+  "compiled": true,
+  "detail": "solved",
+  "diff_in_scope": true,
+  "functional_all_pass": true,
+  "hidden": {
+    "benign_rpc_misses": 0,
+    "compiled": true,
+    "failed": 0,
+    "passed": 16,
+    "ran": true,
+    "returncode": 0,
+    "rpc_misses": [],
+    "setup_failures": {},
+    "skipped": 0,
+    "stderr_tail": "",
+    "stdout_tail": "ed_logs\":[],\"kind\":{\"Unit\":{\"gas\":43496}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"100\u00b5s 125ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_contract_has_code()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":2921}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"68\u00b5s 917ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_selector_check_is_not_vacuous()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":7150}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"64\u00b5s 375ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_unknown_selector_is_rejected()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":4631}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"50\u00b5s 125ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]},\"test/hidden/regression.t.sol:MCAI_Regression\":{\"duration\":\"58ms 35\u00b5s 83ns\",\"test_results\":{\"test_amm_buy_works()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":149245}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"39ms 154\u00b5s 375ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_approved_transferFrom_works_and_debits_allowance()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":275255}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"8ms 772\u00b5s 708ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_metadata_preserved()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":13745}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"31ms 805\u00b5s 917ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_normal_transfer_works()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":248868}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"8ms 887\u00b5s 208ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_taxwallet_transferFrom_with_approval_moves_tokens()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":273117}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"34ms 731\u00b5s 167ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_transferFrom_debits_the_sender_exactly()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":276187}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"8ms 835\u00b5s 125ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_unapproved_spender_cannot_move_tokens()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":250358}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"8ms 805\u00b5s 292ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]},\"test/hidden/security.t.sol:MCAI_Security\":{\"duration\":\"56ms 41\u00b5s 958ns\",\"test_results\":{\"test_taxwallet_cannot_move_holder_tokens_without_approval()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":250323}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"35ms 465\u00b5s 458ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_taxwallet_cannot_move_pair_tokens_without_approval()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":70759}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"29ms 355\u00b5s 208ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_taxwallet_transferFrom_debits_allowance()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":271808}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"35ms 558\u00b5s 709ns\",\"breakpoints\":{},\"gas_snapshots\":{}},\"test_unapproved_spender_cannot_burn_to_dead_wallet()\":{\"status\":\"Success\",\"reason\":null,\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":234800}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"2ms 560\u00b5s 250ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]}}\n",
+    "structured": true,
+    "tests": {
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_dispatch()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_dispatch()",
+        "name": "test_abi_selectors_dispatch()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_preserved()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_preserved()",
+        "name": "test_abi_selectors_preserved()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_contract_has_code()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_contract_has_code()",
+        "name": "test_contract_has_code()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_selector_check_is_not_vacuous()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_selector_check_is_not_vacuous()",
+        "name": "test_selector_check_is_not_vacuous()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/invariants_auto.t.sol:AutoInvariants:test_unknown_selector_is_rejected()": {
+        "id": "test/hidden/invariants_auto.t.sol:AutoInvariants:test_unknown_selector_is_rejected()",
+        "name": "test_unknown_selector_is_rejected()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/invariants_auto.t.sol:AutoInvariants"
+      },
+      "test/hidden/regression.t.sol:MCAI_Regression:test_amm_buy_works()": {
+        "id": "test/hidden/regression.t.sol:MCAI_Regression:test_amm_buy_works()",
+        "name": "test_amm_buy_works()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:MCAI_Regression"
+      },
+      "test/hidden/regression.t.sol:MCAI_Regression:test_approved_transferFrom_works_and_debits_allowance()": {
+        "id": "test/hidden/regression.t.sol:MCAI_Regression:test_approved_transferFrom_works_and_debits_allowance()",
+        "name": "test_approved_transferFrom_works_and_debits_allowance()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:MCAI_Regression"
+      },
+      "test/hidden/regression.t.sol:MCAI_Regression:test_metadata_preserved()": {
+        "id": "test/hidden/regression.t.sol:MCAI_Regression:test_metadata_preserved()",
+        "name": "test_metadata_preserved()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:MCAI_Regression"
+      },
+      "test/hidden/regression.t.sol:MCAI_Regression:test_normal_transfer_works()": {
+        "id": "test/hidden/regression.t.sol:MCAI_Regression:test_normal_transfer_works()",
+        "name": "test_normal_transfer_works()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:MCAI_Regression"
+      },
+      "test/hidden/regression.t.sol:MCAI_Regression:test_taxwallet_transferFrom_with_approval_moves_tokens()": {
+        "id": "test/hidden/regression.t.sol:MCAI_Regression:test_taxwallet_transferFrom_with_approval_moves_tokens()",
+        "name": "test_taxwallet_transferFrom_with_approval_moves_tokens()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:MCAI_Regression"
+      },
+      "test/hidden/regression.t.sol:MCAI_Regression:test_transferFrom_debits_the_sender_exactly()": {
+        "id": "test/hidden/regression.t.sol:MCAI_Regression:test_transferFrom_debits_the_sender_exactly()",
+        "name": "test_transferFrom_debits_the_sender_exactly()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:MCAI_Regression"
+      },
+      "test/hidden/regression.t.sol:MCAI_Regression:test_unapproved_spender_cannot_move_tokens()": {
+        "id": "test/hidden/regression.t.sol:MCAI_Regression:test_unapproved_spender_cannot_move_tokens()",
+        "name": "test_unapproved_spender_cannot_move_tokens()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/regression.t.sol:MCAI_Regression"
+      },
+      "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_holder_tokens_without_approval()": {
+        "id": "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_holder_tokens_without_approval()",
+        "name": "test_taxwallet_cannot_move_holder_tokens_without_approval()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/security.t.sol:MCAI_Security"
+      },
+      "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_pair_tokens_without_approval()": {
+        "id": "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_cannot_move_pair_tokens_without_approval()",
+        "name": "test_taxwallet_cannot_move_pair_tokens_without_approval()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/security.t.sol:MCAI_Security"
+      },
+      "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_transferFrom_debits_allowance()": {
+        "id": "test/hidden/security.t.sol:MCAI_Security:test_taxwallet_transferFrom_debits_allowance()",
+        "name": "test_taxwallet_transferFrom_debits_allowance()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/security.t.sol:MCAI_Security"
+      },
+      "test/hidden/security.t.sol:MCAI_Security:test_unapproved_spender_cannot_burn_to_dead_wallet()": {
+        "id": "test/hidden/security.t.sol:MCAI_Security:test_unapproved_spender_cannot_burn_to_dead_wallet()",
+        "name": "test_unapproved_spender_cannot_burn_to_dead_wallet()",
+        "reason": null,
+        "status": "Success",
+        "suite": "test/hidden/security.t.sol:MCAI_Security"
+      }
+    },
+    "timed_out": false
+  },
+  "hidden_all_pass": true,
+  "outcome": "solved",
+  "poc": {
+    "benign_rpc_misses": 0,
+    "compiled": true,
+    "failed": 1,
+    "passed": 0,
+    "ran": true,
+    "returncode": 1,
+    "rpc_misses": [],
+    "setup_failures": {},
+    "skipped": 0,
+    "stderr_tail": "",
+    "stdout_tail": "{\"test/poc.t.sol:MCAI_PoC\":{\"duration\":\"17ms 752\u00b5s 375ns\",\"test_results\":{\"testExploit()\":{\"status\":\"Failure\",\"reason\":\"ERC20: transfer amount exceeds allowance\",\"counterexample\":null,\"logs\":[],\"decoded_logs\":[],\"kind\":{\"Unit\":{\"gas\":72393}},\"traces\":[],\"labeled_addresses\":{},\"duration\":\"4ms 705\u00b5s 917ns\",\"breakpoints\":{},\"gas_snapshots\":{}}},\"warnings\":[]}}\n",
+    "structured": true,
+    "tests": {
+      "test/poc.t.sol:MCAI_PoC:testExploit()": {
+        "id": "test/poc.t.sol:MCAI_PoC:testExploit()",
+        "name": "testExploit()",
+        "reason": "ERC20: transfer amount exceeds allowance",
+        "status": "Failure",
+        "suite": "test/poc.t.sol:MCAI_PoC"
+      }
+    },
+    "timed_out": false
+  },
+  "poc_blocked": true,
+  "poc_failure_kind": "revert",
+  "reason": "",
+  "reason_detail": "solved",
+  "reason_family": "",
+  "score": 1.0,
+  "solved": true,
+  "task_id": "mcai_2025_01",
+  "tests_match_manifest": true
+}

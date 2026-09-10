@@ -1,0 +1,82 @@
+{
+  "abi_invariants": {
+    "bytecode_selectors": "Success",
+    "dispatch_control": "Success",
+    "dispatch_selectors": "Success",
+    "not_vacuous": "Success"
+  },
+  "canaries": [],
+  "changed_files": [
+    "src/contracts/Token.sol"
+  ],
+  "compiled": true,
+  "diff_in_scope": true,
+  "hidden_all_pass": true,
+  "hidden_setup_failures": {},
+  "hidden_tests": {
+    "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_dispatch()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/invariants_auto.t.sol:AutoInvariants:test_abi_selectors_preserved()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/invariants_auto.t.sol:AutoInvariants:test_contract_has_code()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/invariants_auto.t.sol:AutoInvariants:test_selector_check_is_not_vacuous()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/invariants_auto.t.sol:AutoInvariants:test_unknown_selector_is_rejected()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/regression.t.sol:GoldReserve_Regression:test_metadata_preserved()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/regression.t.sol:GoldReserve_Regression:test_mint_then_deposit_then_claim_pays_the_holder()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/regression.t.sol:GoldReserve_Regression:test_mint_works()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/regression.t.sol:GoldReserve_Regression:test_nft_transfer_works()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/security.t.sol:GoldReserve_Security:test_a_holder_is_paid_only_for_the_nfts_it_held_when_profit_accrued()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/security.t.sol:GoldReserve_Security:test_moving_the_nfts_to_a_fresh_address_cannot_reclaim_the_same_profit()": [
+      "Success",
+      ""
+    ],
+    "test/hidden/security.t.sol:GoldReserve_Security:test_nft_minted_after_a_deposit_inherits_no_profit()": [
+      "Success",
+      ""
+    ]
+  },
+  "outcome": "solved",
+  "poc_blocked": true,
+  "poc_failure_kind": "revert",
+  "poc_setup_failures": {},
+  "poc_tests": {
+    "test/poc.t.sol:GoldReserve_PoC:testExploit()": [
+      "Failure",
+      "Nada a reclamar"
+    ]
+  },
+  "reason": "",
+  "reason_family": "",
+  "schema": "evmpatch.grade/1+reasons",
+  "score": 1.0,
+  "task_id": "goldreserve_2025_02",
+  "tests_match_manifest": true
+}
