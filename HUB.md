@@ -16,7 +16,7 @@ The package follows the Hub convention: a `[project]` block with `name`, `versio
 ## Local validation before pushing
 ```bash
 pip install -e .
-pytest tests/ -q                                   # 124 tests (the docker-backed ones skip without the image)
+pytest tests/ -q                                   # 125 tests (the docker-backed ones skip without the image)
 uv run validate evmpatch-env --runtime.type docker --taskset.image evmpatch-env:latest -c 2
 python -m evmpatch_env.sandbox tasks/ngp_2025_09 --reference-patch --backend local --sha256
 uv run vf-eval evmpatch-env -m <model> -n 4 -a '{"split":"train","backend":"local"}'

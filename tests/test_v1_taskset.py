@@ -95,3 +95,52 @@ def test_validate_gold_and_noop_on_the_docker_runtime(task_id, tmp_path):
     row = rows[0]
     assert row["name"] == task_id
     assert row["valid"] is True, json.dumps(row, indent=1)
+
+
+@requires_image
+def test_rollout_hooks_grade_the_source_read_back_from_the_container():
+    """setup -> (agent edits) -> finalize -> reward, through a real DockerRuntime: the
+    reference repair written into /work/project scores 1.0; an untouched tree scores 0.0;
+    a tampered visible proof of concept changes nothing, because the harness is re-staged
+    from the host copy at scoring time; a file outside `patchable_globs` is an out-of-scope
+    edit."""
+    from verifiers.v1.runtimes.docker import DockerRuntime
+    from verifiers.v1.state import state_cls
+    from verifiers.v1.trace import Trace, TraceTask
+
+    from evmpatch_env.build_task import apply_unified_diff
+
+    task = next(iter(EvmPatchTaskset(EvmPatchConfig(id="evmpatch-env", task_ids=["mcai_2025_01"], image=IMAGE))))
+    shipped = (task.task_dir / "project" / task.data.patch_rel).read_text()
+    reference = apply_unified_diff(shipped, task.data.reference_diff)
+
+    def fresh_trace():
+        return Trace(
+            task=TraceTask(type=type(task).__name__, data=task.data, key=task.key, hash=task.hash),
+            state=state_cls(type(task))(),
+            agent=vf.AgentInfo(config=vf.AgentConfig(runtime=vf.DockerConfig(image=IMAGE)),
+                               name="test", trainable=False),
+        )
+
+    async def episode(edit: dict[str, str] | None) -> tuple[float, dict]:
+        runtime = DockerRuntime(vf.DockerConfig(image=IMAGE, workdir="/work"))
+        await runtime.start()
+        try:
+            trace = fresh_trace()
+            await task.setup(trace, runtime)
+            for rel, content in (edit or {}).items():
+                await runtime.write(f"/work/project/{rel}", content.encode())
+            await task.finalize(trace, runtime)
+            reward = await task.solved(trace, runtime)
+            return reward, trace.info["evmpatch"]
+        finally:
+            await runtime.stop()
+
+    reward, info = asyncio.run(episode({task.data.patch_rel: reference}))
+    assert reward == 1.0 and info["outcome"] == "solved", info
+    reward, info = asyncio.run(episode(None))
+    assert reward == 0.0 and info["outcome"] == "not_solved" and "empty_patch" in info["canaries"], info
+    reward, info = asyncio.run(episode({"test/poc.t.sol": "// tampered: the graded copy comes from the host\n"}))
+    assert reward == 0.0 and info["outcome"] == "not_solved" and "empty_patch" in info["canaries"], info
+    reward, info = asyncio.run(episode({"src/other/Evil.sol": "// outside patchable_globs\n"}))
+    assert reward == 0.0 and any(c.startswith("out_of_scope_edit") for c in info["canaries"]), info

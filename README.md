@@ -69,7 +69,7 @@ python -m evmpatch_env.sandbox tasks/ngp_2025_09 --reference-patch --backend loc
 docker build -t evmpatch-env:latest .
 python -m evmpatch_env.sandbox tasks/ngp_2025_09 --reference-patch --backend docker
 
-pytest tests/                          # 124 tests; the docker-backed ones skip without the image
+pytest tests/                          # 125 tests; the docker-backed ones skip without the image
 ```
 `load_environment(tasks_dir=None, split="train", backend="local", max_turns=30, task_ids=None)`
 returns a verifiers `Environment`; use it with `vf-eval`, `prime eval run` or prime-rl like
