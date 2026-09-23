@@ -17,8 +17,8 @@ runtime for every task) and keeps the `load_environment` entry point. Four incid
 2025), every task at `task_version` 2 with hidden security obligations and phased
 proof-of-concept tests. Tested on verifiers 0.3.1: 113 tests pass without Docker, 118 with
 the `docker --network none` backend built. Version-2 grades reproduce byte-for-byte across
-the `local` and Docker backends on one host, and the earlier task version was reproduced
-across two hosts (macOS arm64 and Linux x86_64); see [`RECEIPT.md`](RECEIPT.md).
+the `local` and Docker backends, and on a second host: every CI run regrades every committed
+control on a Linux x86_64 runner and fails if a hash moves; see [`RECEIPT.md`](RECEIPT.md).
 
 ---
 
@@ -69,7 +69,7 @@ python -m evmpatch_env.sandbox tasks/ngp_2025_09 --reference-patch --backend loc
 docker build -t evmpatch-env:latest .
 python -m evmpatch_env.sandbox tasks/ngp_2025_09 --reference-patch --backend docker
 
-pytest tests/                          # 125 tests; the docker-backed ones skip without the image
+pytest tests/                          # 126 tests; the docker-backed ones skip without the image
 ```
 `load_environment(tasks_dir=None, split="train", backend="local", max_turns=30, task_ids=None)`
 returns a verifiers `Environment`; use it with `vf-eval`, `prime eval run` or prime-rl like
@@ -233,9 +233,9 @@ without Foundry and gate CI.
 - The recording is literal too: a correct repair that reads chain state the recording never
   captured grades `inconclusive` / `unrecorded_rpc`, never `solved` (the MCAI case card,
   section 3b, has an example); re-record the task's state to grade it.
-- Version-2 grades have single-host cross-backend receipts; a second-host receipt is
-  pending. Foundry is pinned to 1.7.1 in CI because the report parser and the committed
-  hashes are verified against it.
+- Version-2 grades are checked across both backends on one host, and through the `local`
+  backend on a second host (CI, Linux x86_64) on every push. Foundry is pinned to 1.7.1 in CI
+  because the report parser and the committed hashes are verified against it.
 - On a v1 runtime the reward grades inside the container the agent worked in, in a fresh
   directory re-staged from the host copy of the harness; a separate grading container is a
   possible hardening step. The `local` and `docker` backends grade in a fresh

@@ -8,8 +8,8 @@ canonical grade hashes of the shipped corpus, what the hashes cover, and how to 
 Every task, in both source variants and both hash forms, graded through the `local` backend and
 through `docker run --network none`. Toolchain: forge 1.7.1 (commit `4072e48705af9d93e3c0f6e29e93b5e9a40caed8`), Python 3.12, macOS arm64.
 The same procedure reproduced an earlier task version of this corpus
-byte-identically on a second host (Linux x86_64, Ubuntu, Python 3.10); the current task version
-has been reproduced across the two backends on one host.
+byte-identically on a second host (Linux x86_64, Ubuntu, Python 3.10). The current task version
+is reproduced on a second host by CI on every push; see "Second host" below.
 
 | task | variant | form | local | docker --network none | equal |
 |---|---|---|---|---|---|
@@ -46,10 +46,30 @@ python -m evmpatch_env.sandbox tasks/<task> --reference-patch --backend {local|d
 python -m evmpatch_env.sandbox tasks/<task>                   --backend {local|docker} --sha256
 ```
 
+`ngp_2025_09`'s `foundry.toml` has since pinned solc 0.8.30, the build every NGP grade above was
+produced with, so its task.json hash has moved; no NGP grade changed.
+
 The reference patch grades `solved` (reward 1.0) and the shipped vulnerable source grades
 `not_solved` (reward 0.0) on every task. The container does no judging: it emits a raw payload
 (stdout, stderr, return code, RPC misses per suite) and the host parses and scores it with the
 same functions the local backend uses, so the two backends cannot drift.
+
+## Second host: every committed control, on every push
+
+CI regrades every committed control with each task's own control runner on a GitHub-hosted
+`ubuntu-latest` runner (Linux x86_64, forge 1.7.1, solc 0.8.26 and 0.8.30) and fails unless every
+`worked_example/*/controls/*/sha256.txt` comes out byte-identical. The first such run,
+[35891561095](https://github.com/FarseenSh/evmpatch-env/actions/runs/35891561095) on commit `136944f`, reproduced every committed control hash in all four tasks.
+Two controls are handled apart, by design:
+
+- `mcai_2025_01/unrecorded_rpc_truncated_state` grades on half the recorded state, so its partial
+  evidence varies between runs (its case card, section 6). CI asserts its outcome and reason
+  instead: `inconclusive` / `unrecorded_rpc`.
+- `mcai_2025_01/docker_reference` needs the `evmpatch-env:latest` image, which the runner does not
+  build; its hashes equal the `local` reference grade above.
+
+The earlier run on `b557bed` ([34436918913](https://github.com/FarseenSh/evmpatch-env/actions/runs/34436918913)) had already printed the four reference
+grades on the same runner type, byte-identical to the table above.
 
 ## What is hashed, and what is deliberately not
 
