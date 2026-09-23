@@ -1,6 +1,6 @@
 {
   "task": "mcai_2025_01",
-  "generated_utc": "2026-09-10T03:36:14Z",
+  "generated_utc": "2026-09-23T16:43:37Z",
   "toolchain": {
     "forge": "forge Version: 1.7.1\nCommit SHA: 4072e48705af9d93e3c0f6e29e93b5e9a40caed8\nBuild Timestamp: 2026-05-08T07:54:31.470926000Z (1778226871)\nBuild Profile: dist",
     "python": "3.12.14",
@@ -11,7 +11,7 @@
     "shipped_source_sha256": "8c3bf6647112d88d19970a09c1b86f8a5947bd1d59335ec570b0fbe307a2ea53",
     "reference_patch_diff_sha256": "5233375122066b78e679984c353349041f4207e167957cb11ead20fe50e2c4dd"
   },
-  "seconds": 80.1,
+  "seconds": 21.2,
   "rows": [
     {
       "name": "unpatched",
@@ -45,6 +45,29 @@
     },
     {
       "name": "reference",
+      "outcome": "solved",
+      "reason": "",
+      "score": 1.0,
+      "poc_blocked": true,
+      "hidden_all_pass": true,
+      "functional_all_pass": true,
+      "compiled": true,
+      "diff_in_scope": true,
+      "tests_match_manifest": true,
+      "canaries": [],
+      "abi_invariants": {
+        "bytecode_selectors": "Success",
+        "dispatch_selectors": "Success",
+        "dispatch_control": "Success",
+        "not_vacuous": "Success"
+      },
+      "failing_hidden": [],
+      "core_sha256": "f34d89bad812c6b59ac44136ceea05b35044b03c38bbdaafbe8b391ae5c1963e",
+      "strict_sha256": "253011648b813ff772ba4ba1a49e22c59abcc17e178cbe23cb8069f973ea61a5",
+      "detail": "solved"
+    },
+    {
+      "name": "alt_complete_fix__spend_allowance_first",
       "outcome": "solved",
       "reason": "",
       "score": 1.0,

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Worked example, mcai_2025_01: grade the reference repair, the shipped vulnerable source and a
-set of DESTRUCTIVE / INFRASTRUCTURE controls through the unmodified grader, and record every
-grade (canonical JSON, core+strict SHA-256, full result) under controls/<name>/.
+"""Worked example, mcai_2025_01: grade the reference repair, an ALTERNATIVE complete repair, the
+shipped vulnerable source and a set of DESTRUCTIVE / INFRASTRUCTURE controls through the
+unmodified grader, and record every grade (canonical JSON, core+strict SHA-256, full result)
+under controls/<name>/.
 
 Everything runs offline through the task's fail-closed replay proxy; nothing here needs a
 network, an API key or a paid resource. Run from the repository root:
@@ -145,6 +146,27 @@ def decimals_downgrade(reference: str) -> str:
     return reference.replace(body, "return 18;   // VARIANT: decimals changed")
 
 
+def alt_spend_allowance_first(src: str) -> str:
+    """A complete repair written independently of the reference. The reference neutralises
+    `_decreaseAllowance`; this one never calls it. `transferFrom` checks and spends the
+    caller's allowance BEFORE moving any token (the standard checks-effects order), after the
+    same zero-address guard `_transfer` applies first, so a zero-argument call still reverts
+    before touching any storage the task did not record. Different code, same property: every
+    spender, the tax wallet included, is debited exactly what it moves. Without the guard, the
+    dispatch probe's zero-argument transferFrom reads an unrecorded allowance slot and the
+    repair grades inconclusive / unrecorded_rpc: the recording is as literal as the declared
+    block reasons."""
+    m = TRANSFER_FROM_RE.search(src)
+    assert m, "transferFrom block not found"
+    body = ('        require(sender != address(0), "ERC20: transfer from the zero address");\n'
+            '        uint256 currentAllowance = _allowances[sender][_msgSender()];\n'
+            '        require(currentAllowance >= amount, "ERC20: transfer amount exceeds allowance");\n'
+            '        _approve(sender, _msgSender(), currentAllowance - amount);\n'
+            '        _transfer(sender, recipient, amount);\n'
+            '        return true;')
+    return src[:m.start(2)] + body + src[m.end(2):]
+
+
 def diff_text(a: str, b: str, name: str) -> str:
     return "".join(difflib.unified_diff(a.splitlines(True), b.splitlines(True),
                                         fromfile=f"shipped/{name}", tofile=f"variant/{name}"))
@@ -239,6 +261,11 @@ def main() -> int:
     rows.append(record("reference", grade(TASK, {REL: REFERENCE}), {REL: REFERENCE},
         "The task's own reference_patch.sol.diff applied to the shipped source. Expected: solved, 1.0; hashes equal RECEIPT.md."))
     (HERE / "reference" / "poc_vv.txt").write_text(poc_verbose_log(TASK, {REL: REFERENCE}))
+    v = alt_spend_allowance_first(SHIPPED)
+    rows.append(record("alt_complete_fix__spend_allowance_first", grade(TASK, {REL: v}), {REL: v},
+        "A complete repair written independently of the reference: transferFrom checks and spends the caller's allowance "
+        "before moving any token and never consults _decreaseAllowance. Expected: solved, 1.0, no canary. Its core and "
+        "strict hashes equal the reference repair's: a grade records outcomes and reasons, not the patch that produced them."))
 
     # --- 3. destructive controls
     rows.append(record("noop_identical", grade(TASK, {REL: SHIPPED}), {REL: SHIPPED},

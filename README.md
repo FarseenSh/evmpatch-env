@@ -230,6 +230,9 @@ without Foundry and gate CI.
   single-file sources are the binding constraint on corpus growth.
 - `recognised_block_reasons` are literal: a correct repair that makes the exploit fail with
   an undeclared message grades `inconclusive`, never `not_solved`, and should be triaged.
+- The recording is literal too: a correct repair that reads chain state the recording never
+  captured grades `inconclusive` / `unrecorded_rpc`, never `solved` (the MCAI case card,
+  section 3b, has an example); re-record the task's state to grade it.
 - Version-2 grades have single-host cross-backend receipts; a second-host receipt is
   pending. Foundry is pinned to 1.7.1 in CI because the report parser and the committed
   hashes are verified against it.

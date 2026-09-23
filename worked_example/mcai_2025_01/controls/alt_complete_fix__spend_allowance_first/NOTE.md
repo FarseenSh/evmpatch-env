@@ -1,0 +1,1 @@
+A complete repair written independently of the reference: transferFrom checks and spends the caller's allowance before moving any token and never consults _decreaseAllowance. Expected: solved, 1.0, no canary. Its core and strict hashes equal the reference repair's: a grade records outcomes and reasons, not the patch that produced them.

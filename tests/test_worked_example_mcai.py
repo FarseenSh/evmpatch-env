@@ -3,6 +3,7 @@
 Four grades of the real Ethereum-mainnet task through the local backend, offline:
 
     reference patch              -> solved, 1.0, oracle fails for the DECLARED reason
+    independent alternative repair -> solved, 1.0, and the same grade hash as the reference
     shipped vulnerable source    -> not_solved, oracle Success (the attack reproduces)
     transferFrom always reverts  -> not_solved + bricked: the named regression test fails
     fix + public function dropped -> not_solved + bricked: both ABI checks fail
@@ -71,6 +72,21 @@ def test_reference_patch_is_solved_for_a_declared_reason(reference: str):
     assert oracle.reason in manifest["poc"]["recognised_block_reasons"], oracle.reason
     assert res.hidden_all_pass and res.canaries == []
     assert all(v == "Success" for v in res.abi_invariants.values()), res.abi_invariants
+
+
+def test_independent_alternative_repair_is_solved(controls, shipped: str):
+    """A complete repair that shares no code with the reference: transferFrom spends the
+    caller's allowance before any token moves and never calls _decreaseAllowance. The
+    security obligations state the vulnerability class, not the reference's code, so it must
+    grade solved. A grade records test outcomes and reasons, not the patch, so its canonical
+    hashes equal the reference repair's."""
+    res = _grade(controls.alt_spend_allowance_first(shipped))
+    assert res.outcome == sandbox.OUTCOME_SOLVED and res.score == 1.0, (res.reason, res.reason_detail)
+    assert res.poc_blocked and res.canaries == []
+    want = dict(line.split() for line in
+                (REPO / "worked_example" / "mcai_2025_01" / "controls" / "reference" / "sha256.txt").read_text().splitlines())
+    assert res.canonical_sha256(core_only=True) == want["core"]
+    assert res.canonical_sha256(core_only=False) == want["strict"]
 
 
 def test_shipped_source_reproduces_the_attack():

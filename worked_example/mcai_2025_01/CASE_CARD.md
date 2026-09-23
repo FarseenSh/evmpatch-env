@@ -86,6 +86,21 @@ Grade, `controls/reference/`:
 | core / strict sha256 | `f34d89bad812c6b59ac44136ceea05b35044b03c38bbdaafbe8b391ae5c1963e` / `253011648b813ff772ba4ba1a49e22c59abcc17e178cbe23cb8069f973ea61a5` |
 | cross-backend receipt | `--backend docker` (image `evmpatch-env:latest`, built from `ghcr.io/foundry-rs/foundry:v1.7.1`, `--network none`) produces the **same core and strict hashes** (`controls/docker_reference/`); see `RECEIPT.md` for the corpus-wide table |
 
+### 3b. An independent alternative repair
+
+`controls/alt_complete_fix__spend_allowance_first/`, derived by `run_controls.py`:
+`transferFrom` checks and spends the caller's allowance before any token moves, after the same
+zero-address guard `_transfer` applies first, and never calls `_decreaseAllowance`. It shares no
+code with the reference repair and grades **`solved` / 1.0**, no canary, 16 / 16 hidden tests:
+the security obligations state the vulnerability class, not the reference's code. Its core and
+strict hashes equal the reference repair's, because a grade records test outcomes and reasons,
+not the patch that produced them.
+
+Without the zero-address guard the same repair grades `inconclusive` / `unrecorded_rpc`: the
+dispatch probe's zero-argument `transferFrom` then reads an allowance slot the task never
+recorded, and the replay proxy fails closed. A correct repair that reads unrecorded state is
+left for triage, never credited.
+
 ## 4. Required legitimate behaviour (the hidden suite, hash-locked)
 
 The hidden suite is in **two parts**, and `tests/manifest.json` fixes the exact set, so a run
