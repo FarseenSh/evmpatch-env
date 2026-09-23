@@ -1,18 +1,18 @@
 {
   "task": "ngp_2025_09",
-  "generated_utc": "2026-09-10T03:36:10Z",
+  "generated_utc": "2026-09-23T16:42:09Z",
   "toolchain": {
     "forge": "forge Version: 1.7.1\nCommit SHA: 4072e48705af9d93e3c0f6e29e93b5e9a40caed8\nBuild Timestamp: 2026-05-08T07:54:31.470926000Z (1778226871)\nBuild Profile: dist",
     "python": "3.12.14",
     "platform": "Darwin arm64",
-    "task_json_sha256": "0cab8856e681d608bbc1c68e6b19f195542a510535ddc61fc9404c99b9175adb",
+    "task_json_sha256": "f290666ac8cece9106961e7145f13934dff81db8bd14c3c5fe569234d3a8330a",
     "rpc_log_sha256": "e6da2c723ef906b78bd9aec23151727feaeb302dfadb694ed8bf068fc577c8b2",
     "rpc_log_records": 139,
     "shipped_source_sha256": "1b2978fe2e5b5a3b3ca7b7dd6542313d0ca00971505b12494409b7a74d0046be",
     "reference_patch_diff_sha256": "a2915c73c189667b7946223d11f5caae3ec4a43a54e3b4ef2cd0b99918fdddf7",
     "security_suite_sha256": "988138401eddd4bfc6399b15f999faac7bb6d33cac4c5ff3feb8c2cabbe5aa36"
   },
-  "seconds": 75.9,
+  "seconds": 45.2,
   "rows": [
     {
       "name": "unpatched",
@@ -47,7 +47,7 @@
       "core_sha256": "25b53d32310daa49483bc7f910779928be9c4b3639bcd78029c391de1cab77df",
       "strict_sha256": "a79700ceb81bcee8c9894ba3413dd9a9d5d58691ec8163fea4f60b7a2d9f17f3",
       "detail": "poc still exploitable; security obligations failing (incomplete repair); canaries: empty_patch",
-      "seconds": 7.1
+      "seconds": 25.9
     },
     {
       "name": "reference",
@@ -75,7 +75,7 @@
       "core_sha256": "cb637d0428a31635a00386ccd3ce65430aa1cd71a4cda05752a6806225465b94",
       "strict_sha256": "65466943ed575d6709a890c84423e1e0abe1290d881c15cb919aa5dc391c6464",
       "detail": "solved",
-      "seconds": 7.9
+      "seconds": 2.4
     },
     {
       "name": "alt_fix__fees_charged_to_seller",
@@ -103,7 +103,7 @@
       "core_sha256": "cb637d0428a31635a00386ccd3ce65430aa1cd71a4cda05752a6806225465b94",
       "strict_sha256": "65466943ed575d6709a890c84423e1e0abe1290d881c15cb919aa5dc391c6464",
       "detail": "solved",
-      "seconds": 9.2
+      "seconds": 2.4
     },
     {
       "name": "incomplete_fix__sync_only_removed",
@@ -138,7 +138,7 @@
       "core_sha256": "55603bbcfc5c8fb28f0753fa476231087bc9ea09e31b37275374e135e51ef840",
       "strict_sha256": "82ce207216bc7216146296c8470950355a471d3aabdb81d00067063598920e76",
       "detail": "security obligations failing (incomplete repair); canaries: residual_vulnerability",
-      "seconds": 7.8
+      "seconds": 2.3
     },
     {
       "name": "incomplete_fix__drain_capped",
@@ -173,7 +173,7 @@
       "core_sha256": "55603bbcfc5c8fb28f0753fa476231087bc9ea09e31b37275374e135e51ef840",
       "strict_sha256": "82ce207216bc7216146296c8470950355a471d3aabdb81d00067063598920e76",
       "detail": "security obligations failing (incomplete repair); canaries: residual_vulnerability",
-      "seconds": 7.1
+      "seconds": 2.3
     },
     {
       "name": "non_repair__cosmetic_rename",
@@ -206,7 +206,7 @@
       "core_sha256": "153930c934f39d21979946035a2a16110da3f564cc12b10f83165601c7b6a977",
       "strict_sha256": "5fd319bfccdc26dd07ef1cf7f4cb75281547b69969082a3392fd2a3eb5a9fff1",
       "detail": "poc still exploitable; security obligations failing (incomplete repair)",
-      "seconds": 9.0
+      "seconds": 2.4
     },
     {
       "name": "noop_identical",
@@ -241,7 +241,7 @@
       "core_sha256": "25b53d32310daa49483bc7f910779928be9c4b3639bcd78029c391de1cab77df",
       "strict_sha256": "a79700ceb81bcee8c9894ba3413dd9a9d5d58691ec8163fea4f60b7a2d9f17f3",
       "detail": "poc still exploitable; security obligations failing (incomplete repair); canaries: empty_patch",
-      "seconds": 6.8
+      "seconds": 2.2
     },
     {
       "name": "recognised_reason__approve_reverts",
@@ -277,7 +277,7 @@
       "core_sha256": "fee0babf9d17e350047e2f7d06b0a390bbf0684783fd6bc7849f6b92b28fea5d",
       "strict_sha256": "b4f2c5bf2ad0e6dc5ac8cd31fb686d63ea74cfc6ac604f872b059693f2291cd4",
       "detail": "hidden invariants failing; exploit oracle failed for an undeclared reason ('PRECONDITION_UNREADABLE: approve() reverted before the exploit ran'); canaries: bricked",
-      "seconds": 10.2
+      "seconds": 2.5
     },
     {
       "name": "fix_plus_sell_path_disabled",
@@ -313,7 +313,7 @@
       "core_sha256": "fee0babf9d17e350047e2f7d06b0a390bbf0684783fd6bc7849f6b92b28fea5d",
       "strict_sha256": "ad7643920f4088a9ad8d9aace1e555893d7268f8e7e3b0c12d1794e27104f857",
       "detail": "hidden invariants failing; exploit oracle failed for an undeclared reason ('TransferHelper: TRANSFER_FROM_FAILED'); canaries: bricked",
-      "seconds": 9.8
+      "seconds": 2.4
     },
     {
       "name": "compile_failed",
@@ -341,7 +341,7 @@
       "core_sha256": "965db891ebb4e150e800679a5786581a120336d36fbf14bf93434718e8f71bd2",
       "strict_sha256": "8b98f9fbbaadcb3645b1e0279380fda7ec38a6308661cb56df56f63c34590bf6",
       "detail": "poc suite did not compile",
-      "seconds": 0.8
+      "seconds": 0.4
     }
   ]
 }

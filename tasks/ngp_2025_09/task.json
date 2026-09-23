@@ -31,7 +31,7 @@
     "tests/hidden/regression.t.sol": "9e47392070f4e84d5bf042edfb7d97e0f1ac51940883762da09d480174d38cf8",
     "tests/hidden/security.t.sol": "988138401eddd4bfc6399b15f999faac7bb6d33cac4c5ff3feb8c2cabbe5aa36",
     "tests/manifest.json": "779b0b267da0a6f12cb5e7967c5f0937aabfd718c6d3c9e3b3e1edcf5e13ce01",
-    "project/foundry.toml": "346a6fe0d5e3cd2e8ae9f2c3b5f47da348e9e09f1b1fdf222173f8fe79b9f0bd",
+    "project/foundry.toml": "1d3db215f734a2432667139e2975c8b8066b3414e58fa2ba8647c622f64ed005",
     "project/remappings.txt": "86234603b06c11cf48843e41ee1f6ac564556858c2beecfc63bff08c21f35b3a"
   },
   "episode_budget": 30,
